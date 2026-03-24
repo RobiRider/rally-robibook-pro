@@ -4,105 +4,111 @@ import {
   ArrowUp, ArrowUpRight, ArrowRight, ArrowDownRight, ArrowDown, 
   ArrowDownLeft, ArrowLeft, ArrowUpLeft, CornerUpRight, CornerUpLeft, Navigation,
   Octagon, Map, PenTool, RotateCcw, Settings, Image as ImageIcon,
-  Home, Fuel, Coffee, Camera, Tent
+  Home, Fuel, Coffee, Camera, Tent, X, Flag, Droplets, Mountain, 
+  Wind, Trees, Building2, School, Landmark, Church, Wrench, PlusSquare, 
+  Warehouse, Factory, Waves, Zap, UtensilsCrossed, Save, FolderOpen
 } from 'lucide-react';
 
-// --- UTILIDADES GEOGRÁFICAS ---
+// --- LIBRERÍA EXTENDIDA DE ICONOS ---
+const ICON_CATEGORIES = {
+  "Rally / CC": [
+    { type: 'alert_1', label: 'Peligro 1', icon: <AlertTriangle color="black" strokeWidth={3} size={20} /> },
+    { type: 'alert_2', label: 'Peligro 2', icon: <div className="flex"><AlertTriangle size={14} color="black" strokeWidth={3}/><AlertTriangle size={14} color="black" strokeWidth={3}/></div> },
+    { type: 'alert_3', label: 'Peligro 3', icon: <div className="flex"><AlertTriangle size={12} color="black" strokeWidth={3}/><AlertTriangle size={12} color="black" strokeWidth={3}/><AlertTriangle size={12} color="black" strokeWidth={3}/></div> },
+    { type: 'stop', label: 'STOP', icon: <div className="bg-red-600 text-white text-[7px] font-black px-1 rounded border border-black uppercase">STOP</div> },
+    { type: 'waypoint', label: 'WPT', icon: <MapPin fill="black" color="white" size={20} /> },
+    { type: 'fuel', label: 'Gasolinera', icon: <Fuel color="black" size={20} /> },
+    { type: 'mechanic', label: 'Asistencia', icon: <Wrench color="black" size={20} /> },
+    { type: 'medical', label: 'Médico', icon: <PlusSquare color="red" size={20} /> },
+    { type: 'bivouac', label: 'Vivac', icon: <Tent color="black" size={20} /> },
+    { type: 'dz', label: 'DZ', icon: <div className="border-2 border-black rounded-full w-6 h-6 flex items-center justify-center font-black text-[9px]">DZ</div> },
+    { type: 'fz', label: 'FZ', icon: <div className="border-2 border-green-600 rounded-full w-6 h-6 flex items-center justify-center font-black text-[9px] text-green-600">FZ</div> },
+    { type: 'cap', label: 'CAP', icon: <div className="font-black text-[10px] border border-black px-1 bg-yellow-400">CAP</div> },
+    { type: 'cap_a', label: 'CAP A', icon: <div className="font-black text-[10px] border border-black px-1 bg-yellow-400">CAP A</div> },
+    { type: 'flag_start', label: 'Salida', icon: <Flag color="green" fill="green" size={20} /> },
+    { type: 'flag_end', label: 'Meta', icon: <Flag color="red" fill="red" size={20} /> },
+    { type: 'reset_icon', label: 'Reset', icon: <RotateCcw color="black" size={20} /> },
+  ],
+  "Señales": [
+    { type: 'v30', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">30</div> },
+    { type: 'v50', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">50</div> },
+    { type: 'v90', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">90</div> },
+    { type: 'v100', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[9px] tracking-tighter">100</div> },
+    { type: 'v120', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px]">120</div> },
+    { type: 'v_end', icon: <div className="border-2 border-black rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px] relative"><div className="absolute w-full h-0.5 bg-black rotate-45"/>FIN</div> },
+    { type: 'warning_sign', icon: <AlertTriangle color="red" size={20} /> },
+    { type: 'no_entry', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center"><div className="w-4 h-1 bg-white"/></div> },
+    { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">P</div> },
+    { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#2563eb"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
+    { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" fontWeight="bold" textAnchor="middle">STOP</text></svg> },
+    { type: 'yield', label: 'Ceda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,22 2,2 22,2" fill="white" stroke="#dc2626" strokeWidth="3" strokeLinejoin="round" /></svg> },
+    { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#2563eb" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
+    { type: 'dangerous_curve', label: 'Curva', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M10,16 Q10,10 14,8 M12,6 L15,8 L13,10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
+    { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" fontWeight="bold" textAnchor="middle">10%</text></svg> },
+  ],
+  "Referencias": [
+    { type: 'house', label: 'Casa', icon: <Home size={20}/> },
+    { type: 'houses', label: 'Casas', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="white" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><g transform="translate(10, 2) scale(0.55)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(1, 10) scale(0.6)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(11, 11) scale(0.65)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g></svg> },
+    { type: 'church', label: 'Iglesia', icon: <Church size={20}/> },
+    { type: 'factory', label: 'Fábrica', icon: <Factory size={20}/> },
+    { type: 'bridge_over', label: 'P. Sobre', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 7,2 L 7,22 M 17,2 L 17,22" stroke="black" strokeWidth="3" strokeLinecap="round"/><path d="M 3,2 L 7,6 M 21,2 L 17,6 M 3,22 L 7,18 M 21,22 L 17,18" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
+    { type: 'bridge_under', label: 'P. Bajo', icon: <svg viewBox="0 0 24 24" width="20" height="20"><line x1="2" y1="8" x2="22" y2="8" stroke="black" strokeWidth="2" strokeLinecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="black" strokeWidth="2" strokeLinecap="round"/><path d="M 7,22 L 7,16 A 5 5 0 0 1 17 16 L 17,22" stroke="black" strokeWidth="2" fill="none" strokeLinecap="round"/></svg> },
+    { type: 'tower', label: 'Torre', icon: <Landmark size={20}/> },
+    { type: 'pylon', label: 'Alta Tensión', icon: <svg viewBox="0 0 24 24" width="20" height="20" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M12,2 L8,22 M12,2 L16,22 M6,8 L18,8 M5,14 L19,14 M10,2 L14,8 M14,2 L10,8 M8,8 L12,14 M16,8 L12,14" /></svg> },
+    { type: 'tree', label: 'Árbol', icon: <Trees size={20}/> },
+    { type: 'park', label: 'Parque', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 6 12 C 0 12 0 1 6 1 C 12 1 12 12 6 12 Z" fill="#22c55e" /><line x1="6" y1="12" x2="6" y2="22" stroke="#92400e" strokeWidth="3" strokeLinecap="round" /><line x1="10" y1="8" x2="22" y2="8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="8" x2="9" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="20" y1="8" x2="23" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="14" y1="8" x2="14" y2="16" stroke="black" strokeWidth="1"/><line x1="18" y1="8" x2="18" y2="16" stroke="black" strokeWidth="1"/><line x1="13" y1="16" x2="19" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
+    { type: 'cafe', label: 'Café', icon: <Coffee size={20}/> },
+    { type: 'restaurant', label: 'Restaurante', icon: <UtensilsCrossed size={20}/> },
+    { type: 'pharmacy', label: 'Farmacia', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M10,3 h4 v6 h6 v4 h-6 v6 h-4 v-6 h-6 v-4 h6 z" fill="#16a34a" /></svg> },
+  ],
+  "Terreno": [
+    { type: 'water', label: 'Agua', icon: <Droplets color="blue" size={20}/> },
+    { type: 'river', label: 'Río', icon: <Waves color="blue" size={20}/> },
+    { type: 'sand', label: 'Arena', icon: <div className="grid grid-cols-2 gap-0.5"><div className="w-1.5 h-1.5 bg-yellow-600 rounded-full"/><div className="w-1.5 h-1.5 bg-yellow-600 rounded-full"/><div className="w-1.5 h-1.5 bg-yellow-600 rounded-full"/><div className="w-1.5 h-1.5 bg-yellow-600 rounded-full"/></div> },
+    { type: 'dust', label: 'Polvo', icon: <Wind color="gray" size={20}/> },
+    { type: 'stones', label: 'Piedras', icon: <Mountain color="gray" size={20}/> },
+    { type: 'danger_zap', label: 'Eléctrico', icon: <Zap color="orange" size={20}/> },
+  ]
+};
+
+// --- UTILIDADES ---
 const haversineDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; 
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 };
 
-const formatRallyDist = (num) => {
-  if (num === null || num === undefined || isNaN(num)) return "0,000";
-  return parseFloat(num).toFixed(3).replace('.', ',');
-};
+// Formato modificado para fijarlo a 2 decimales en todo el documento
+const formatRallyDist = (num) => parseFloat(num || 0).toFixed(2).replace('.', ',');
 
-// --- MOTOR DE CURVAS ---
 const catmullRom2bezier = (points) => {
-  if (!points || points.length === 0) return '';
-  if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
-  if (points.length === 2) return `M ${points[0].x},${points[0].y} L ${points[1].x},${points[1].y}`;
-  
+  if (!points || points.length < 2) return '';
   let d = `M ${points[0].x},${points[0].y} `;
   for (let i = 0; i < points.length - 1; i++) {
     const p0 = i === 0 ? points[0] : points[i - 1];
     const p1 = points[i];
     const p2 = points[i + 1];
     const p3 = i + 2 < points.length ? points[i + 2] : p2;
-
-    const cp1x = p1.x + (p2.x - p0.x) / 6;
-    const cp1y = p1.y + (p2.y - p0.y) / 6;
-    const cp2x = p2.x - (p3.x - p1.x) / 6;
-    const cp2y = p2.y - (p3.y - p1.y) / 6;
-
+    const cp1x = p1.x + (p2.x - p0.x) / 6, cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6, cp2y = p2.y - (p3.y - p1.y) / 6;
     d += `C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y} `;
   }
   return d;
 };
 
-// --- LIBRERÍA DE ICONOS RALLY ---
-const RALLY_ICONS = [
-  { type: 'alert_1', label: 'Peligro 1', icon: <AlertTriangle width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'alert_2', label: 'Peligro 2', icon: (
-      <svg viewBox="0 0 44 24" width="100%" height="100%">
-        <AlertTriangle x="0" y="0" width="24" height="24" color="black" strokeWidth={2.5} />
-        <AlertTriangle x="20" y="0" width="24" height="24" color="black" strokeWidth={2.5} />
-      </svg>
-  )},
-  { type: 'alert_3', label: 'Peligro 3', icon: (
-      <svg viewBox="0 0 64 24" width="100%" height="100%">
-        <AlertTriangle x="0" y="0" width="24" height="24" color="black" strokeWidth={2.5} />
-        <AlertTriangle x="20" y="0" width="24" height="24" color="black" strokeWidth={2.5} />
-        <AlertTriangle x="40" y="0" width="24" height="24" color="black" strokeWidth={2.5} />
-      </svg>
-  )},
-  { type: 'stop', label: 'STOP', icon: (
-      <svg viewBox="0 0 24 24" width="100%" height="100%">
-        <Octagon x="0" y="0" width="24" height="24" fill="black" color="black" />
-        <text x="12" y="15" fill="white" fontSize="7" fontWeight="black" textAnchor="middle">STOP</text>
-      </svg>
-  )},
-  { type: 'speed_30', label: 'Vel 30', icon: (
-      <svg viewBox="0 0 24 24" width="100%" height="100%">
-        <circle cx="12" cy="12" r="11" fill="white" stroke="black" strokeWidth="2.5" />
-        <text x="12" y="16" fill="black" fontSize="10" fontWeight="bold" textAnchor="middle">30</text>
-      </svg>
-  )},
-  { type: 'speed_50', label: 'Vel 50', icon: (
-      <svg viewBox="0 0 24 24" width="100%" height="100%">
-        <circle cx="12" cy="12" r="11" fill="white" stroke="black" strokeWidth="2.5" />
-        <text x="12" y="16" fill="black" fontSize="10" fontWeight="bold" textAnchor="middle">50</text>
-      </svg>
-  )},
-  { type: 'speed_70', label: 'Vel 70', icon: (
-      <svg viewBox="0 0 24 24" width="100%" height="100%">
-        <circle cx="12" cy="12" r="11" fill="white" stroke="black" strokeWidth="2.5" />
-        <text x="12" y="16" fill="black" fontSize="10" fontWeight="bold" textAnchor="middle">70</text>
-      </svg>
-  )},
-  { type: 'waypoint', label: 'Waypoint', icon: <MapPin width="100%" height="100%" fill="black" color="white" strokeWidth={1.5} /> },
-  { type: 'house', label: 'Casa', icon: <Home width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'gas', label: 'Gasolinera', icon: <Fuel width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'cafe', label: 'Cafetería', icon: <Coffee width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'camera', label: 'Radar', icon: <Camera width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'tent', label: 'Campamento', icon: <Tent width="100%" height="100%" color="black" strokeWidth={2.5} /> },
-  { type: 'bridge', label: 'Puente', icon: <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="black" strokeWidth="2.5"><path d="M2 12c0-4 4-8 10-8s10 4 10 8 M2 16h20 M6 16v4 M18 16v4"/></svg> },
-  { type: 'water', label: 'Badén/Agua', icon: <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="black" strokeWidth="2.5"><path d="M2 12 Q7 7 12 12 T22 12 M2 18 Q7 13 12 18 T22 18"/></svg> }
-];
+const distToSegment = (p, v, w) => {
+  const l2 = Math.pow(v.x - w.x, 2) + Math.pow(v.y - w.y, 2);
+  if (l2 === 0) return Math.pow(p.x - v.x, 2) + Math.pow(p.y - v.y, 2);
+  let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+  t = Math.max(0, Math.min(1, t));
+  return Math.sqrt(Math.pow(p.x - (v.x + t * (w.x - v.x)), 2) + Math.pow(p.y - (v.y + t * (w.y - v.y)), 2));
+};
 
-const RenderIcon = (type) => RALLY_ICONS.find(i => i.type === type)?.icon || null;
-
-// --- ESTRUCTURA VECTORIAL ---
-const defaultCustomTulip = {
-  isRoundabout: false,
-  paths: [{ id: 'main-1', type: 'main', points: [{x: 50, y: 90}, {x: 50, y: 50}, {x: 50, y: 10}] }],
+const defaultCustomTulip = { 
+  isRoundabout: false, 
+  paths: [{ id: 'm1', type: 'main', points: [{x: 50, y: 90}, {x: 50, y: 10}], isDirt: false, isHighway: false, thickness: 5 }], 
   icons: [] 
 };
 
@@ -111,349 +117,139 @@ const normalizeTulip = (data) => {
   return { ...data, icons: data.icons || [] };
 };
 
-const TULIP_ICONS = [
-  { id: 'straight', icon: ArrowUp, label: 'Recto' },
-  { id: 'slight_right', icon: ArrowUpRight, label: 'Ligera Derecha' },
-  { id: 'right', icon: ArrowRight, label: 'Derecha' },
-  { id: 'hard_right', icon: CornerUpRight, label: 'Derecha Cerrada' },
-  { id: 'u_turn', icon: ArrowDown, label: 'Media Vuelta' },
-  { id: 'hard_left', icon: CornerUpLeft, label: 'Izquierda Cerrada' },
-  { id: 'left', icon: ArrowLeft, label: 'Izquierda' },
-  { id: 'slight_left', icon: ArrowUpLeft, label: 'Ligera Izquierda' },
-  { id: 'start', icon: Navigation, label: 'Salida' }
-];
+const GetIconComponent = (type) => {
+  for (const cat in ICON_CATEGORIES) {
+    const item = ICON_CATEGORIES[cat].find(i => i.type === type);
+    if (item) return item.icon;
+  }
+  return null;
+};
 
-export default function App() {
-  const [roadbook, setRoadbook] = useState([]);
+// --- COMPONENTE: SELECTOR UNIVERSAL ---
+function UniversalIconPicker({ onSelect, onUpload, onClose }) {
+  const [activeTab, setActiveTab] = useState("Rally / CC");
   const fileInputRef = useRef(null);
-  
-  // Nuevo estado para controlar el aviso de impresión
-  const [showPrintModal, setShowPrintModal] = useState(false);
-  
-  // Nuevo estado para controlar la confirmación de borrado
-  const [rowToDelete, setRowToDelete] = useState(null);
-
-  const handlePrint = () => {
-    // Intenta forzar el foco y lanzar la impresión
-    setTimeout(() => {
-      window.focus();
-      window.print();
-    }, 100);
-    // Muestra las instrucciones por si el navegador bloquea la acción automática
-    setShowPrintModal(true);
-  };
-
-  useEffect(() => {
-    setRoadbook(prev => {
-      let isChanged = false;
-      const updated = prev.map((row, index) => {
-        let expectedPartial = 0;
-        if (index === 0) {
-          expectedPartial = row.totalDist; 
-        } else {
-          const prevTotal = prev[index - 1].totalDist;
-          if (row.totalDist < prevTotal) expectedPartial = row.totalDist; 
-          else expectedPartial = row.totalDist - prevTotal;
-        }
-        expectedPartial = Math.max(0, expectedPartial);
-        if (Math.abs(row.partialDist - expectedPartial) > 0.0001) {
-          isChanged = true; return { ...row, partialDist: expectedPartial };
-        }
-        return row;
-      });
-      return isChanged ? updated : prev;
-    });
-  }, [roadbook.map(r => r.totalDist).join(',')]);
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const gpxText = event.target.result;
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(gpxText, "text/xml");
-
-      const trkseg = xmlDoc.getElementsByTagName('trkpt');
-      let points = [];
-      let cumulativeDist = 0;
-
-      for (let i = 0; i < trkseg.length; i++) {
-        const lat = parseFloat(trkseg[i].getAttribute('lat'));
-        const lon = parseFloat(trkseg[i].getAttribute('lon'));
-        if (i > 0) {
-          const prevLat = parseFloat(trkseg[i-1].getAttribute('lat'));
-          const prevLon = parseFloat(trkseg[i-1].getAttribute('lon'));
-          cumulativeDist += haversineDistance(prevLat, prevLon, lat, lon);
-        }
-        points.push({ lat, lon, dist: cumulativeDist });
-      }
-
-      const wpts = xmlDoc.getElementsByTagName('wpt');
-      let newRoadbook = [];
-
-      if (points.length > 0) {
-        newRoadbook.push({
-          id: crypto.randomUUID(), totalDist: 0, partialDist: 0,
-          tulipId: 'start', customTulip: null, infoIcons: [], notes: 'INICIO / START', lat: points[0].lat, lon: points[0].lon
-        });
-      }
-
-      for (let i = 0; i < wpts.length; i++) {
-        const lat = parseFloat(wpts[i].getAttribute('lat'));
-        const lon = parseFloat(wpts[i].getAttribute('lon'));
-        let name = "WAYPOINT", desc = "";
-        
-        const nameNode = wpts[i].getElementsByTagName('name')[0];
-        if (nameNode) name = nameNode.textContent.toUpperCase();
-        const descNode = wpts[i].getElementsByTagName('desc')[0];
-        if (descNode) desc = descNode.textContent.toUpperCase();
-
-        let closestDist = 0, minError = Infinity;
-        points.forEach(p => {
-          const err = haversineDistance(lat, lon, p.lat, p.lon);
-          if (err < minError) { minError = err; closestDist = p.dist; }
-        });
-
-        if (closestDist > 0.05) {
-          const isStop = name.includes('STOP');
-          const isDanger = name.includes('PELIGRO') || name.includes('DANGER');
-          
-          let initIcons = [];
-          if (isStop) initIcons.push({ id: crypto.randomUUID(), type: 'stop', x: 50, y: 50, scale: 1 });
-          else if (isDanger) initIcons.push({ id: crypto.randomUUID(), type: 'alert_1', x: 50, y: 50, scale: 1 });
-
-          newRoadbook.push({
-            id: crypto.randomUUID(), totalDist: parseFloat(closestDist.toFixed(3)), partialDist: 0, 
-            tulipId: 'custom',
-            customTulip: { ...JSON.parse(JSON.stringify(defaultCustomTulip)), icons: initIcons },
-            infoIcons: [],
-            notes: `${name}\n${desc}`.trim(), lat, lon
-          });
-        }
-      }
-
-      newRoadbook.sort((a, b) => a.totalDist - b.totalDist);
-      setRoadbook(newRoadbook);
-    };
-    reader.readAsText(file);
-    e.target.value = null; 
-  };
-
-  const addManualRow = () => {
-    const lastDist = roadbook.length > 0 ? roadbook[roadbook.length - 1].totalDist : 0;
-    setRoadbook([...roadbook, {
-        id: crypto.randomUUID(), totalDist: parseFloat((lastDist + 1.0).toFixed(3)), partialDist: 1.0,
-        tulipId: 'custom', customTulip: JSON.parse(JSON.stringify(defaultCustomTulip)), infoIcons: [], notes: '', lat: null, lon: null
-    }]);
-  };
-
-  const addResetRow = () => {
-    setRoadbook([...roadbook, {
-        id: crypto.randomUUID(), totalDist: 0, partialDist: 0,
-        tulipId: 'start', customTulip: null, infoIcons: [], notes: '0000\nRESET', lat: null, lon: null
-    }]);
-  };
-
-  const insertRowAfter = (id) => {
-    setRoadbook(prev => {
-      const index = prev.findIndex(r => r.id === id);
-      if (index === -1) return prev;
-      const newRoadbook = [...prev];
-      const currentRow = newRoadbook[index];
-      const nextRow = newRoadbook[index + 1];
-      let suggestedDist = currentRow.totalDist + (nextRow && nextRow.totalDist > currentRow.totalDist ? (nextRow.totalDist - currentRow.totalDist) / 2 : 0.1);
-
-      newRoadbook.splice(index + 1, 0, {
-        id: crypto.randomUUID(), totalDist: parseFloat(suggestedDist.toFixed(3)), partialDist: 0,
-        tulipId: 'custom', customTulip: JSON.parse(JSON.stringify(defaultCustomTulip)), infoIcons: [], notes: '', lat: null, lon: null
-      });
-      return newRoadbook;
-    });
-  };
-
-  const updateRow = (id, fieldOrUpdates, value) => {
-    setRoadbook(prev => prev.map(row => {
-      if (row.id === id) {
-        if (typeof fieldOrUpdates === 'object' && fieldOrUpdates !== null) return { ...row, ...fieldOrUpdates };
-        return { ...row, [fieldOrUpdates]: value };
-      }
-      return row;
-    }));
-  };
-
-  const requestDeleteRow = (id) => {
-    setRowToDelete(id);
-  };
-
-  const confirmDelete = () => {
-    if (rowToDelete) {
-      setRoadbook(prev => prev.filter(row => row.id !== rowToDelete));
-      setRowToDelete(null);
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-gray-200 text-black font-sans pb-10">
-      <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <Map className="w-8 h-8 text-white" />
-          <div>
-            <h1 className="text-xl font-bold uppercase tracking-widest">Rally RobiBook Pro</h1>
-            {/* FRASE ELIMINADA */}
-          </div>
+    <div className="fixed inset-0 z-[250] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onPointerDown={onClose}>
+      <div className="bg-white border-4 border-black w-full max-w-xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onPointerDown={e => e.stopPropagation()}>
+        <div className="p-4 border-b-4 border-black flex justify-between items-center bg-gray-50">
+          <h3 className="font-black uppercase text-lg tracking-tight">Librería de Iconos</h3>
+          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><X/></button>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded font-bold text-sm transition-colors"><Upload className="w-4 h-4" /> GPX</button>
-          <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept=".gpx" className="hidden" />
-          <button onClick={addManualRow} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded font-bold text-sm transition-colors"><Plus className="w-4 h-4" /> Añadir Fila</button>
-          <button onClick={addResetRow} className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold text-sm transition-colors"><Info className="w-4 h-4" /> RESET</button>
-          <button onClick={handlePrint} className="flex items-center gap-2 bg-green-600 hover:bg-green-500 px-4 py-2 rounded font-bold text-sm transition-colors"><Printer className="w-4 h-4" /> Imprimir</button>
-        </div>
-      </header>
 
-      <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
-        <div className="flex w-full border-4 border-black border-b-0 bg-white text-black font-black uppercase text-center text-sm tracking-widest print:border-t-0 print:border-l-0 print:border-r-0">
-          <div className="w-[25%] p-2 border-r-4 border-black">Distancia</div>
-          <div className="w-[35%] p-2 border-r-4 border-black">Dirección</div>
-          <div className="w-[40%] p-2">Información</div>
+        <div className="p-4 bg-blue-50 border-b-2 border-black">
+          <button onClick={() => fileInputRef.current?.click()} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-black py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
+            <Upload size={18}/> SUBIR IMAGEN PROPIA
+          </button>
+          <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={(e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (ev) => onUpload(ev.target.result);
+              reader.readAsDataURL(file);
+            }
+          }} />
         </div>
-        <div className="flex flex-col border-4 border-black border-b-0 print:border-0 print:border-t-4 print:border-black">
-          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-4 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
-          {roadbook.map((row, index) => (
-            <RoadbookRow key={row.id} row={row} index={index + 1} onUpdate={updateRow} onDelete={requestDeleteRow} onInsert={insertRowAfter} />
+
+        <div className="flex bg-gray-200 border-b-2 border-black overflow-x-auto no-scrollbar shrink-0">
+          {Object.keys(ICON_CATEGORIES).map(cat => (
+            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-5 py-4 font-black text-sm uppercase tracking-widest whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-4 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-4 border-transparent'}`}>
+              {cat}
+            </button>
           ))}
         </div>
-        <div className="h-4 border-t-4 border-black print:hidden"></div>
-      </main>
 
-      {/* MODAL DE CONFIRMACIÓN DE BORRADO */}
-      {rowToDelete && (
-        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setRowToDelete(null)}>
-          <div className="bg-white p-6 rounded-2xl shadow-2xl max-w-sm text-center border-4 border-black" onPointerDown={e => e.stopPropagation()}>
-            <Trash2 className="w-16 h-16 text-red-600 mx-auto mb-4" />
-            <h2 className="text-xl font-black mb-2 uppercase tracking-tight">¿Eliminar viñeta?</h2>
-            <p className="text-gray-600 mb-6 font-medium">Esta acción eliminará la fila por completo y no se puede deshacer.</p>
-            <div className="flex gap-4">
-              <button onClick={() => setRowToDelete(null)} className="flex-1 bg-gray-200 text-black font-bold py-3 px-4 rounded hover:bg-gray-300 transition-colors uppercase border-2 border-gray-300">
-                Cancelar
-              </button>
-              <button onClick={confirmDelete} className="flex-1 bg-red-600 text-white font-bold py-3 px-4 rounded hover:bg-red-700 transition-colors uppercase border-2 border-red-700">
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* MODAL INSTRUCCIONES DE IMPRESIÓN */}
-      {showPrintModal && (
-        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
-          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-4 border-black" onPointerDown={e => e.stopPropagation()}>
-            <Printer className="w-16 h-16 text-black mx-auto mb-4" />
-            <h2 className="text-2xl font-black mb-2 uppercase tracking-tight">Imprimir Roadbook</h2>
-            <p className="text-gray-700 mb-6 font-medium text-lg">
-              Si la ventana no se abre automáticamente, pulsa:<br/><br/>
-              <span className="bg-gray-200 px-3 py-1 rounded border-2 border-gray-400 font-bold font-mono">Ctrl + P</span> (Windows)<br/>
-              <span className="bg-gray-200 px-3 py-1 rounded border-2 border-gray-400 font-bold font-mono mt-2 inline-block">Cmd + P</span> (Mac)
-            </p>
-            <p className="text-sm text-gray-500 mb-6">
-              El diseño está optimizado para generar un PDF en formato rollo, ocultando todos los botones y menús.
-            </p>
-            <button 
-              onClick={() => setShowPrintModal(false)} 
-              className="w-full bg-green-600 text-white font-bold py-3 px-6 rounded hover:bg-green-700 text-lg uppercase tracking-wider transition-colors"
-            >
-              Entendido
+        <div className="p-4 pb-12 overflow-y-auto grid grid-cols-4 sm:grid-cols-5 gap-3 bg-white flex-1 min-h-0 content-start">
+          {ICON_CATEGORIES[activeTab].map((item, idx) => (
+            <button key={idx} onClick={() => onSelect(item.type)} className="group flex flex-col items-center justify-center gap-2 p-2 border-2 border-gray-100 rounded-xl hover:border-black hover:bg-gray-50 transition-all">
+              <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                {item.icon}
+              </div>
+              <span className="text-[8px] font-black uppercase text-gray-400 group-hover:text-black">{item.label || item.type}</span>
             </button>
-          </div>
+          ))}
         </div>
-      )}
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @media print {
-          body { background-color: white !important; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          @page { margin: 0; size: auto; }
-          .print\\:hidden { display: none !important; }
-          .print\\:border-0 { border: none !important; }
-          .print\\:border-t-4 { border-top-width: 4px !important; }
-          .print\\:border-black { border-color: black !important; }
-          .print\\:shadow-none { box-shadow: none !important; }
-          .print\\:w-full { width: 100% !important; max-width: 100% !important; }
-          .print\\:mt-0 { margin-top: 0 !important; }
-          .roadbook-row { page-break-inside: avoid; break-inside: avoid; }
-        }
-      `}} />
+      </div>
     </div>
   );
 }
 
-// --- COMPONENTE DE VISTA ESTÁTICA TULIPA (SVG CORE) ---
+// --- RENDERIZADORES ---
+
 function StaticTulipRenderer({ data, id }) {
-  const { paths, isRoundabout, icons } = normalizeTulip(data);
-  const hasEntry = paths.some(p => p.type === 'entry');
-  
+  const norm = normalizeTulip(data);
   return (
     <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
       <defs>
-        <marker id={`arrow-${id}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 1 L 10 5 L 0 9 z" fill="black" />
+        <marker id={`arrow-blue-${id}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id={`block-black-${id}`} viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <rect x="4.6" y="1" width="0.8" height="8" fill="black" />
         </marker>
       </defs>
-
-      {isRoundabout && <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />}
-
-      {paths.filter(p => p.type === 'secondary').map(path => (
-        <path key={path.id} d={catmullRom2bezier(path.points)} fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      ))}
-      {paths.filter(p => p.type === 'entry').map(path => (
-        <g key={path.id}>
-          <path d={catmullRom2bezier(path.points)} fill="none" stroke="black" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-          {path.points.length > 0 && <circle cx={path.points[0].x} cy={path.points[0].y} r="5" fill="black" />}
-        </g>
-      ))}
-      {paths.filter(p => p.type === 'main').map(path => (
-        <g key={path.id}>
-          <path d={catmullRom2bezier(path.points)} fill="none" stroke="black" strokeWidth="5" markerEnd={`url(#arrow-${id})`} strokeLinecap="round" strokeLinejoin="round" />
-          {!hasEntry && path.points.length > 0 && <circle cx={path.points[0].x} cy={path.points[0].y} r="5" fill="black" />}
-        </g>
-      ))}
-      
-      {icons.map(ic => {
-        const size = 30 * (ic.scale || 1);
-        const xPos = ic.x - size / 2;
-        const yPos = ic.y - size / 2;
+      {norm.isRoundabout && <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />}
+      {norm.paths.map(p => {
+        const isMain = p.type === 'main';
+        const isEntry = p.type === 'entry';
+        const isWrong = !isMain && !isEntry; 
+        const color = (isMain || isEntry) ? '#3b82f6' : 'black'; 
+        const width = p.type === 'secondary' ? '2' : (p.thickness || 5).toString();
+        const dash = p.isDirt ? (width >= 4 ? '10,10' : '4,4') : 'none';
         
-        if (ic.type === 'custom_image') {
-          return <image key={ic.id} href={ic.dataUrl} x={xPos} y={yPos} width={size} height={size} preserveAspectRatio="xMidYMid meet" />;
-        }
+        let marker = '';
+        if (isMain) marker = `url(#arrow-blue-${id})`;
+        if (isWrong) marker = `url(#block-black-${id})`;
+
+        const lineCap = 'butt';
+        const dPath = catmullRom2bezier(p.points);
         
         return (
-          <svg key={ic.id} x={xPos} y={yPos} width={size} height={size} overflow="visible">
-            {RenderIcon(ic.type)}
-          </svg>
+          <g key={p.id}>
+            <path d={dPath} fill="none" stroke={color} strokeWidth={width} strokeDasharray={dash} strokeLinecap={lineCap} />
+            {p.isHighway && (
+              <path d={dPath} fill="none" stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} strokeLinecap={lineCap} />
+            )}
+            {marker && (
+              <path d={dPath} fill="none" stroke="transparent" strokeWidth={width} markerEnd={marker} pointerEvents="none" />
+            )}
+          </g>
+        );
+      })}
+      {norm.icons.map(ic => { 
+        const rot = ic.rotation || 0;
+        const scale = ic.scale || 1;
+        return (
+          <g key={ic.id} style={{transform: `translate(${ic.x}px, ${ic.y}px) rotate(${rot}deg) scale(${scale}) translate(-15px, -15px)`}}>
+            {ic.type === 'custom_image' ? (
+              <image href={ic.dataUrl} width={30} height={30} preserveAspectRatio="xMidYMid meet" />
+            ) : (
+              <foreignObject width={30} height={30}>
+                <div style={{width: 30, height: 30}} className="flex items-center justify-center overflow-visible">
+                  {GetIconComponent(ic.type)}
+                </div>
+              </foreignObject>
+            )}
+          </g>
         );
       })}
     </svg>
   );
 }
 
-// --- EDITOR VECTORIAL TULIPA ---
 function TulipVectorEditor({ data, onSave, onCancel }) {
   const normData = normalizeTulip(data);
   const [paths, setPaths] = useState(normData.paths);
   const [icons, setIcons] = useState(normData.icons);
   const [isRoundabout, setIsRoundabout] = useState(normData.isRoundabout);
-  
   const [rExits, setRExits] = useState(3);
   const [rTarget, setRTarget] = useState(2);
-
   const svgRef = useRef(null);
-  const customImgInputRef = useRef(null);
-  
   const [dragging, setDragging] = useState(null); 
   const [selectedIconId, setSelectedIconId] = useState(null);
+  const [selectedPathId, setSelectedPathId] = useState(null); 
+  const [showIconPicker, setShowIconPicker] = useState(false);
 
   const getCoords = (e) => {
     const svg = svgRef.current;
@@ -469,15 +265,22 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
     e.stopPropagation();
     e.target.setPointerCapture(e.pointerId);
     setDragging(target);
-    
-    if (target.type === 'icon') setSelectedIconId(target.iconId);
-    else setSelectedIconId(null);
+    if (target.type === 'icon') {
+      setSelectedIconId(target.iconId);
+      setSelectedPathId(null);
+    } else if (target.type === 'path') {
+      setSelectedPathId(target.pathId);
+      setSelectedIconId(null);
+      setDragging(null); 
+    } else {
+      setSelectedIconId(null);
+      setSelectedPathId(null);
+    }
   };
 
   const handlePointerMove = (e) => {
     if (!dragging) return;
     const loc = getCoords(e);
-    
     if (dragging.type === 'node') {
       setPaths(paths.map(path => {
         if (path.id !== dragging.pathId) return path;
@@ -529,12 +332,20 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
     }));
   };
 
+  const deleteSelectedPath = () => {
+    if (!selectedPathId || paths.length <= 1) return; 
+    setPaths(paths.filter(p => p.id !== selectedPathId));
+    setSelectedPathId(null);
+  };
+
   const updateSelectedIconScale = (delta) => {
     if (!selectedIconId) return;
-    setIcons(icons.map(ic => {
-      if (ic.id === selectedIconId) return { ...ic, scale: Math.max(0.5, Math.min(4, (ic.scale || 1) + delta)) };
-      return ic;
-    }));
+    setIcons(icons.map(ic => ic.id === selectedIconId ? { ...ic, scale: Math.max(0.5, Math.min(4, (ic.scale || 1) + delta)) } : ic));
+  };
+
+  const updateSelectedIconRotation = (delta) => {
+    if (!selectedIconId) return;
+    setIcons(icons.map(ic => ic.id === selectedIconId ? { ...ic, rotation: (ic.rotation || 0) + delta } : ic));
   };
 
   const deleteSelectedIcon = () => {
@@ -543,81 +354,117 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
     setSelectedIconId(null);
   };
 
+  const togglePathDirt = () => {
+    if (!selectedPathId) return;
+    setPaths(paths.map(p => p.id === selectedPathId ? { ...p, isDirt: !p.isDirt } : p));
+  };
+
+  const togglePathHighway = () => {
+    if (!selectedPathId) return;
+    setPaths(paths.map(p => p.id === selectedPathId ? { ...p, isHighway: !p.isHighway } : p));
+  };
+
+  const cycleThickness = () => {
+    if (!selectedPathId) return;
+    setPaths(paths.map(p => {
+      if (p.id !== selectedPathId) return p;
+      let current = p.type === 'secondary' ? 2 : (p.thickness || 5);
+      let next = current === 5 ? 3.5 : (current === 3.5 ? 2 : 5);
+      return { ...p, type: p.type === 'secondary' ? 'wrong_way' : p.type, thickness: next };
+    }));
+  };
+
   const addIcon = (type, dataUrl = null) => {
-    const newIcon = { id: crypto.randomUUID(), type, x: 50, y: 50, scale: 1, dataUrl };
+    const newIcon = { id: crypto.randomUUID(), type, x: 50, y: 50, scale: 1, rotation: 0, dataUrl };
     setIcons([...icons, newIcon]);
     setSelectedIconId(newIcon.id);
   };
 
-  const handleCustomImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => addIcon('custom_image', event.target.result);
-    reader.readAsDataURL(file);
-    e.target.value = null;
-  };
-
-  const addSecondaryPath = () => setPaths([...paths, { id: crypto.randomUUID(), type: 'secondary', points: [{x: 50, y: 50}, {x: 80, y: 30}] }]);
-  const addMainPath = () => setPaths([...paths, { id: crypto.randomUUID(), type: 'main', points: [{x: 50, y: 90}, {x: 50, y: 50}, {x: 50, y: 10}] }]);
   const generateRoundabout = () => {
     const newPaths = [];
     const totalLegs = rExits + 1;
-    newPaths.push({ id: crypto.randomUUID(), type: 'entry', points: [{x: 50, y: 90}, {x: 50, y: 65}] });
+    newPaths.push({ id: crypto.randomUUID(), type: 'entry', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 90}, {x: 50, y: 65}] });
     for (let i = 1; i <= rExits; i++) {
       const angle = Math.PI / 2 - i * (2 * Math.PI / totalLegs);
       const isTarget = (i === rTarget);
       const r1 = 15; const r2 = isTarget ? 45 : 30;
-      newPaths.push({ id: crypto.randomUUID(), type: isTarget ? 'main' : 'secondary', points: [{x: 50 + r1 * Math.cos(angle), y: 50 + r1 * Math.sin(angle)}, {x: 50 + r2 * Math.cos(angle), y: 50 + r2 * Math.sin(angle)}] });
+      newPaths.push({ id: crypto.randomUUID(), type: isTarget ? 'main' : 'wrong_way', isDirt: false, isHighway: false, thickness: isTarget ? 5 : 3.5, points: [{x: 50 + r1 * Math.cos(angle), y: 50 + r1 * Math.sin(angle)}, {x: 50 + r2 * Math.cos(angle), y: 50 + r2 * Math.sin(angle)}] });
     }
     setPaths(newPaths); setIsRoundabout(true);
+    setSelectedPathId(null);
   };
+
+  const selectedPath = paths.find(p => p.id === selectedPathId);
+  const showThicknessBtn = selectedPath && selectedPath.type !== 'main';
 
   return (
     <div className="flex flex-col items-center select-none w-full">
-      <div className="text-[10px] text-gray-500 mb-2 font-bold uppercase flex justify-between w-full px-2">
-        <span>Arrástrame</span>
-        <span>Línea 2 clics = + Nodo</span>
+      <div className="bg-gray-100 p-2 rounded border-2 border-gray-200 mb-2 w-full flex flex-col items-center">
+        <span className="text-[10px] font-black uppercase text-gray-500 mb-1">Generador Rotonda</span>
+        <div className="flex gap-2 items-center text-xs">
+          <span>Salidas:</span>
+          <input type="number" min="1" max="8" value={rExits} onChange={e=>setRExits(parseInt(e.target.value)||1)} className="w-10 border rounded text-center" />
+          <span>Objetivo:</span>
+          <input type="number" min="1" max={rExits} value={rTarget} onChange={e=>setRTarget(parseInt(e.target.value)||1)} className="w-10 border rounded text-center" />
+          <button onClick={generateRoundabout} className="bg-blue-600 text-white font-bold px-2 py-1 rounded hover:bg-blue-700 ml-1 uppercase text-[10px]">Generar</button>
+        </div>
       </div>
-      
-      <div className="w-64 h-64 border-2 border-dashed border-gray-400 bg-gray-50 mb-2 relative touch-none shadow-inner rounded overflow-hidden" onPointerDown={() => setSelectedIconId(null)}>
-        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-full overflow-visible" onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} onPointerLeave={handlePointerUp}>
-          <defs><marker id="editor-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#000" /></marker></defs>
+
+      <div 
+        className="w-64 h-64 border-2 border-dashed border-gray-400 bg-gray-50 mb-2 relative touch-none shadow-inner rounded overflow-hidden"
+        onPointerDown={() => { setSelectedPathId(null); setSelectedIconId(null); }}
+      >
+        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-full overflow-visible" onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
+          <defs>
+            <marker id="editor-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" /></marker>
+            <marker id="editor-block-black" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><rect x="4.6" y="1" width="0.8" height="8" fill="black" /></marker>
+            <marker id="editor-arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" /></marker>
+            <marker id="editor-block-orange" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><rect x="4.6" y="1" width="0.8" height="8" fill="#f59e0b" /></marker>
+          </defs>
           {isRoundabout && <circle cx="50" cy="50" r="15" fill="none" stroke="#cbd5e1" strokeWidth="4" />}
-          
-          {paths.map(path => (
-            <g key={path.id}>
-              <path d={catmullRom2bezier(path.points)} stroke="transparent" strokeWidth="15" fill="none" onDoubleClick={(e) => handleLineDoubleClick(e, path.id)} className="cursor-crosshair" />
-              {path.type === 'secondary' && <path d={catmullRom2bezier(path.points)} stroke="#64748b" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none" />}
-              {path.type === 'entry' && <path d={catmullRom2bezier(path.points)} stroke="black" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none" />}
-              {path.type === 'main' && <path d={catmullRom2bezier(path.points)} stroke="black" strokeWidth="4" fill="none" markerEnd="url(#editor-arrow)" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none" />}
-            </g>
-          ))}
-
-          {paths.map(path => path.points.map((p, i) => (
-            <circle key={`${path.id}-pt-${i}`} cx={p.x} cy={p.y} r="6" fill="#ef4444" stroke="white" strokeWidth="2" className="cursor-grab active:cursor-grabbing hover:fill-red-500 transition-all"
-              onPointerDown={(e) => handlePointerDown(e, { type: 'node', pathId: path.id, pointIdx: i })} onDoubleClick={(e) => handleDeletePoint(e, path.id, i)}
-            />
-          )))}
-
-          {icons.map(ic => {
-            const size = 30 * (ic.scale || 1);
-            const xPos = ic.x - size / 2;
-            const yPos = ic.y - size / 2;
-            const isSelected = selectedIconId === ic.id;
-
+          {paths.map(path => {
+            const isSelected = path.id === selectedPathId;
+            const isMain = path.type === 'main';
+            const isEntry = path.type === 'entry';
+            const isWrong = !isMain && !isEntry;
+            const color = isSelected ? "#f59e0b" : ((isMain || isEntry) ? '#3b82f6' : 'black'); 
+            const width = path.type === 'secondary' ? '2' : (path.thickness || 5).toString();
+            const dash = path.isDirt ? (width >= 4 ? '10,10' : '4,4') : 'none';
+            
+            let marker = '';
+            if (isMain) marker = isSelected ? "url(#editor-arrow-orange)" : "url(#editor-arrow-blue)";
+            if (isWrong) marker = isSelected ? "url(#editor-block-orange)" : "url(#editor-block-black)";
+            
+            const lineCap = 'butt';
+            const dPath = catmullRom2bezier(path.points);
+            
             return (
-              <g key={ic.id} onPointerDown={(e) => handlePointerDown(e, { type: 'icon', iconId: ic.id })} className="cursor-grab active:cursor-grabbing">
-                <rect x={xPos - 5} y={yPos - 5} width={size + 10} height={size + 10} fill="transparent" />
-                {isSelected && <rect x={xPos - 2} y={yPos - 2} width={size + 4} height={size + 4} fill="none" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2,2" rx="2" />}
-                
-                {ic.type === 'custom_image' ? (
-                  <image href={ic.dataUrl} x={xPos} y={yPos} width={size} height={size} preserveAspectRatio="xMidYMid meet" className="pointer-events-none"/>
-                ) : (
-                  <svg x={xPos} y={yPos} width={size} height={size} overflow="visible" className="pointer-events-none">
-                    {RenderIcon(ic.type)}
-                  </svg>
+              <g key={path.id}>
+                <path d={dPath} stroke="transparent" strokeWidth="20" fill="none" strokeLinecap={lineCap} onPointerDown={(e) => handlePointerDown(e, { type: 'path', pathId: path.id })} onDoubleClick={(e) => handleLineDoubleClick(e, path.id)} className="cursor-crosshair" />
+                <path d={dPath} stroke={color} strokeWidth={width} strokeDasharray={dash} fill="none" strokeLinecap={lineCap} className="pointer-events-none transition-colors" />
+                {path.isHighway && (
+                  <path d={dPath} stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} fill="none" strokeLinecap={lineCap} className="pointer-events-none transition-colors" />
                 )}
+                {marker && (
+                  <path d={dPath} stroke="transparent" strokeWidth={width} fill="none" markerEnd={marker} className="pointer-events-none" />
+                )}
+              </g>
+            );
+          })}
+          {paths.map(path => path.points.map((p, i) => (
+            <circle key={`${path.id}-pt-${i}`} cx={p.x} cy={p.y} r="6" fill="#ef4444" stroke="white" strokeWidth="2" onPointerDown={(e) => handlePointerDown(e, { type: 'node', pathId: path.id, pointIdx: i })} onDoubleClick={(e) => handleDeletePoint(e, path.id, i)} />
+          )))}
+          {icons.map(ic => {
+            const rot = ic.rotation || 0;
+            const scale = ic.scale || 1;
+            return (
+              <g key={ic.id} onPointerDown={(e) => handlePointerDown(e, { type: 'icon', iconId: ic.id })} style={{transform: `translate(${ic.x}px, ${ic.y}px) rotate(${rot}deg) scale(${scale}) translate(-15px, -15px)`}}>
+                <rect width={30} height={30} fill="transparent" />
+                <foreignObject width={30} height={30}>
+                  <div className="w-full h-full flex items-center justify-center pointer-events-none overflow-visible">
+                    {ic.type === 'custom_image' ? <img src={ic.dataUrl} className="w-full h-full object-contain" /> : GetIconComponent(ic.type)}
+                  </div>
+                </foreignObject>
               </g>
             );
           })}
@@ -625,269 +472,483 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       </div>
 
       {selectedIconId && (
-        <div className="w-full bg-blue-50 border border-blue-300 shadow-sm rounded p-1 mb-2 flex justify-between items-center relative z-20">
-          <span className="text-[10px] font-bold text-blue-800 ml-2 uppercase">Tamaño Icono</span>
-          <div className="flex gap-1">
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); updateSelectedIconScale(-0.2); }} className="px-3 py-1 bg-white border border-blue-200 rounded text-lg font-bold hover:bg-blue-100 leading-none">-</button>
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); updateSelectedIconScale(0.2); }} className="px-3 py-1 bg-white border border-blue-200 rounded text-lg font-bold hover:bg-blue-100 leading-none">+</button>
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); deleteSelectedIcon(); }} className="px-2 py-1 bg-red-100 text-red-600 rounded text-xs font-bold hover:bg-red-200 ml-2"><Trash2 size={16}/></button>
+        <div className="flex gap-1 mb-2 w-full justify-center">
+          <button onClick={() => updateSelectedIconScale(-0.1)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">-</button>
+          <button onClick={() => updateSelectedIconScale(0.1)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">+</button>
+          <button onClick={() => updateSelectedIconRotation(-15)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↺</button>
+          <button onClick={() => updateSelectedIconRotation(15)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↻</button>
+          <button onClick={deleteSelectedIcon} className="bg-red-500 text-white px-3 rounded font-bold text-xs uppercase tracking-wide ml-2">Eliminar</button>
+        </div>
+      )}
+
+      {selectedPathId && selectedPath && (
+        <div className="flex flex-col gap-2 mb-2 w-full justify-center bg-gray-100 p-2 rounded border-2 border-gray-200">
+          <span className="text-[10px] font-black uppercase text-gray-500 text-center tracking-widest">Opciones de Vía</span>
+          <div className="grid grid-cols-2 gap-2 w-full">
+            <button onClick={togglePathDirt} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+              {selectedPath.isDirt ? 'Hacer Asfalto' : 'Hacer Tierra'}
+            </button>
+            <button onClick={togglePathHighway} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+              {selectedPath.isHighway ? 'Vía Única' : 'Autopista'}
+            </button>
+            {showThicknessBtn && (
+              <button onClick={cycleThickness} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+                Grosor: {(selectedPath.type === 'secondary' || selectedPath.thickness === 2) ? 'Fino' : (selectedPath.thickness === 3.5 ? 'Medio' : 'Grueso')}
+              </button>
+            )}
+            {paths.length > 1 ? (
+              <button onClick={deleteSelectedPath} className={`bg-red-600 text-white border-2 border-red-700 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-red-700 transition-colors ${!showThicknessBtn ? 'col-span-2' : ''}`}>
+                Eliminar Vía
+              </button>
+            ) : (
+              <div className={`flex items-center justify-center text-[9px] text-red-500 font-bold text-center border-2 border-transparent ${!showThicknessBtn ? 'col-span-2' : ''}`}>No eliminable</div>
+            )}
           </div>
         </div>
       )}
 
-      <div className="w-full bg-slate-100 p-2 rounded mb-2 border border-slate-300">
-        <div className="flex gap-2 overflow-x-auto pb-1 custom-scrollbar">
-          <button onClick={() => customImgInputRef.current?.click()} className="shrink-0 flex items-center gap-1 h-8 px-2 bg-blue-100 border border-blue-300 rounded hover:bg-blue-200 text-xs font-bold text-blue-800 whitespace-nowrap">
-            <ImageIcon size={14}/> Subir
-          </button>
-          <input type="file" ref={customImgInputRef} onChange={handleCustomImageUpload} accept="image/*" className="hidden" />
-          
-          {RALLY_ICONS.map(ic => (
-            <button key={ic.type} onClick={() => addIcon(ic.type)} className="shrink-0 w-8 h-8 p-1 bg-white border border-slate-300 rounded hover:bg-blue-50 flex items-center justify-center" title={ic.label}>
-              <div className="w-full h-full pointer-events-none">{ic.icon}</div>
-            </button>
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-1 p-2 bg-gray-100 rounded border-2 border-gray-200 mb-2 w-full justify-center items-center">
+        {ICON_CATEGORIES["Rally / CC"].slice(0, 5).map(ic => (
+          <button key={ic.type} onClick={(e) => { e.stopPropagation(); addIcon(ic.type); }} className="w-8 h-8 p-1 border border-gray-300 bg-white rounded hover:bg-gray-50">{ic.icon}</button>
+        ))}
+        <button onClick={(e) => { e.stopPropagation(); setShowIconPicker(true); }} className="px-2 py-1 bg-blue-600 text-white font-bold text-[10px] rounded uppercase hover:bg-blue-700 h-8 flex items-center gap-1">
+          <Plus size={12}/> Más Iconos
+        </button>
       </div>
 
-      <div className="w-full bg-blue-50 border border-blue-200 rounded p-2 mb-2">
-        <div className="text-xs font-bold text-blue-800 mb-1 flex items-center gap-1"><Settings size={12}/> Rotonda Automática</div>
-        <div className="flex items-center gap-2 text-xs">
-          <label className="flex items-center text-slate-700">Sal: <input type="number" min="1" max="8" value={rExits} onChange={e => setRExits(Math.max(1, Number(e.target.value)))} className="w-8 ml-1 p-0.5 border rounded text-center" /></label>
-          <label className="flex items-center text-slate-700">Tomar: <input type="number" min="1" max={rExits} value={rTarget} onChange={e => setRTarget(Math.max(1, Math.min(rExits, Number(e.target.value))))} className="w-8 ml-1 p-0.5 border rounded text-center" /></label>
-          <button onClick={generateRoundabout} className="ml-auto bg-blue-600 text-white px-2 py-1 rounded font-bold hover:bg-blue-700 transition">Generar</button>
-        </div>
+      {showIconPicker && (
+        <UniversalIconPicker 
+          onSelect={type => { addIcon(type); setShowIconPicker(false); }}
+          onUpload={url => { addIcon('custom_image', url); setShowIconPicker(false); }}
+          onClose={() => setShowIconPicker(false)}
+        />
+      )}
+
+      <div className="grid grid-cols-2 gap-2 mb-4 w-full">
+        <button onClick={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'wrong_way', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 50}, {x: 20, y: 30}] }]); }} className="bg-black text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-gray-800 transition-colors shadow">+ Adicional</button>
+        <button onClick={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'main', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 90}, {x: 50, y: 10}] }]); }} className="bg-blue-600 text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-blue-700 transition-colors shadow">+ Principal</button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 w-full mb-2">
-        <button onClick={addSecondaryPath} className="bg-slate-200 text-slate-800 text-xs font-bold py-2 px-1 rounded border border-slate-300 hover:bg-slate-300">+ Vía Secundaria</button>
-        <button onClick={addMainPath} className="bg-slate-800 text-white text-xs font-bold py-2 px-1 rounded hover:bg-slate-700">+ Vía Principal</button>
-      </div>
-
-      <div className="w-full mt-2 pt-2 border-t-2 border-slate-200 flex gap-2">
-        <button onClick={onCancel} className="flex-1 bg-slate-200 text-slate-700 font-bold py-2 rounded hover:bg-slate-300">Cancelar</button>
-        <button onClick={() => onSave({ paths, isRoundabout, icons })} className="flex-1 bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700 shadow">Guardar Cambios</button>
+      <div className="flex gap-2 mt-2 w-full">
+        <button onClick={onCancel} className="flex-1 bg-gray-300 font-bold uppercase text-sm py-3 rounded hover:bg-gray-400 transition-colors">Cancelar</button>
+        <button onClick={() => onSave({ paths, isRoundabout, icons })} className="flex-1 bg-green-600 text-white font-bold uppercase text-sm py-3 rounded hover:bg-green-700 transition-colors">Guardar</button>
       </div>
     </div>
   );
 }
 
-// --- COMPONENTE DE FILA PRINCIPAL ---
 function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
-  const [showTulipEditor, setShowTulipEditor] = useState(false);
-  
-  const [isEditingDist, setIsEditingDist] = useState(false);
-  const [tempDist, setTempDist] = useState('');
-  const handleDistClick = () => { setTempDist(row.totalDist.toString()); setIsEditingDist(true); };
-  const handleDistBlur = () => {
-    setIsEditingDist(false);
-    let val = parseFloat(tempDist.replace(',', '.'));
-    if (isNaN(val)) val = row.totalDist; 
-    onUpdate(row.id, 'totalDist', val);
-  };
-
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [selectedIconId, setSelectedIconId] = useState(null);
+  const [draggingIconId, setDraggingIconId] = useState(null);
+  const [distMode, setDistMode] = useState(false);
+  const [tempDist, setTempDist] = useState(''); 
   const infoRef = useRef(null);
-  const customInfoImgInputRef = useRef(null);
-  const [infoIcons, setInfoIcons] = useState(row.infoIcons || []);
-  const [showInfoIconPicker, setShowInfoIconPicker] = useState(false);
-  
-  const [draggingInfo, setDraggingInfo] = useState(null);
-  const [selectedInfoIconId, setSelectedInfoIconId] = useState(null);
 
-  useEffect(() => { setInfoIcons(row.infoIcons || []) }, [row.infoIcons]);
-
-  const handleInfoAddIcon = (type, dataUrl = null) => {
-    const newIcons = [...infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1, dataUrl }];
-    setInfoIcons(newIcons);
-    onUpdate(row.id, 'infoIcons', newIcons);
-    setShowInfoIconPicker(false);
-    setSelectedInfoIconId(newIcons[newIcons.length - 1].id);
+  const handleInfoPointerMove = (e) => {
+    if (!draggingIconId) return;
+    const r = infoRef.current.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === draggingIconId ? { ...ic, x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) } : ic));
   };
 
-  const handleInfoCustomImage = (e) => {
+  const isGreen = row.partialDist < 0.3;
+
+  return (
+    <div className="roadbook-row w-full print:block">
+      <div className="flex border-b-4 border-black bg-white min-h-[160px] group relative">
+        <div className={`w-[20%] border-r-4 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
+          <div 
+            className="w-full h-full flex flex-col items-center justify-start pt-6 cursor-text hover:bg-black/5"
+            onClick={() => { setTempDist(formatRallyDist(row.totalDist)); setDistMode(true); }}
+          >
+            {distMode ? (
+              <input 
+                type="text"
+                autoFocus 
+                dir="ltr" 
+                value={tempDist} 
+                onChange={e => setTempDist(e.target.value)} 
+                onBlur={() => {
+                  const parsed = parseFloat(tempDist.replace(',', '.'));
+                  onUpdate(row.id, 'totalDist', isNaN(parsed) ? 0 : parsed);
+                  setDistMode(false);
+                }}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') e.target.blur();
+                }}
+                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.2rem] sm:text-[2.5rem] leading-none font-black tracking-tighter" 
+              />
+            ) : (
+              <span className="text-[2.2rem] sm:text-[2.5rem] leading-none font-black tracking-tighter whitespace-nowrap">
+                {formatRallyDist(row.totalDist)}
+              </span>
+            )}
+          </div>
+          
+          <div className="absolute bottom-0 left-0 w-[65%] h-[40%] border-t-4 border-r-4 border-black flex items-center justify-center pointer-events-none">
+            <span className="text-xl sm:text-2xl font-bold text-gray-800 leading-none">
+              {formatRallyDist(row.partialDist)}
+            </span>
+          </div>
+
+          <div className="absolute bottom-0 right-0 w-9 h-9 sm:w-11 sm:h-11 border-t-4 border-l-4 border-black bg-black flex items-center justify-center pointer-events-none">
+            <span className="text-base sm:text-lg font-black text-white leading-none">
+              {index}
+            </span>
+          </div>
+        </div>
+
+        <div className="w-[40%] border-r-4 border-black flex items-center justify-center relative p-2 overflow-hidden">
+          <button onClick={() => setEditorOpen(true)} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-gray-50 transition-colors rounded">
+            <StaticTulipRenderer data={row.customTulip} id={row.id} />
+          </button>
+          
+          {editorOpen && (
+            <div className="fixed inset-0 z-[150] bg-black/50 flex items-center justify-center p-4" onPointerDown={() => setEditorOpen(false)}>
+              <div onPointerDown={e => e.stopPropagation()} className="bg-white border-4 border-black rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh] w-full max-w-[360px]">
+                <TulipVectorEditor data={row.customTulip} onSave={val => { onUpdate(row.id, 'customTulip', val); setEditorOpen(false); }} onCancel={() => setEditorOpen(false)} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="w-[40%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
+          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 font-black uppercase text-2xl focus:bg-gray-50 leading-tight" placeholder="Añadir nota..." />
+          {row.infoIcons.map(ic => {
+            const isSel = selectedIconId === ic.id;
+            const scale = ic.scale || 1;
+            const rot = ic.rotation || 0;
+            return (
+              <div 
+                key={ic.id} 
+                style={{
+                  position: 'absolute', 
+                  left: `${ic.x}%`, 
+                  top: `${ic.y}%`, 
+                  transform: `translate(-50%, -50%) rotate(${rot}deg) scale(${scale})`, 
+                  width: 40, 
+                  height: 40
+                }} 
+                className={`flex items-center justify-center cursor-move touch-none transition-shadow ${isSel ? 'ring-2 ring-blue-500 rounded bg-blue-50/50' : ''}`} 
+                onPointerDown={e => { e.stopPropagation(); e.target.setPointerCapture(e.pointerId); setSelectedIconId(ic.id); setDraggingIconId(ic.id); }}
+                onPointerUp={e => { e.stopPropagation(); e.target.releasePointerCapture(e.pointerId); setDraggingIconId(null); }}
+              >
+                {ic.type === 'custom_image' ? <img src={ic.dataUrl} className="w-full h-full object-contain pointer-events-none" /> : <div className="w-full h-full pointer-events-none flex items-center justify-center">{GetIconComponent(ic.type)}</div>}
+              </div>
+            );
+          })}
+
+          {selectedIconId && (
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-white border-2 border-black rounded-lg p-1 z-50 shadow-xl" onPointerDown={e => e.stopPropagation()}>
+              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.max(0.5, (ic.scale||1)-0.2)} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl">-</button>
+              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.min(4, (ic.scale||1)+0.2)} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl">+</button>
+              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)-15} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl leading-none">↺</button>
+              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)+15} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl leading-none">↻</button>
+              <button onClick={() => { onUpdate(row.id, 'infoIcons', row.infoIcons.filter(ic => ic.id !== selectedIconId)); setSelectedIconId(null); }} className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded flex items-center justify-center ml-2"><Trash2 size={16}/></button>
+            </div>
+          )}
+
+          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-0 group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 hover:scale-100"><ImageIcon size={18}/></button>
+          {pickerOpen && <UniversalIconPicker 
+            onSelect={type => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1.2, rotation: 0 }]); setPickerOpen(false); }}
+            onUpload={url => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type: 'custom_image', x: 80, y: 50, scale: 1.2, rotation: 0, dataUrl: url }]); setPickerOpen(false); }}
+            onClose={() => setPickerOpen(false)}
+          />}
+        </div>
+
+        <div className="absolute -right-16 top-1/2 -translate-y-1/2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
+          <button onClick={() => onInsert(row.id)} className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"><Plus size={20}/></button>
+          <button onClick={() => onDelete(row.id)} className="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700"><Trash2 size={20}/></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- CABECERA ---
+
+// Recibe ahora los datos desde App para poder exportarlos juntos
+function EditableRoadbookHeader({ data, setData }) {
+  const [active, setActive] = useState(null);
+  
+  const renderField = (field, className, placeholder, rows=1, textAlign='center') => {
+    const isEditing = active === field;
+    if (isEditing) {
+      return (
+        <textarea 
+          autoFocus 
+          rows={rows} 
+          value={data[field]} 
+          onChange={e => setData({...data, [field]: e.target.value})} 
+          onBlur={() => setActive(null)} 
+          className={`bg-yellow-50 outline-none w-full p-1 font-bold ${className}`}
+          style={{ textAlign: textAlign, fontFamily: 'inherit' }}
+        />
+      );
+    }
+    return (
+      <div 
+        onClick={() => setActive(field)} 
+        className={`cursor-text hover:bg-gray-100 rounded p-1 whitespace-pre-wrap transition-all ${!data[field] ? 'bg-gray-50 border-2 border-dashed border-gray-200 min-h-[1.5em]' : ''} ${className}`}
+        style={{ textAlign: textAlign }}
+      >
+        {data[field] || placeholder}
+      </div>
+    );
+  };
+
+  return (
+    <header className="border-4 border-black border-b-0 p-6 flex flex-col bg-white overflow-hidden">
+      <div className="flex justify-between items-center gap-4 mb-6">
+        <div className="flex-1 flex flex-col items-center">
+          {renderField('titleI', 'text-2xl font-black italic uppercase', 'INICIO')}
+          <div className="w-full border-4 border-black p-4 shadow-[6px_6px_0_0_black] mt-2">
+            {renderField('placeI', 'text-[10px] font-black uppercase mb-1', 'NOMBRE LUGAR SALIDA')}
+            {renderField('coordsI', 'text-sm font-mono font-bold', 'COORDENADAS SALIDA', 2)}
+          </div>
+        </div>
+
+        <div className="w-40 h-40 shrink-0 flex items-center justify-center relative border-4 border-dashed border-gray-200 rounded-full group overflow-hidden hover:border-gray-300 transition-colors">
+          {data.logo ? (
+            <img src={data.logo} className="w-full h-full object-contain cursor-pointer" onClick={() => setData({...data, logo: null})}/>
+          ) : (
+            <button onClick={() => {
+              const input = document.createElement('input'); input.type='file';
+              input.onchange=e=>{ const r=new FileReader(); r.onload=ev=>setData({...data, logo:ev.target.result}); r.readAsDataURL(e.target.files[0]); };
+              input.click();
+            }} className="flex flex-col items-center text-gray-400 group-hover:text-black font-black uppercase text-[8px] transition-colors">
+              <ImageIcon size={32} className="mb-2"/> Subir Logo
+            </button>
+          )}
+        </div>
+
+        <div className="flex-1 flex flex-col items-center">
+          {renderField('titleF', 'text-2xl font-black italic uppercase', 'FINAL')}
+          <div className="w-full border-4 border-black p-4 shadow-[6px_6px_0_0_black] mt-2">
+            {renderField('placeF', 'text-[10px] font-black uppercase mb-1', 'NOMBRE LUGAR DESTINO')}
+            {renderField('coordsF', 'text-sm font-mono font-bold', 'COORDENADAS DESTINO', 2)}
+          </div>
+        </div>
+      </div>
+      <div className="border-y-4 border-black py-2">
+        {renderField('rules', 'text-[9px] font-bold italic leading-tight', 'REGLAMENTO Y NORMAS...', 6, 'left')}
+      </div>
+    </header>
+  );
+}
+
+// --- APP PRINCIPAL ---
+
+export default function App() {
+  const [roadbook, setRoadbook] = useState([]);
+  
+  // Hemos movido el estado de la cabecera aquí para poder exportarlo entero
+  const [headerData, setHeaderData] = useState(() => JSON.parse(localStorage.getItem('robibook_header_v4')) || { titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
+  
+  const fileInputRef = useRef(null);
+  const loadProjectRef = useRef(null);
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [rowToDelete, setRowToDelete] = useState(null);
+
+  // Auto-guardado en caché para la cabecera (por si refrescas por error)
+  useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
+
+  const handlePrint = () => setShowPrintModal(true);
+
+  // Funciones de Guardado/Carga de Proyecto
+  const handleSaveProject = () => {
+    const projectData = { version: "1.0", header: headerData, roadbook };
+    const blob = new Blob([JSON.stringify(projectData)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${headerData.titleI || 'ruta'}_proyecto.rbk`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleLoadProject = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (event) => handleInfoAddIcon('custom_image', event.target.result);
-    reader.readAsDataURL(file);
-    e.target.value = null;
+    reader.onload = (event) => {
+      try {
+        const projectData = JSON.parse(event.target.result);
+        if (projectData.roadbook) setRoadbook(projectData.roadbook);
+        if (projectData.header) setHeaderData(projectData.header);
+      } catch (error) {
+        alert("El archivo no es válido o está corrupto.");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = null; 
   };
 
-  const handleInfoPointerDown = (e, id) => {
-    e.stopPropagation();
-    e.target.setPointerCapture(e.pointerId);
-    setDraggingInfo(id);
-    setSelectedInfoIconId(id);
-  };
+  useEffect(() => {
+    setRoadbook(prev => {
+      let isChanged = false;
+      const updated = prev.map((row, idx) => {
+        let expected = idx === 0 ? row.totalDist : Math.max(0, row.totalDist - prev[idx-1].totalDist);
+        expected = parseFloat(expected.toFixed(2));
+        if (Math.abs(row.partialDist - expected) > 0.001) { isChanged = true; return { ...row, partialDist: expected }; }
+        return row;
+      });
+      return isChanged ? updated : prev;
+    });
+  }, [roadbook.map(r => r.totalDist).join(',')]);
 
-  const handleInfoPointerMove = (e) => {
-    if (!draggingInfo) return;
-    const rect = infoRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setInfoIcons(infoIcons.map(ic => ic.id === draggingInfo ? { ...ic, x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) } : ic));
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const xml = new DOMParser().parseFromString(event.target.result, "text/xml");
+      const trk = Array.from(xml.getElementsByTagName('trkpt')).map(p => ({
+        lat: parseFloat(p.getAttribute('lat')), lon: parseFloat(p.getAttribute('lon'))
+      }));
+      let dist = 0;
+      const pointsWithDist = trk.map((p, i) => {
+        if (i > 0) dist += haversineDistance(trk[i-1].lat, trk[i-1].lon, p.lat, p.lon);
+        return { ...p, dist };
+      });
+      const wpts = Array.from(xml.getElementsByTagName('wpt')).map(w => {
+        const lat = parseFloat(w.getAttribute('lat')), lon = parseFloat(w.getAttribute('lon'));
+        let closest = pointsWithDist[0]; let minErr = Infinity;
+        pointsWithDist.forEach(p => { const err = Math.abs(lat-p.lat) + Math.abs(lon-p.lon); if (err < minErr) { minErr = err; closest = p; } });
+        return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: { ...defaultCustomTulip }, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WAYPOINT").toUpperCase() };
+      });
+      setRoadbook(wpts.sort((a,b) => a.totalDist - b.totalDist));
+    };
+    reader.readAsText(file); e.target.value = null;
   };
-
-  const handleInfoPointerUp = (e) => {
-    if (draggingInfo) {
-      e.target.releasePointerCapture(e.pointerId);
-      setDraggingInfo(null);
-      onUpdate(row.id, 'infoIcons', infoIcons); 
-    }
-  };
-
-  const updateSelectedInfoIconScale = (delta) => {
-    if (!selectedInfoIconId) return;
-    const updated = infoIcons.map(ic => ic.id === selectedInfoIconId ? { ...ic, scale: Math.max(0.5, Math.min(4, (ic.scale || 1) + delta)) } : ic);
-    setInfoIcons(updated);
-    onUpdate(row.id, 'infoIcons', updated);
-  };
-
-  const deleteSelectedInfoIcon = () => {
-    if (!selectedInfoIconId) return;
-    const updated = infoIcons.filter(ic => ic.id !== selectedInfoIconId);
-    setInfoIcons(updated);
-    onUpdate(row.id, 'infoIcons', updated);
-    setSelectedInfoIconId(null);
-  };
-
-  const isCustomMode = row.tulipId === 'custom' && row.customTulip;
 
   return (
-    <div className="flex border-b-4 border-black bg-white roadbook-row min-h-[160px] relative group">
-      
-      <div className="w-[25%] border-r-4 border-black flex flex-col">
-        <div className="flex-1 border-b-4 border-black flex items-center justify-center p-2 relative bg-white hover:bg-gray-50 cursor-text" onClick={!isEditingDist ? handleDistClick : undefined}>
-          {isEditingDist ? (
-            <input autoFocus type="text" value={tempDist} onChange={(e) => setTempDist(e.target.value)} onBlur={handleDistBlur} onKeyDown={e => { if (e.key === 'Enter') e.target.blur() }} className="w-full text-center text-4xl sm:text-5xl font-black text-black bg-transparent outline-none" />
-          ) : (
-            <span className="text-4xl sm:text-5xl font-black text-black tracking-tighter">{formatRallyDist(row.totalDist)}</span>
-          )}
+    <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none" dir="ltr">
+      <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
+        <div className="flex items-center gap-3">
+          <Map className="w-8 h-8" />
+          <h1 className="text-xl font-black uppercase tracking-widest text-white">Rally RobiBook Pro</h1>
         </div>
-        <div className="h-[40%] min-h-[50px] flex items-center justify-center p-1 bg-white">
-          <span className="text-2xl sm:text-3xl font-bold text-black">{formatRallyDist(row.partialDist)}</span>
+        <div className="flex flex-wrap gap-2">
+          {/* Nuevos botones de Guardar / Cargar */}
+          <button onClick={handleSaveProject} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Guardar Proyecto"><Save size={16}/> Guardar</button>
+          <button onClick={() => loadProjectRef.current?.click()} className="flex items-center gap-2 bg-teal-600 hover:bg-teal-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Cargar Proyecto"><FolderOpen size={16}/> Cargar</button>
+          <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk,.json" className="hidden" />
+
+          <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded font-bold text-sm transition-colors text-white"><Upload size={16}/> GPX</button>
+          <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept=".gpx" className="hidden" />
+          <button onClick={() => setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[roadbook.length-1]?.totalDist || 0) + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }])} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded font-bold text-sm text-white"><Plus size={16}/> Añadir Fila</button>
+          <button onClick={() => setRoadbook([])} className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold text-sm text-white"><RotateCcw size={16}/> RESET</button>
+          <button onClick={handlePrint} className="flex items-center gap-2 bg-green-600 hover:bg-green-500 px-4 py-2 rounded font-bold text-sm text-white"><Printer size={16}/> Imprimir</button>
         </div>
-      </div>
+      </header>
 
-      <div className="w-[35%] border-r-4 border-black relative flex items-center justify-center p-4 bg-white">
-        <div className="absolute top-2 left-2 border-[3px] border-black bg-white px-2 py-0.5 text-lg font-black text-black z-10">{index}</div>
+      <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
+        <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
+        
+        <div className="flex w-full border-4 border-black border-b-0 bg-white text-black font-black uppercase text-center text-[10px] tracking-widest print:border-x-0 print:border-t-0">
+          <div className="w-[20%] p-2 border-r-4 border-black">Distancia</div>
+          <div className="w-[40%] p-2 border-r-4 border-black">Dirección</div>
+          <div className="w-[40%] p-2">Información</div>
+        </div>
 
-        <button onClick={() => setShowTulipEditor(true)} className="w-full h-full flex items-center justify-center focus:outline-none print:pointer-events-none hover:bg-gray-50 transition-colors p-2">
-          {isCustomMode ? (
-            <div className="w-24 h-24 sm:w-32 sm:h-32"><StaticTulipRenderer data={row.customTulip} id={row.id} /></div>
-          ) : (
-            (() => {
-              const currentTulip = TULIP_ICONS.find(t => t.id === row.tulipId) || TULIP_ICONS[0];
-              const IconComponent = currentTulip.icon;
-              return <IconComponent className="w-24 h-24 text-black stroke-[2]" />;
-            })()
-          )}
-        </button>
-
-        {showTulipEditor && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border-4 border-black shadow-2xl p-3 z-50 w-[360px] flex flex-col print:hidden rounded-xl">
-            <TulipVectorEditor 
-              data={row.customTulip || defaultCustomTulip} 
-              onSave={(newTulip) => { onUpdate(row.id, { customTulip: newTulip, tulipId: 'custom' }); setShowTulipEditor(false); }}
-              onCancel={() => setShowTulipEditor(false)}
+        <div className="flex flex-col print:block border-4 border-black border-b-0 print:border-0 print:border-t-4 print:border-black">
+          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-4 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
+          {roadbook.map((row, index) => (
+            <RoadbookRow 
+              key={row.id} 
+              row={row} 
+              index={index + 1} 
+              onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} 
+              onDelete={id => setRowToDelete(id)} 
+              onInsert={id => {
+                const insertIdx = roadbook.findIndex(r => r.id === id);
+                const nextDist = roadbook[insertIdx+1] ? roadbook[insertIdx+1].totalDist : roadbook[insertIdx].totalDist + 0.1;
+                const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[insertIdx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' };
+                const updated = [...roadbook]; updated.splice(insertIdx+1, 0, newRow); setRoadbook(updated);
+              }} 
             />
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+        <div className="h-0 border-t-4 border-black print:block hidden"></div>
+      </main>
 
-      <div 
-        className="w-[40%] flex flex-col bg-white relative group/info" 
-        ref={infoRef}
-        onPointerMove={handleInfoPointerMove}
-        onPointerUp={handleInfoPointerUp}
-        onPointerLeave={handleInfoPointerUp}
-        onPointerDown={() => setSelectedInfoIconId(null)}
-      >
-        <textarea
-          value={row.notes}
-          onChange={(e) => onUpdate(row.id, 'notes', e.target.value)}
-          className="w-full h-full resize-none bg-transparent outline-none text-black font-black uppercase text-xl sm:text-2xl leading-tight p-4 focus:bg-gray-50"
-          placeholder="NOTAS..."
-        />
-        {row.lat && row.lon && (
-          <div className="absolute bottom-1 right-2 text-xs text-black font-bold font-mono tracking-tighter opacity-80 pointer-events-none">
-            N{row.lat.toFixed(5)} W{Math.abs(row.lon).toFixed(5)}
+      {rowToDelete && (
+        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
+          <div className="bg-white p-6 rounded-2xl border-4 border-black text-center max-w-sm" onPointerDown={e => e.stopPropagation()}>
+            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-black mb-6 uppercase text-black">¿Eliminar viñeta?</h2>
+            <div className="flex gap-4"><button onClick={() => setRowToDelete(null)} className="flex-1 bg-gray-200 py-3 rounded font-bold text-black hover:bg-gray-300 transition-colors">CANCELAR</button><button onClick={() => { setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
           </div>
-        )}
+        </div>
+      )}
 
-        {infoIcons.map(ic => {
-          const isSelected = selectedInfoIconId === ic.id;
-          const size = 40 * (ic.scale || 1);
-          
-          return (
-            <div 
-              key={ic.id}
-              style={{ position: 'absolute', left: `${ic.x}%`, top: `${ic.y}%`, transform: 'translate(-50%, -50%)', width: size, height: size }}
-              onPointerDown={(e) => handleInfoPointerDown(e, ic.id)}
-              className={`cursor-grab active:cursor-grabbing flex items-center justify-center transition-shadow ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2 bg-blue-50/50' : ''} rounded`}
+      {showPrintModal && (
+        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
+          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-4 border-black" onPointerDown={e => e.stopPropagation()}>
+            <Printer className="w-16 h-16 text-black mx-auto mb-4" />
+            <h2 className="text-2xl font-black mb-4 uppercase tracking-tight text-black">Imprimir Roadbook</h2>
+            <div className="text-left text-gray-700 mb-6 font-medium text-base bg-yellow-50 p-4 border-2 border-yellow-400 rounded-xl">
+              <p className="mb-2 font-bold text-black">Pasos para un PDF perfecto:</p>
+              <ol className="list-decimal pl-5 space-y-2">
+                <li>Pulsa el botón <b className="text-blue-700">"Fijar Pantalla"</b> de abajo.</li>
+                <li>Pulsa inmediatamente <span className="bg-white px-2 py-1 rounded border-2 border-black font-bold font-mono text-sm">Ctrl + P</span> (o Cmd+P).</li>
+                <li>En la ventana de impresión pon <b>Tamaño: A4</b>.</li>
+                <li>Pon <b>Márgenes: Predeterminados</b> (¡NO pongas "Ninguno" o cortará las viñetas!).</li>
+              </ol>
+            </div>
+            <button
+              onClick={() => {
+                setShowPrintModal(false);
+                setTimeout(() => {
+                  const container = document.getElementById('main-app-container');
+                  if (container) container.focus();
+                }, 100);
+              }}
+              className="w-full bg-blue-600 text-white font-black py-4 px-6 rounded-xl hover:bg-blue-700 text-lg uppercase tracking-wider transition-colors shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none"
             >
-              {ic.type === 'custom_image' ? (
-                <img src={ic.dataUrl} className="w-full h-full object-contain pointer-events-none" />
-              ) : (
-                <div className="w-full h-full pointer-events-none flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" className="w-full h-full overflow-visible">
-                    {RenderIcon(ic.type)}
-                  </svg>
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {selectedInfoIconId && (
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white border border-blue-400 shadow-xl rounded px-2 py-1 flex gap-2 items-center z-40 print:hidden">
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); updateSelectedInfoIconScale(-0.2); }} className="w-8 h-8 bg-gray-100 rounded text-xl font-bold hover:bg-gray-200 flex items-center justify-center">-</button>
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); updateSelectedInfoIconScale(0.2); }} className="w-8 h-8 bg-gray-100 rounded text-xl font-bold hover:bg-gray-200 flex items-center justify-center">+</button>
-            <div className="w-px h-6 bg-gray-300 mx-1"></div>
-            <button onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); deleteSelectedInfoIcon(); }} className="w-8 h-8 text-red-600 bg-red-50 hover:bg-red-200 rounded flex items-center justify-center"><Trash2 size={16}/></button>
+              Fijar Pantalla
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
-        <button 
-          onPointerDown={(e) => { e.stopPropagation(); setShowInfoIconPicker(!showInfoIconPicker); }}
-          className="absolute top-2 right-2 opacity-0 group-hover/info:opacity-100 transition-opacity bg-blue-600 text-white p-2 rounded-full shadow hover:bg-blue-700 print:hidden z-20"
-          title="Añadir icono a la información"
-        >
-          <ImageIcon className="w-4 h-4" />
-        </button>
-
-        {showInfoIconPicker && (
-          <div className="absolute top-12 right-2 bg-white border-2 border-black shadow-xl p-2 rounded w-[260px] z-30 flex flex-col gap-2 print:hidden" onPointerDown={e => e.stopPropagation()}>
-            <div className="text-[10px] font-bold text-center text-slate-500 uppercase border-b pb-1">Selecciona Icono</div>
-            
-            <div className="flex gap-1 overflow-x-auto pb-1 custom-scrollbar">
-              <button onClick={() => customInfoImgInputRef.current?.click()} className="shrink-0 flex items-center gap-1 h-8 px-2 bg-blue-100 border border-blue-300 rounded hover:bg-blue-200 text-xs font-bold text-blue-800 whitespace-nowrap">
-                <ImageIcon size={14}/> Subir Foto
-              </button>
-              <input type="file" ref={customInfoImgInputRef} onChange={handleInfoCustomImage} accept="image/*" className="hidden" />
-
-              {RALLY_ICONS.map(ic => (
-                <button 
-                  key={ic.type} onClick={() => handleInfoAddIcon(ic.type)} 
-                  className="shrink-0 w-8 h-8 border border-gray-200 rounded hover:bg-gray-100 flex items-center justify-center p-1"
-                  title={ic.label}
-                >
-                  <div className="w-full h-full pointer-events-none flex items-center justify-center">
-                    <svg viewBox="0 0 24 24" className="w-full h-full overflow-visible">{ic.icon}</svg>
-                  </div>
-                </button>
-              ))}
-            </div>
-            
-            <button onClick={() => setShowInfoIconPicker(false)} className="w-full mt-1 bg-red-100 text-red-700 text-xs font-bold py-1 rounded">Cerrar</button>
-          </div>
-        )}
-      </div>
-
-      <div className="absolute -right-14 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity print:hidden flex flex-col gap-2">
-        <button onClick={() => onInsert(row.id)} className="p-3 bg-blue-600 text-white hover:bg-blue-700 rounded-full shadow-lg" title="Insertar fila debajo"><Plus className="w-5 h-5" /></button>
-        <button onClick={() => onDelete(row.id)} className="p-3 bg-red-600 text-white hover:bg-red-700 rounded-full shadow-lg" title="Eliminar"><Trash2 className="w-5 h-5" /></button>
-      </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media print {
+          html, body, #root, #main-app-container { 
+            background-color: white !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            height: auto !important;
+            min-height: auto !important;
+            overflow: visible !important;
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact; 
+          }
+          @page { 
+            margin: 10mm; 
+          }
+          .min-h-screen { min-height: auto !important; }
+          .print\\:hidden { display: none !important; }
+          .print\\:block { display: block !important; }
+          .print\\:border-0 { border: none !important; }
+          .print\\:border-t-4 { border-top-width: 4px !important; }
+          .print\\:border-black { border-color: black !important; }
+          .print\\:shadow-none { box-shadow: none !important; }
+          .print\\:w-full { width: 100% !important; max-width: 100% !important; }
+          .print\\:mt-0 { margin-top: 0 !important; }
+          
+          /* Evitar que se corten las viñetas */
+          .roadbook-row { 
+            page-break-inside: avoid !important; 
+            break-inside: avoid !important; 
+            display: block !important;
+          }
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}} />
     </div>
   );
 }
