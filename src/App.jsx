@@ -6,7 +6,7 @@ import {
   Octagon, Map, PenTool, RotateCcw, Settings, Image as ImageIcon,
   Home, Fuel, Coffee, Camera, Tent, X, Flag, Droplets, Mountain, 
   Wind, Trees, Building2, School, Landmark, Church, Wrench, PlusSquare, 
-  Warehouse, Factory, Waves, Zap, UtensilsCrossed, Save, FolderOpen
+  Warehouse, Factory, Waves, Zap, UtensilsCrossed, Save, FolderOpen, HelpCircle
 } from 'lucide-react';
 
 // --- LIBRERÍA EXTENDIDA DE ICONOS ---
@@ -824,6 +824,83 @@ export default function App() {
     reader.readAsText(file); e.target.value = null;
   };
 
+  const handleManualOpen = () => {
+    const manualHTML = `
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Manual de Usuario - Rally RobiBook Pro</title>
+          <style>
+              :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
+              body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); margin: 0; padding: 0; }
+              .container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border: 4px solid black; }
+              h1 { border-bottom: 4px solid black; padding-bottom: 15px; text-transform: uppercase; font-black; letter-spacing: -1px; margin-top: 0; }
+              h2 { color: var(--primary); margin-top: 40px; border-bottom: 2px solid var(--border); padding-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2rem; }
+              h3 { color: #475569; margin-top: 25px; font-weight: 700; }
+              .step { background: #f1f5f9; padding: 20px; border-left: 4px solid #f59e0b; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+              ul { padding-left: 20px; }
+              li { margin-bottom: 10px; }
+              kbd { background: black; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em; font-family: monospace; font-weight: bold; }
+              .icon-btn { display: inline-flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 4px; padding: 2px 8px; font-weight: bold; font-size: 0.9em; margin: 0 4px; border: 1px solid #cbd5e1; }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h1>🏁 Manual de Uso: Rally RobiBook Pro</h1>
+              <p>Bienvenido al editor profesional de roadbooks. Esta herramienta está diseñada para digitalizar, editar y maquetar rutómetros con calidad de competición. Aquí tienes todo lo necesario para dominarla.</p>
+              
+              <h2>1. Primeros Pasos y Carga de Rutas</h2>
+              <div class="step">
+                  <h3>🌍 Importar un Track (GPX)</h3>
+                  <p>Haz clic en el botón <span class="icon-btn">GPX</span> de la barra superior para importar tu ruta. La aplicación leerá los Waypoints de tu archivo, calculará automáticamente las distancias kilométricas entre ellos y creará todas las viñetas necesarias.</p>
+              </div>
+              <div class="step">
+                  <h3>➕ Creación Manual</h3>
+                  <p>Usa <span class="icon-btn">+ Añadir Fila</span> para crear viñetas desde cero al final del documento. Si necesitas insertar una viñeta entre dos ya existentes, pasa el ratón por el lado derecho de una fila y pulsa el botón azul <b>+</b>.</p>
+              </div>
+
+              <h2>2. Editor de Viñetas (El Canvas Vectorial)</h2>
+              <p>Haz clic en el dibujo de cualquier viñeta (columna central) para abrir el editor avanzado:</p>
+              <ul>
+                  <li><b>Dibujar Vías:</b> Usa los botones inferiores para añadir la ruta <b>+ Principal</b> (azul) o vías <b>+ Adicionales</b> (negras).</li>
+                  <li><b>Modificar Curvas:</b> Arrastra los puntos rojos para dar forma a las carreteras. 
+                      <br><i>Truco:</i> Haz <b>doble clic</b> en la línea para añadir un nuevo punto de curvatura. Haz doble clic en un punto rojo para eliminarlo.</li>
+                  <li><b>Tipos de Terreno:</b> Selecciona una línea (se pondrá naranja). En las "Opciones de Vía", cambia a <i>Tierra</i> (línea discontinua) o conviértela en <i>Autopista</i> (doble línea).</li>
+                  <li><b>Grosores:</b> En las vías adicionales, pulsa el botón "Grosor" para alternar entre Fino, Medio y Grueso. La "T" de bloqueo se adaptará automáticamente.</li>
+                  <li><b>Rotondas Automáticas:</b> En la parte superior del editor, indica el número de salidas de la rotonda y por cuál debes salir. Pulsa <b>Generar</b> y la app trazará la rotonda perfecta al instante.</li>
+                  <li><b>Iconos y Símbolos:</b> Arrastra señales o referencias desde el catálogo inferior al lienzo. Una vez colocado, tócalo para que aparezcan los controles de tamaño <kbd>+</kbd> <kbd>-</kbd> y de rotación <kbd>↺</kbd> <kbd>↻</kbd>.</li>
+              </ul>
+
+              <h2>3. Gestión de Distancias e Información</h2>
+              <ul>
+                  <li><b>Editar Kilómetros:</b> Haz clic en el número de la distancia TOTAL (el número grande de la izquierda) y escribe el nuevo valor. Al pulsar <kbd>Enter</kbd>, la distancia Parcial de esa viñeta (y de la siguiente) se recalcularán matemáticamente.</li>
+                  <li><b>Avisos visuales:</b> Si la distancia entre dos viñetas es inferior a 300 metros (0.3 km), el recuadro de la distancia se pintará de verde automáticamente para alertar al piloto.</li>
+                  <li><b>Caja de Información:</b> Escribe texto libremente en la tercera columna. Si pasas el ratón por encima, verás un botón azul arriba a la derecha para <b>añadir iconos sueltos</b> (peligros, controles, etc.) que puedes arrastrar libremente por el texto para crear tus notas personalizadas.</li>
+              </ul>
+
+              <h2>4. Guardar, Cargar e Imprimir</h2>
+              <div class="step">
+                  <h3>💾 Guardar Proyecto</h3>
+                  <p>Pulsa <b>Guardar</b> para descargar un archivo <code>.rbk</code> (RobiBook) en tu ordenador. Este archivo contiene todas tus distancias, dibujos, notas y configuraciones de cabecera. Es tu copia de seguridad.</p>
+              </div>
+              <div class="step">
+                  <h3>📂 Cargar Proyecto</h3>
+                  <p>Al empezar a trabajar otro día, pulsa <b>Cargar</b> y selecciona tu archivo <code>.rbk</code> para restaurar tu trabajo exactamente donde lo dejaste, sin perder ni un detalle.</p>
+              </div>
+              <div class="step">
+                  <h3>🖨️ Exportar a PDF (Imprimir)</h3>
+                  <p>Pulsa el botón verde <b>Imprimir</b>. En la ventana que aparece, pulsa "Fijar Pantalla". Inmediatamente después, pulsa <kbd>Ctrl + P</kbd> (o <kbd>Cmd + P</kbd> en Mac). En los ajustes de impresión de tu navegador, asegúrate de configurar el tamaño en <b>A4</b>, los márgenes en <b>Predeterminados</b> y desmarcar la opción de imprimir encabezados/pies de página.</p>
+              </div>
+          </div>
+      </body>
+      </html>
+    `;
+    const blob = new Blob([manualHTML], { type: 'text/html;charset=utf-8' });
+    window.open(URL.createObjectURL(blob), '_blank');
+  };
+
   return (
     <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none" dir="ltr">
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
@@ -832,7 +909,10 @@ export default function App() {
           <h1 className="text-xl font-black uppercase tracking-widest text-white">Rally RobiBook Pro</h1>
         </div>
         <div className="flex flex-wrap gap-2">
-          {/* Nuevos botones de Guardar / Cargar */}
+          {/* Botón de Manual */}
+          <button onClick={handleManualOpen} className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 px-4 py-2 rounded font-bold text-sm transition-colors text-black mr-4 shadow-sm" title="Abrir instrucciones"><HelpCircle size={16}/> Manual</button>
+          
+          {/* Botones de Guardar / Cargar */}
           <button onClick={handleSaveProject} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Guardar Proyecto"><Save size={16}/> Guardar</button>
           <button onClick={() => loadProjectRef.current?.click()} className="flex items-center gap-2 bg-teal-600 hover:bg-teal-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Cargar Proyecto"><FolderOpen size={16}/> Cargar</button>
           <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk,.json" className="hidden" />
