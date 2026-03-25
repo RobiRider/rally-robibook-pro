@@ -15,16 +15,16 @@ const ICON_CATEGORIES = {
     { type: 'alert_1', label: 'Peligro 1', icon: <AlertTriangle color="black" strokeWidth={3} size={20} /> },
     { type: 'alert_2', label: 'Peligro 2', icon: <div className="flex"><AlertTriangle size={14} color="black" strokeWidth={3}/><AlertTriangle size={14} color="black" strokeWidth={3}/></div> },
     { type: 'alert_3', label: 'Peligro 3', icon: <div className="flex"><AlertTriangle size={12} color="black" strokeWidth={3}/><AlertTriangle size={12} color="black" strokeWidth={3}/><AlertTriangle size={12} color="black" strokeWidth={3}/></div> },
-    { type: 'stop', label: 'STOP', icon: <div className="bg-red-600 text-white text-[7px] font-black px-1 rounded border border-black uppercase">STOP</div> },
+    { type: 'stop', label: 'STOP', icon: <div className="bg-red-600 text-white text-[7px] font-bold px-1 rounded border border-black uppercase">STOP</div> },
     { type: 'waypoint', label: 'WPT', icon: <MapPin fill="black" color="white" size={20} /> },
     { type: 'fuel', label: 'Gasolinera', icon: <Fuel color="black" size={20} /> },
     { type: 'mechanic', label: 'Asistencia', icon: <Wrench color="black" size={20} /> },
     { type: 'medical', label: 'Médico', icon: <PlusSquare color="red" size={20} /> },
     { type: 'bivouac', label: 'Vivac', icon: <Tent color="black" size={20} /> },
-    { type: 'dz', label: 'DZ', icon: <div className="border-2 border-black rounded-full w-6 h-6 flex items-center justify-center font-black text-[9px]">DZ</div> },
-    { type: 'fz', label: 'FZ', icon: <div className="border-2 border-green-600 rounded-full w-6 h-6 flex items-center justify-center font-black text-[9px] text-green-600">FZ</div> },
-    { type: 'cap', label: 'CAP', icon: <div className="font-black text-[10px] border border-black px-1 bg-yellow-400">CAP</div> },
-    { type: 'cap_a', label: 'CAP A', icon: <div className="font-black text-[10px] border border-black px-1 bg-yellow-400">CAP A</div> },
+    { type: 'dz', label: 'DZ', icon: <div className="border-2 border-black rounded-full w-6 h-6 flex items-center justify-center font-bold text-[9px]">DZ</div> },
+    { type: 'fz', label: 'FZ', icon: <div className="border-2 border-green-600 rounded-full w-6 h-6 flex items-center justify-center font-bold text-[9px] text-green-600">FZ</div> },
+    { type: 'cap', label: 'CAP', icon: <div className="font-bold text-[10px] border border-black px-1 bg-yellow-400">CAP</div> },
+    { type: 'cap_a', label: 'CAP A', icon: <div className="font-bold text-[10px] border border-black px-1 bg-yellow-400">CAP A</div> },
     { type: 'flag_start', label: 'Salida', icon: <Flag color="green" fill="green" size={20} /> },
     { type: 'flag_end', label: 'Meta', icon: <Flag color="red" fill="red" size={20} /> },
     { type: 'reset_icon', label: 'Reset', icon: <RotateCcw color="black" size={20} /> },
@@ -33,7 +33,7 @@ const ICON_CATEGORIES = {
     { type: 'v30', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">30</div> },
     { type: 'v50', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">50</div> },
     { type: 'v90', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">90</div> },
-    { type: 'v100', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[9px] tracking-tighter">100</div> },
+    { type: 'v100', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[9px] tracking-tight">100</div> },
     { type: 'v120', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px]">120</div> },
     { type: 'v_end', icon: <div className="border-2 border-black rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px] relative"><div className="absolute w-full h-0.5 bg-black rotate-45"/>FIN</div> },
     { type: 'warning_sign', icon: <AlertTriangle color="red" size={20} /> },
@@ -132,14 +132,14 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[250] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onPointerDown={onClose}>
-      <div className="bg-white border-4 border-black w-full max-w-xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onPointerDown={e => e.stopPropagation()}>
-        <div className="p-4 border-b-4 border-black flex justify-between items-center bg-gray-50">
-          <h3 className="font-black uppercase text-lg tracking-tight">Librería de Iconos</h3>
+      <div className="bg-white border-2 border-black w-full max-w-xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onPointerDown={e => e.stopPropagation()}>
+        <div className="p-4 border-b-2 border-black flex justify-between items-center bg-gray-50">
+          <h3 className="font-bold uppercase text-lg tracking-tight">Librería de Iconos</h3>
           <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><X/></button>
         </div>
 
         <div className="p-4 bg-blue-50 border-b-2 border-black">
-          <button onClick={() => fileInputRef.current?.click()} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-black py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
+          <button onClick={() => fileInputRef.current?.click()} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
             <Upload size={18}/> SUBIR IMAGEN PROPIA
           </button>
           <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={(e) => {
@@ -154,7 +154,7 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
 
         <div className="flex bg-gray-200 border-b-2 border-black overflow-x-auto no-scrollbar shrink-0">
           {Object.keys(ICON_CATEGORIES).map(cat => (
-            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-5 py-4 font-black text-sm uppercase tracking-widest whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-4 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-4 border-transparent'}`}>
+            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-5 py-4 font-bold text-sm uppercase tracking-widest whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
               {cat}
             </button>
           ))}
@@ -166,7 +166,7 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
               <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <span className="text-[8px] font-black uppercase text-gray-400 group-hover:text-black">{item.label || item.type}</span>
+              <span className="text-[8px] font-bold uppercase text-gray-400 group-hover:text-black">{item.label || item.type}</span>
             </button>
           ))}
         </div>
@@ -400,7 +400,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
   return (
     <div className="flex flex-col items-center select-none w-full">
       <div className="bg-gray-100 p-2 rounded border-2 border-gray-200 mb-2 w-full flex flex-col items-center">
-        <span className="text-[10px] font-black uppercase text-gray-500 mb-1">Generador Rotonda</span>
+        <span className="text-[10px] font-bold uppercase text-gray-500 mb-1">Generador Rotonda</span>
         <div className="flex gap-2 items-center text-xs">
           <span>Salidas:</span>
           <input type="number" min="1" max="8" value={rExits} onChange={e=>setRExits(parseInt(e.target.value)||1)} className="w-10 border rounded text-center" />
@@ -483,7 +483,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
 
       {selectedPathId && selectedPath && (
         <div className="flex flex-col gap-2 mb-2 w-full justify-center bg-gray-100 p-2 rounded border-2 border-gray-200">
-          <span className="text-[10px] font-black uppercase text-gray-500 text-center tracking-widest">Opciones de Vía</span>
+          <span className="text-[10px] font-bold uppercase text-gray-500 text-center tracking-widest">Opciones de Vía</span>
           <div className="grid grid-cols-2 gap-2 w-full">
             <button onClick={togglePathDirt} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
               {selectedPath.isDirt ? 'Hacer Asfalto' : 'Hacer Tierra'}
@@ -558,8 +558,8 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
 
   return (
     <div className="roadbook-row w-full print:block">
-      <div className="flex border-b-4 border-black bg-white min-h-[160px] group relative">
-        <div className={`w-[20%] border-r-4 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
+      <div className="flex border-b-2 border-black bg-white min-h-[160px] group relative">
+        <div className={`w-[30%] border-r-2 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
           <div 
             className="w-full h-full flex flex-col items-center justify-start pt-6 cursor-text hover:bg-black/5"
             onClick={() => { setTempDist(formatRallyDist(row.totalDist)); setDistMode(true); }}
@@ -579,44 +579,52 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
                 onKeyDown={e => {
                   if (e.key === 'Enter') e.target.blur();
                 }}
-                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.2rem] sm:text-[2.5rem] leading-none font-black tracking-tighter" 
+                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight" 
               />
             ) : (
-              <span className="text-[2.2rem] sm:text-[2.5rem] leading-none font-black tracking-tighter whitespace-nowrap">
+              <span className="text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight whitespace-nowrap">
                 {formatRallyDist(row.totalDist)}
               </span>
             )}
           </div>
           
-          <div className="absolute bottom-0 left-0 w-[65%] h-[40%] border-t-4 border-r-4 border-black flex items-center justify-center pointer-events-none">
-            <span className="text-xl sm:text-2xl font-bold text-gray-800 leading-none">
+          <div className="absolute bottom-0 left-0 w-[65%] h-[40%] border-t-2 border-r-2 border-black flex items-center justify-center pointer-events-none">
+            <span className="text-2xl sm:text-3xl font-semibold text-gray-800 leading-none">
               {formatRallyDist(row.partialDist)}
             </span>
           </div>
 
-          <div className="absolute bottom-0 right-0 w-9 h-9 sm:w-11 sm:h-11 border-t-4 border-l-4 border-black bg-black flex items-center justify-center pointer-events-none">
-            <span className="text-base sm:text-lg font-black text-white leading-none">
+          <div className="absolute bottom-0 right-0 w-10 h-10 sm:w-12 sm:h-12 border-t-2 border-l-2 border-black bg-black flex items-center justify-center pointer-events-none">
+            <span className="text-lg sm:text-xl font-bold text-white leading-none">
               {index}
             </span>
           </div>
         </div>
 
-        <div className="w-[40%] border-r-4 border-black flex items-center justify-center relative p-2 overflow-hidden">
+        <div className="w-[35%] border-r-2 border-black flex items-center justify-center relative p-2 overflow-hidden">
           <button onClick={() => setEditorOpen(true)} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-gray-50 transition-colors rounded">
             <StaticTulipRenderer data={row.customTulip} id={row.id} />
           </button>
           
           {editorOpen && (
             <div className="fixed inset-0 z-[150] bg-black/50 flex items-center justify-center p-4" onPointerDown={() => setEditorOpen(false)}>
-              <div onPointerDown={e => e.stopPropagation()} className="bg-white border-4 border-black rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh] w-full max-w-[360px]">
+              <div onPointerDown={e => e.stopPropagation()} className="bg-white border-2 border-black rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh] w-full max-w-[360px]">
                 <TulipVectorEditor data={row.customTulip} onSave={val => { onUpdate(row.id, 'customTulip', val); setEditorOpen(false); }} onCancel={() => setEditorOpen(false)} />
               </div>
             </div>
           )}
         </div>
 
-        <div className="w-[40%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
-          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 font-black uppercase text-2xl focus:bg-gray-50 leading-tight" placeholder="Añadir nota..." />
+        <div className="w-[35%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
+          
+          {/* TEXTAREA INTERACTIVO: Visible solo en pantalla, se oculta al imprimir */}
+          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 font-bold uppercase text-2xl focus:bg-gray-50 leading-tight print:hidden" placeholder="Añadir nota..." />
+          
+          {/* DIV ESTÁTICO DE IMPRESIÓN: Visible solo en el PDF, evita que Chrome estire la fila a lo loco */}
+          <div className="hidden print:block w-full h-full p-4 font-bold uppercase text-2xl leading-tight whitespace-pre-wrap overflow-hidden">
+            {row.notes}
+          </div>
+
           {row.infoIcons.map(ic => {
             const isSel = selectedIconId === ic.id;
             const scale = ic.scale || 1;
@@ -701,17 +709,17 @@ function EditableRoadbookHeader({ data, setData }) {
   };
 
   return (
-    <header className="border-4 border-black border-b-0 p-6 flex flex-col bg-white overflow-hidden">
+    <header className="border-2 border-black border-b-0 p-6 flex flex-col bg-white overflow-hidden">
       <div className="flex justify-between items-center gap-4 mb-6">
         <div className="flex-1 flex flex-col items-center">
-          {renderField('titleI', 'text-2xl font-black italic uppercase', 'INICIO')}
-          <div className="w-full border-4 border-black p-4 shadow-[6px_6px_0_0_black] mt-2">
-            {renderField('placeI', 'text-[10px] font-black uppercase mb-1', 'NOMBRE LUGAR SALIDA')}
+          {renderField('titleI', 'text-2xl font-bold italic uppercase', 'INICIO')}
+          <div className="w-full border-2 border-black p-4 shadow-[4px_4px_0_0_black] mt-2">
+            {renderField('placeI', 'text-[10px] font-bold uppercase mb-1', 'NOMBRE LUGAR SALIDA')}
             {renderField('coordsI', 'text-sm font-mono font-bold', 'COORDENADAS SALIDA', 2)}
           </div>
         </div>
 
-        <div className="w-40 h-40 shrink-0 flex items-center justify-center relative border-4 border-dashed border-gray-200 rounded-full group overflow-hidden hover:border-gray-300 transition-colors">
+        <div className="w-40 h-40 shrink-0 flex items-center justify-center relative border-2 border-dashed border-gray-200 rounded-full group overflow-hidden hover:border-gray-300 transition-colors">
           {data.logo ? (
             <img src={data.logo} className="w-full h-full object-contain cursor-pointer" onClick={() => setData({...data, logo: null})}/>
           ) : (
@@ -719,21 +727,21 @@ function EditableRoadbookHeader({ data, setData }) {
               const input = document.createElement('input'); input.type='file';
               input.onchange=e=>{ const r=new FileReader(); r.onload=ev=>setData({...data, logo:ev.target.result}); r.readAsDataURL(e.target.files[0]); };
               input.click();
-            }} className="flex flex-col items-center text-gray-400 group-hover:text-black font-black uppercase text-[8px] transition-colors">
+            }} className="flex flex-col items-center text-gray-400 group-hover:text-black font-bold uppercase text-[8px] transition-colors">
               <ImageIcon size={32} className="mb-2"/> Subir Logo
             </button>
           )}
         </div>
 
         <div className="flex-1 flex flex-col items-center">
-          {renderField('titleF', 'text-2xl font-black italic uppercase', 'FINAL')}
-          <div className="w-full border-4 border-black p-4 shadow-[6px_6px_0_0_black] mt-2">
-            {renderField('placeF', 'text-[10px] font-black uppercase mb-1', 'NOMBRE LUGAR DESTINO')}
+          {renderField('titleF', 'text-2xl font-bold italic uppercase', 'FINAL')}
+          <div className="w-full border-2 border-black p-4 shadow-[4px_4px_0_0_black] mt-2">
+            {renderField('placeF', 'text-[10px] font-bold uppercase mb-1', 'NOMBRE LUGAR DESTINO')}
             {renderField('coordsF', 'text-sm font-mono font-bold', 'COORDENADAS DESTINO', 2)}
           </div>
         </div>
       </div>
-      <div className="border-y-4 border-black py-2">
+      <div className="border-y-2 border-black py-2">
         {renderField('rules', 'text-[9px] font-bold italic leading-tight', 'REGLAMENTO Y NORMAS...', 6, 'left')}
       </div>
     </header>
@@ -835,8 +843,8 @@ export default function App() {
           <style>
               :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
               body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); margin: 0; padding: 0; }
-              .container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border: 4px solid black; }
-              h1 { border-bottom: 4px solid black; padding-bottom: 15px; text-transform: uppercase; font-black; letter-spacing: -1px; margin-top: 0; }
+              .container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border: 2px solid black; }
+              h1 { border-bottom: 2px solid black; padding-bottom: 15px; text-transform: uppercase; font-weight: 800; letter-spacing: -1px; margin-top: 0; }
               h2 { color: var(--primary); margin-top: 40px; border-bottom: 2px solid var(--border); padding-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2rem; }
               h3 { color: #475569; margin-top: 25px; font-weight: 700; }
               .step { background: #f1f5f9; padding: 20px; border-left: 4px solid #f59e0b; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
@@ -906,7 +914,7 @@ export default function App() {
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <Map className="w-8 h-8" />
-          <h1 className="text-xl font-black uppercase tracking-widest text-white">Rally RobiBook Pro</h1>
+          <h1 className="text-xl font-bold uppercase tracking-widest text-white">Rally RobiBook Pro</h1>
         </div>
         <div className="flex flex-wrap gap-2">
           {/* Botón de Manual */}
@@ -928,14 +936,16 @@ export default function App() {
       <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
         
-        <div className="flex w-full border-4 border-black border-b-0 bg-white text-black font-black uppercase text-center text-[10px] tracking-widest print:border-x-0 print:border-t-0">
-          <div className="w-[20%] p-2 border-r-4 border-black">Distancia</div>
-          <div className="w-[40%] p-2 border-r-4 border-black">Dirección</div>
-          <div className="w-[40%] p-2">Información</div>
+        {/* CORRECCIÓN: Se han quitado las clases "print:border-x-0 print:border-t-0" para que respete la cuadrícula en el PDF */}
+        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
+          <div className="w-[30%] p-2 border-r-2 border-black">Distancia</div>
+          <div className="w-[35%] p-2 border-r-2 border-black">Dirección</div>
+          <div className="w-[35%] p-2">Información</div>
         </div>
 
-        <div className="flex flex-col print:block border-4 border-black border-b-0 print:border-0 print:border-t-4 print:border-black">
-          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-4 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
+        {/* CORRECCIÓN: Se han quitado las clases "print:border-0 print:border-t-2 print:border-black" para que no sobreescriba los bordes */}
+        <div className="flex flex-col print:block border-2 border-black border-b-0">
+          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-2 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
           {roadbook.map((row, index) => (
             <RoadbookRow 
               key={row.id} 
@@ -952,13 +962,12 @@ export default function App() {
             />
           ))}
         </div>
-        <div className="h-0 border-t-4 border-black print:block hidden"></div>
       </main>
 
       {rowToDelete && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
-          <div className="bg-white p-6 rounded-2xl border-4 border-black text-center max-w-sm" onPointerDown={e => e.stopPropagation()}>
-            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-black mb-6 uppercase text-black">¿Eliminar viñeta?</h2>
+          <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-w-sm" onPointerDown={e => e.stopPropagation()}>
+            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-bold mb-6 uppercase text-black">¿Eliminar viñeta?</h2>
             <div className="flex gap-4"><button onClick={() => setRowToDelete(null)} className="flex-1 bg-gray-200 py-3 rounded font-bold text-black hover:bg-gray-300 transition-colors">CANCELAR</button><button onClick={() => { setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
           </div>
         </div>
@@ -966,9 +975,9 @@ export default function App() {
 
       {showPrintModal && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
-          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-4 border-black" onPointerDown={e => e.stopPropagation()}>
+          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-2 border-black" onPointerDown={e => e.stopPropagation()}>
             <Printer className="w-16 h-16 text-black mx-auto mb-4" />
-            <h2 className="text-2xl font-black mb-4 uppercase tracking-tight text-black">Imprimir Roadbook</h2>
+            <h2 className="text-2xl font-bold mb-4 uppercase tracking-tight text-black">Imprimir Roadbook</h2>
             <div className="text-left text-gray-700 mb-6 font-medium text-base bg-yellow-50 p-4 border-2 border-yellow-400 rounded-xl">
               <p className="mb-2 font-bold text-black">Pasos para un PDF perfecto:</p>
               <ol className="list-decimal pl-5 space-y-2">
@@ -986,7 +995,7 @@ export default function App() {
                   if (container) container.focus();
                 }, 100);
               }}
-              className="w-full bg-blue-600 text-white font-black py-4 px-6 rounded-xl hover:bg-blue-700 text-lg uppercase tracking-wider transition-colors shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none"
+              className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-blue-700 text-lg uppercase tracking-wider transition-colors shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none"
             >
               Fijar Pantalla
             </button>
@@ -1012,9 +1021,6 @@ export default function App() {
           .min-h-screen { min-height: auto !important; }
           .print\\:hidden { display: none !important; }
           .print\\:block { display: block !important; }
-          .print\\:border-0 { border: none !important; }
-          .print\\:border-t-4 { border-top-width: 4px !important; }
-          .print\\:border-black { border-color: black !important; }
           .print\\:shadow-none { box-shadow: none !important; }
           .print\\:w-full { width: 100% !important; max-width: 100% !important; }
           .print\\:mt-0 { margin-top: 0 !important; }
