@@ -75,7 +75,7 @@ const ICON_CATEGORIES = {
     { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     
-    /* --- SEÑALES OBLIGATORIAS CORREGIDAS --- */
+    /* --- SEÑALES OBLIGATORIAS --- */
     { type: 'mandatory_straight', label: 'Oblig. Recto', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 8" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="12,5 9,9 15,9" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
     { type: 'mandatory_right', label: 'Oblig. Der.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 1 16 10 L 16 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="19,10 15,7 15,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
     { type: 'mandatory_left', label: 'Oblig. Izq.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 0 8 10 L 8 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="5,10 9,7 9,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
@@ -94,6 +94,7 @@ const ICON_CATEGORIES = {
     { type: 'houses', label: 'Casas', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="white" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><g transform="translate(10, 2) scale(0.55)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(1, 10) scale(0.6)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(11, 11) scale(0.65)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g></svg> },
     { type: 'church', label: 'Iglesia', icon: <Church size={20}/> },
     { type: 'factory', label: 'Fábrica', icon: <Factory size={20}/> },
+    { type: 'camera_ref', label: 'Cámara', icon: <Camera size={20}/> },
     { type: 'skyscraper', label: 'Edificio Alto', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" strokeWidth="1.5" strokeLinejoin="round"><path d="M4,22 L20,22 M6,22 L6,10 L9,10 L9,4 L15,4 L15,10 L18,10 L18,22" stroke="black" /><path d="M11,7 L13,7 M11,10 L13,10 M11,13 L13,13 M11,16 L13,16 M11,19 L13,19 M7,13 L8,13 M7,16 L8,16 M7,19 L8,19 M16,13 L17,13 M16,16 L17,16 M16,19 L17,19" stroke="black" strokeWidth="1" /></svg> },
     { type: 'bridge_over', label: 'P. Sobre', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 7,2 L 7,22 M 17,2 L 17,22" stroke="black" strokeWidth="3" strokeLinecap="round"/><path d="M 3,2 L 7,6 M 21,2 L 17,6 M 3,22 L 7,18 M 21,22 L 17,18" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
     { type: 'bridge_under', label: 'P. Bajo', icon: <svg viewBox="0 0 24 24" width="20" height="20"><line x1="2" y1="8" x2="22" y2="8" stroke="black" strokeWidth="2" strokeLinecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="black" strokeWidth="2" strokeLinecap="round"/><path d="M 7,22 L 7,16 A 5 5 0 0 1 17 16 L 17,22" stroke="black" strokeWidth="2" fill="none" strokeLinecap="round"/></svg> },
@@ -608,7 +609,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
                 dir="ltr" 
                 value={tempDist} 
                 onChange={e => setTempDist(e.target.value)}
-                onFocus={(e) => e.target.select()} // Selecciona todo al enfocar para facilitar sobreescritura
+                onFocus={(e) => e.target.select()}
                 onClick={e => e.stopPropagation()} 
                 onBlur={() => {
                   const val = tempDist.replace(',', '.');
