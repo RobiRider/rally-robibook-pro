@@ -713,6 +713,7 @@ export default function App() {
   const fileInputRef = useRef(null);
   const loadProjectRef = useRef(null);
   const [showPrintModal, setShowPrintModal] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
 
   useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
@@ -725,6 +726,14 @@ export default function App() {
   };
   const handleLoadProject = (e) => {
     const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(e.target.files[0]); e.target.value = null;
+  };
+
+  const handleResetProject = () => {
+    setRoadbook([]);
+    setHeaderData({ titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
+    localStorage.removeItem('robibook_data_v4');
+    localStorage.removeItem('robibook_header_v4');
+    setShowResetConfirm(false);
   };
 
   useEffect(() => {
@@ -795,6 +804,7 @@ export default function App() {
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
         <div className="flex items-center gap-3"><Map className="w-8 h-8" /><h1 className="text-xl font-bold uppercase tracking-widest">Rally RobiBook Pro</h1></div>
         <div className="flex flex-wrap gap-2">
+          <button onPointerDown={(e) => { e.stopPropagation(); setShowResetConfirm(true); }} className="bg-red-700 text-white px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"><Trash2 size={16}/> Nuevo</button>
           <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpen(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
           <button onPointerDown={(e) => { e.stopPropagation(); handleSaveProject(); }} className="bg-indigo-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-indigo-500 transition-colors"><Save size={16}/> Guardar</button>
           <button onPointerDown={(e) => { e.stopPropagation(); loadProjectRef.current?.click(); }} className="bg-teal-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-teal-500 transition-colors"><FolderOpen size={16}/> Cargar</button>
@@ -825,6 +835,20 @@ export default function App() {
           <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
             <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-bold mb-6 uppercase">¿Eliminar viñeta?</h2>
             <div className="flex gap-4"><button onPointerDown={(e) => { e.stopPropagation(); setRowToDelete(null); }} className="flex-1 bg-gray-200 py-3 rounded font-bold hover:bg-gray-300 transition-colors">CANCELAR</button><button onPointerDown={(e) => { e.stopPropagation(); setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
+          </div>
+        </div>
+      )}
+
+      {showResetConfirm && (
+        <div className="fixed inset-0 z-[150] bg-black/70 flex items-center justify-center p-4" onPointerDown={() => setShowResetConfirm(false)}>
+          <div className="bg-white p-8 rounded-2xl border-2 border-black text-center max-w-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
+            <RotateCcw size={48} className="mx-auto text-red-600 mb-4" />
+            <h2 className="text-xl font-bold mb-2 uppercase">Reiniciar Proyecto</h2>
+            <p className="text-gray-600 mb-6 text-sm font-medium">¿Estás seguro de que quieres borrar todo y empezar de cero? Esta acción no se puede deshacer.</p>
+            <div className="flex gap-4">
+              <button onPointerDown={(e) => { e.stopPropagation(); setShowResetConfirm(false); }} className="flex-1 bg-gray-200 py-3 rounded font-bold hover:bg-gray-300 transition-colors">CANCELAR</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); handleResetProject(); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">BORRAR TODO</button>
+            </div>
           </div>
         </div>
       )}
