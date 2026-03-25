@@ -593,7 +593,13 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
         <div className={`w-[30%] border-r-2 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
           <div 
             className="w-full h-full flex flex-col items-center justify-start pt-6 cursor-text hover:bg-black/5"
-            onPointerDown={() => { setTempDist(formatRallyDist(row.totalDist)); setDistMode(true); }}
+            onClick={(e) => { 
+              if (!distMode) {
+                e.stopPropagation();
+                setTempDist(row.totalDist.toString().replace('.', ',')); 
+                setDistMode(true); 
+              }
+            }}
           >
             {distMode ? (
               <input 
@@ -601,16 +607,20 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
                 autoFocus 
                 dir="ltr" 
                 value={tempDist} 
-                onChange={e => setTempDist(e.target.value)} 
+                onChange={e => setTempDist(e.target.value)}
+                onFocus={(e) => e.target.select()} // Selecciona todo al enfocar para facilitar sobreescritura
+                onClick={e => e.stopPropagation()} 
                 onBlur={() => {
-                  const parsed = parseFloat(tempDist.replace(',', '.'));
+                  const val = tempDist.replace(',', '.');
+                  const parsed = parseFloat(val);
                   onUpdate(row.id, 'totalDist', isNaN(parsed) ? 0 : parsed);
                   setDistMode(false);
                 }}
                 onKeyDown={e => {
                   if (e.key === 'Enter') e.target.blur();
+                  if (e.key === 'Escape') setDistMode(false);
                 }}
-                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight" 
+                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight border-2 border-blue-400 rounded-lg" 
               />
             ) : (
               <span className="text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight whitespace-nowrap">
@@ -725,7 +735,7 @@ export default function App() {
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${headerData.titleI || 'ruta'}.rbk`; a.click();
   };
   const handleLoadProject = (e) => {
-    const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(e.target.files[0]); e.target.value = null;
+    const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(event.target.files[0]); e.target.value = null;
   };
 
   const handleResetProject = () => {
