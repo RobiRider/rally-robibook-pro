@@ -54,7 +54,7 @@ const ICON_CATEGORIES = {
     { type: 'v_end', icon: <div className="border-2 border-black rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px] relative"><div className="absolute w-full h-0.5 bg-black rotate-45"/>FIN</div> },
     { type: 'warning_sign', icon: <AlertTriangle color="red" size={20} /> },
     { type: 'warning_danger', label: 'Peligro', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><rect x="11.2" y="8" width="1.6" height="5" fill="black"/><circle cx="12" cy="16" r="1.2" fill="black"/></svg> },
-    { type: 'no_entry', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center"><div className="w-4 h-1 bg-white"/></div> },
+    { type: 'no_entry', label: 'Prohibido', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center border border-black"><div className="w-4 h-1 bg-white"/></div> },
     { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 rounded flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: '#3D93D0' }}>P</div> },
     { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
     { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" fontWeight="bold" textAnchor="middle">STOP</text></svg> },
@@ -69,13 +69,13 @@ const ICON_CATEGORIES = {
     { type: 'two_way', label: 'Doble Sent.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 9 16 L 9 8 L 7 10 M 9 8 L 11 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/><path d="M 15 8 L 15 16 L 13 14 M 15 16 L 17 14" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/></svg> },
     { type: 'pedestrian', label: 'Peatones', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><circle cx="12" cy="8" r="1.5" fill="black"/><path d="M 12 10 L 12 14 L 10 17 M 12 14 L 14 17 M 10 10 L 14 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><line x1="7" y1="16" x2="17" y2="16" stroke="black" strokeWidth="1.5"/></svg> },
     { type: 'priority_intersection', label: 'Prioridad', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><line x1="12" y1="7" x2="12" y2="17" stroke="black" strokeWidth="3" strokeLinecap="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="black" strokeWidth="1.5" strokeLinecap="round"/></svg> },
-    { type: 'traffic_lights', label: 'Semáforo', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><rect x="8.5" y="6" width="7" height="12" rx="1" fill="black"/><circle cx="12" cy="8" r="1.2" fill="#ef4444"/><circle cx="12" cy="12" r="1.2" fill="#eab308"/><circle cx="12" cy="16" r="1.2" fill="#22c55e"/></svg> },
+    { type: 'traffic_lights', label: 'Semáforo', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><rect x="8" y="2" width="8" height="15" rx="1.5" fill="black" stroke="black" strokeWidth="0.5"/><circle cx="12" cy="5.5" r="2.2" fill="#ef4444"/><circle cx="12" cy="10" r="2.2" fill="#fbbf24"/><circle cx="12" cy="14.5" r="2.2" fill="#22c55e"/><rect x="11.2" y="17" width="1.6" height="5" fill="black"/></svg> },
     { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" fontWeight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
     { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#3D93D0" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     
-    /* --- SEÑALES OBLIGATORIAS CORREGIDAS (Con flechas de triángulo sólido) --- */
+    /* --- SEÑALES OBLIGATORIAS CORREGIDAS --- */
     { type: 'mandatory_straight', label: 'Oblig. Recto', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 8" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="12,5 9,9 15,9" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
     { type: 'mandatory_right', label: 'Oblig. Der.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 1 16 10 L 16 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="19,10 15,7 15,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
     { type: 'mandatory_left', label: 'Oblig. Izq.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 0 8 10 L 8 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="5,10 9,7 9,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
@@ -94,6 +94,7 @@ const ICON_CATEGORIES = {
     { type: 'houses', label: 'Casas', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="white" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><g transform="translate(10, 2) scale(0.55)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(1, 10) scale(0.6)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g><g transform="translate(11, 11) scale(0.65)"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" /></g></svg> },
     { type: 'church', label: 'Iglesia', icon: <Church size={20}/> },
     { type: 'factory', label: 'Fábrica', icon: <Factory size={20}/> },
+    { type: 'skyscraper', label: 'Edificio Alto', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" strokeWidth="1.5" strokeLinejoin="round"><path d="M4,22 L20,22 M6,22 L6,10 L9,10 L9,4 L15,4 L15,10 L18,10 L18,22" stroke="black" /><path d="M11,7 L13,7 M11,10 L13,10 M11,13 L13,13 M11,16 L13,16 M11,19 L13,19 M7,13 L8,13 M7,16 L8,16 M7,19 L8,19 M16,13 L17,13 M16,16 L17,16 M16,19 L17,19" stroke="black" strokeWidth="1" /></svg> },
     { type: 'bridge_over', label: 'P. Sobre', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 7,2 L 7,22 M 17,2 L 17,22" stroke="black" strokeWidth="3" strokeLinecap="round"/><path d="M 3,2 L 7,6 M 21,2 L 17,6 M 3,22 L 7,18 M 21,22 L 17,18" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
     { type: 'bridge_under', label: 'P. Bajo', icon: <svg viewBox="0 0 24 24" width="20" height="20"><line x1="2" y1="8" x2="22" y2="8" stroke="black" strokeWidth="2" strokeLinecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="black" strokeWidth="2" strokeLinecap="round"/><path d="M 7,22 L 7,16 A 5 5 0 0 1 17 16 L 17,22" stroke="black" strokeWidth="2" fill="none" strokeLinecap="round"/></svg> },
     { type: 'tower', label: 'Torre', icon: <Landmark size={20}/> },
@@ -123,7 +124,6 @@ const haversineDistance = (lat1, lon1, lat2, lon2) => {
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 };
 
-// Formato modificado para fijarlo a 2 decimales en todo el documento
 const formatRallyDist = (num) => parseFloat(num || 0).toFixed(2).replace('.', ',');
 
 const catmullRom2bezier = (points) => {
@@ -141,14 +141,6 @@ const catmullRom2bezier = (points) => {
   return d;
 };
 
-const distToSegment = (p, v, w) => {
-  const l2 = Math.pow(v.x - w.x, 2) + Math.pow(v.y - w.y, 2);
-  if (l2 === 0) return Math.pow(p.x - v.x, 2) + Math.pow(p.y - v.y, 2);
-  let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
-  t = Math.max(0, Math.min(1, t));
-  return Math.sqrt(Math.pow(p.x - (v.x + t * (w.x - v.x)), 2) + Math.pow(p.y - (v.y + t * (w.y - v.y)), 2));
-};
-
 const defaultCustomTulip = { 
   isRoundabout: false, 
   paths: [{ id: 'm1', type: 'main', points: [{x: 50, y: 90}, {x: 50, y: 10}], isDirt: false, isHighway: false, thickness: 5 }], 
@@ -160,13 +152,15 @@ const normalizeTulip = (data) => {
   return { ...data, icons: data.icons || [] };
 };
 
-const GetIconComponent = (type) => {
+const findIconByType = (type) => {
   for (const cat in ICON_CATEGORIES) {
     const item = ICON_CATEGORIES[cat].find(i => i.type === type);
-    if (item) return item.icon;
+    if (item) return item;
   }
   return null;
 };
+
+const GetIconComponent = (type) => findIconByType(type)?.icon || null;
 
 // --- COMPONENTE: SELECTOR UNIVERSAL ---
 function UniversalIconPicker({ onSelect, onUpload, onClose }) {
@@ -178,11 +172,11 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
       <div className="bg-white border-2 border-black w-full max-w-xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onPointerDown={e => e.stopPropagation()}>
         <div className="p-4 border-b-2 border-black flex justify-between items-center bg-gray-50">
           <h3 className="font-bold uppercase text-lg tracking-tight">Librería de Iconos</h3>
-          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><X/></button>
+          <button onPointerDown={(e) => { e.stopPropagation(); onClose(); }} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><X/></button>
         </div>
 
         <div className="p-4 bg-blue-50 border-b-2 border-black">
-          <button onClick={() => fileInputRef.current?.click()} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
+          <button onPointerDown={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
             <Upload size={18}/> SUBIR IMAGEN PROPIA
           </button>
           <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={(e) => {
@@ -197,7 +191,7 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
 
         <div className="flex bg-gray-200 border-b-2 border-black overflow-x-auto no-scrollbar shrink-0">
           {Object.keys(ICON_CATEGORIES).map(cat => (
-            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-3 py-3 font-bold text-[10px] sm:text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
+            <button key={cat} onPointerDown={(e) => { e.stopPropagation(); setActiveTab(cat); }} className={`flex items-center justify-center px-3 py-3 font-bold text-[10px] sm:text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
               {cat}
             </button>
           ))}
@@ -205,11 +199,11 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
 
         <div className="p-4 pb-12 overflow-y-auto grid grid-cols-4 sm:grid-cols-5 gap-3 bg-white flex-1 min-h-0 content-start">
           {ICON_CATEGORIES[activeTab].map((item, idx) => (
-            <button key={idx} onClick={() => onSelect(item.type)} className="group flex flex-col items-center justify-center gap-2 p-2 border-2 border-gray-100 rounded-xl hover:border-black hover:bg-gray-50 transition-all">
-              <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <button key={idx} onPointerDown={(e) => { e.stopPropagation(); onSelect(item.type); }} className="group flex flex-col items-center justify-center gap-2 p-2 border-2 border-gray-100 rounded-xl hover:border-black hover:bg-gray-50 transition-all">
+              <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform pointer-events-none">
                 {item.icon}
               </div>
-              <span className="text-[8px] font-bold uppercase text-gray-400 group-hover:text-black text-center">{item.label || item.type}</span>
+              <span className="text-[8px] font-bold uppercase text-gray-400 group-hover:text-black text-center pointer-events-none">{item.label || item.type}</span>
             </button>
           ))}
         </div>
@@ -236,23 +230,16 @@ function StaticTulipRenderer({ data, id }) {
       {norm.paths.map(p => {
         const isMain = p.type === 'main';
         const isEntry = p.type === 'entry';
-        const isWrong = !isMain && !isEntry; 
         const color = (isMain || isEntry) ? '#3b82f6' : 'black'; 
         const width = p.type === 'secondary' ? '2' : (p.thickness || 5).toString();
         const dash = p.isDirt ? (width >= 4 ? '10,10' : '4,4') : 'none';
-        
-        let marker = '';
-        if (isMain) marker = `url(#arrow-blue-${id})`;
-        if (isWrong) marker = `url(#block-black-${id})`;
-
-        const lineCap = 'butt';
+        let marker = isMain ? `url(#arrow-blue-${id})` : (!isEntry ? `url(#block-black-${id})` : '');
         const dPath = catmullRom2bezier(p.points);
-        
         return (
           <g key={p.id}>
-            <path d={dPath} fill="none" stroke={color} strokeWidth={width} strokeDasharray={dash} strokeLinecap={lineCap} />
+            <path d={dPath} fill="none" stroke={color} strokeWidth={width} strokeDasharray={dash} strokeLinecap="butt" />
             {p.isHighway && (
-              <path d={dPath} fill="none" stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} strokeLinecap={lineCap} />
+              <path d={dPath} fill="none" stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} strokeLinecap="butt" />
             )}
             {marker && (
               <path d={dPath} fill="none" stroke="transparent" strokeWidth={width} markerEnd={marker} pointerEvents="none" />
@@ -293,6 +280,8 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
   const [selectedIconId, setSelectedIconId] = useState(null);
   const [selectedPathId, setSelectedPathId] = useState(null); 
   const [showIconPicker, setShowIconPicker] = useState(false);
+
+  const QUICK_ICON_TYPES = ["roundabout", "stop_traffic", "no_entry", "warning_danger"];
 
   const getCoords = (e) => {
     const svg = svgRef.current;
@@ -449,7 +438,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           <input type="number" min="1" max="8" value={rExits} onChange={e=>setRExits(parseInt(e.target.value)||1)} className="w-10 border rounded text-center" />
           <span>Objetivo:</span>
           <input type="number" min="1" max={rExits} value={rTarget} onChange={e=>setRTarget(parseInt(e.target.value)||1)} className="w-10 border rounded text-center" />
-          <button onClick={generateRoundabout} className="bg-blue-600 text-white font-bold px-2 py-1 rounded hover:bg-blue-700 ml-1 uppercase text-[10px]">Generar</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); generateRoundabout(); }} className="bg-blue-600 text-white font-bold px-2 py-1 rounded hover:bg-blue-700 ml-1 uppercase text-[10px]">Generar</button>
         </div>
       </div>
 
@@ -469,24 +458,17 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
             const isSelected = path.id === selectedPathId;
             const isMain = path.type === 'main';
             const isEntry = path.type === 'entry';
-            const isWrong = !isMain && !isEntry;
             const color = isSelected ? "#f59e0b" : ((isMain || isEntry) ? '#3b82f6' : 'black'); 
             const width = path.type === 'secondary' ? '2' : (path.thickness || 5).toString();
             const dash = path.isDirt ? (width >= 4 ? '10,10' : '4,4') : 'none';
-            
-            let marker = '';
-            if (isMain) marker = isSelected ? "url(#editor-arrow-orange)" : "url(#editor-arrow-blue)";
-            if (isWrong) marker = isSelected ? "url(#editor-block-orange)" : "url(#editor-block-black)";
-            
-            const lineCap = 'butt';
+            let marker = isMain ? (isSelected ? "url(#editor-arrow-orange)" : "url(#editor-arrow-blue)") : (!isEntry ? (isSelected ? "url(#editor-block-orange)" : "url(#editor-block-black)") : '');
             const dPath = catmullRom2bezier(path.points);
-            
             return (
               <g key={path.id}>
-                <path d={dPath} stroke="transparent" strokeWidth="20" fill="none" strokeLinecap={lineCap} onPointerDown={(e) => handlePointerDown(e, { type: 'path', pathId: path.id })} onDoubleClick={(e) => handleLineDoubleClick(e, path.id)} className="cursor-crosshair" />
-                <path d={dPath} stroke={color} strokeWidth={width} strokeDasharray={dash} fill="none" strokeLinecap={lineCap} className="pointer-events-none transition-colors" />
+                <path d={dPath} stroke="transparent" strokeWidth="20" fill="none" onPointerDown={(e) => handlePointerDown(e, { type: 'path', pathId: path.id })} onDoubleClick={(e) => handleLineDoubleClick(e, path.id)} className="cursor-crosshair" />
+                <path d={dPath} stroke={color} strokeWidth={width} strokeDasharray={dash} fill="none" strokeLinecap="butt" className="pointer-events-none transition-colors" />
                 {path.isHighway && (
-                  <path d={dPath} stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} fill="none" strokeLinecap={lineCap} className="pointer-events-none transition-colors" />
+                  <path d={dPath} stroke="white" strokeWidth={Math.max(1, parseFloat(width) - 2).toString()} strokeDasharray={dash} fill="none" className="pointer-events-none transition-colors" />
                 )}
                 {marker && (
                   <path d={dPath} stroke="transparent" strokeWidth={width} fill="none" markerEnd={marker} className="pointer-events-none" />
@@ -516,11 +498,11 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
 
       {selectedIconId && (
         <div className="flex gap-1 mb-2 w-full justify-center">
-          <button onClick={() => updateSelectedIconScale(-0.1)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">-</button>
-          <button onClick={() => updateSelectedIconScale(0.1)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">+</button>
-          <button onClick={() => updateSelectedIconRotation(-15)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↺</button>
-          <button onClick={() => updateSelectedIconRotation(15)} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↻</button>
-          <button onClick={deleteSelectedIcon} className="bg-red-500 text-white px-3 rounded font-bold text-xs uppercase tracking-wide ml-2">Eliminar</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); updateSelectedIconScale(-0.1); }} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">-</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); updateSelectedIconScale(0.1); }} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">+</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); updateSelectedIconRotation(-15); }} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↺</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); updateSelectedIconRotation(15); }} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center leading-none">↻</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); deleteSelectedIcon(); }} className="bg-red-500 text-white px-3 rounded font-bold text-xs uppercase tracking-wide ml-2">Eliminar</button>
         </div>
       )}
 
@@ -528,19 +510,19 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
         <div className="flex flex-col gap-2 mb-2 w-full justify-center bg-gray-100 p-2 rounded border-2 border-gray-200">
           <span className="text-[10px] font-bold uppercase text-gray-500 text-center tracking-widest">Opciones de Vía</span>
           <div className="grid grid-cols-2 gap-2 w-full">
-            <button onClick={togglePathDirt} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+            <button onPointerDown={(e) => { e.stopPropagation(); togglePathDirt(); }} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
               {selectedPath.isDirt ? 'Hacer Asfalto' : 'Hacer Tierra'}
             </button>
-            <button onClick={togglePathHighway} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+            <button onPointerDown={(e) => { e.stopPropagation(); togglePathHighway(); }} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
               {selectedPath.isHighway ? 'Vía Única' : 'Autopista'}
             </button>
             {showThicknessBtn && (
-              <button onClick={cycleThickness} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
+              <button onPointerDown={(e) => { e.stopPropagation(); cycleThickness(); }} className="bg-white border-2 border-gray-300 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-gray-50 transition-colors">
                 Grosor: {(selectedPath.type === 'secondary' || selectedPath.thickness === 2) ? 'Fino' : (selectedPath.thickness === 3.5 ? 'Medio' : 'Grueso')}
               </button>
             )}
             {paths.length > 1 ? (
-              <button onClick={deleteSelectedPath} className={`bg-red-600 text-white border-2 border-red-700 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-red-700 transition-colors ${!showThicknessBtn ? 'col-span-2' : ''}`}>
+              <button onPointerDown={(e) => { e.stopPropagation(); deleteSelectedPath(); }} className={`bg-red-600 text-white border-2 border-red-700 py-2 rounded shadow-sm font-bold text-[10px] uppercase hover:bg-red-700 transition-colors ${!showThicknessBtn ? 'col-span-2' : ''}`}>
                 Eliminar Vía
               </button>
             ) : (
@@ -551,12 +533,28 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       )}
 
       <div className="flex flex-wrap gap-1 p-2 bg-gray-100 rounded border-2 border-gray-200 mb-2 w-full justify-center items-center">
-        {ICON_CATEGORIES["Rally / CC"].slice(0, 5).map(ic => (
-          <button key={ic.type} onClick={(e) => { e.stopPropagation(); addIcon(ic.type); }} className="w-8 h-8 p-1 border border-gray-300 bg-white rounded hover:bg-gray-50">{ic.icon}</button>
-        ))}
-        <button onClick={(e) => { e.stopPropagation(); setShowIconPicker(true); }} className="px-2 py-1 bg-blue-600 text-white font-bold text-[10px] rounded uppercase hover:bg-blue-700 h-8 flex items-center gap-1">
+        {QUICK_ICON_TYPES.map(type => {
+          const icData = findIconByType(type);
+          if (!icData) return null;
+          return (
+            <button key={type} onPointerDown={(e) => { e.stopPropagation(); addIcon(type); }} className="w-8 h-8 p-1 border border-gray-300 bg-white rounded hover:bg-gray-50 flex items-center justify-center">
+              <div className="w-full h-full scale-125 flex items-center justify-center pointer-events-none">{icData.icon}</div>
+            </button>
+          );
+        })}
+        <button onPointerDown={(e) => { e.stopPropagation(); setShowIconPicker(true); }} className="px-2 py-1 bg-blue-600 text-white font-bold text-[10px] rounded uppercase hover:bg-blue-700 h-8 flex items-center gap-1 shadow-sm">
           <Plus size={12}/> Más Iconos
         </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 mb-4 w-full">
+        <button onPointerDown={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'wrong_way', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 50}, {x: 20, y: 30}] }]); }} className="bg-black text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-gray-800 transition-colors shadow">+ Adicional</button>
+        <button onPointerDown={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'main', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 90}, {x: 50, y: 10}] }]); }} className="bg-blue-600 text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-blue-700 transition-colors shadow">+ Principal</button>
+      </div>
+
+      <div className="flex gap-2 mt-2 w-full">
+        <button onPointerDown={onCancel} className="flex-1 bg-gray-300 font-bold uppercase text-sm py-3 rounded hover:bg-gray-400 transition-colors">Cancelar</button>
+        <button onPointerDown={() => onSave({ paths, isRoundabout, icons })} className="flex-1 bg-green-600 text-white font-bold uppercase text-sm py-3 rounded hover:bg-green-700 transition-colors">Guardar</button>
       </div>
 
       {showIconPicker && (
@@ -566,16 +564,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           onClose={() => setShowIconPicker(false)}
         />
       )}
-
-      <div className="grid grid-cols-2 gap-2 mb-4 w-full">
-        <button onClick={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'wrong_way', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 50}, {x: 20, y: 30}] }]); }} className="bg-black text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-gray-800 transition-colors shadow">+ Adicional</button>
-        <button onClick={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'main', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 90}, {x: 50, y: 10}] }]); }} className="bg-blue-600 text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-blue-700 transition-colors shadow">+ Principal</button>
-      </div>
-
-      <div className="flex gap-2 mt-2 w-full">
-        <button onClick={onCancel} className="flex-1 bg-gray-300 font-bold uppercase text-sm py-3 rounded hover:bg-gray-400 transition-colors">Cancelar</button>
-        <button onClick={() => onSave({ paths, isRoundabout, icons })} className="flex-1 bg-green-600 text-white font-bold uppercase text-sm py-3 rounded hover:bg-green-700 transition-colors">Guardar</button>
-      </div>
     </div>
   );
 }
@@ -605,7 +593,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
         <div className={`w-[30%] border-r-2 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
           <div 
             className="w-full h-full flex flex-col items-center justify-start pt-6 cursor-text hover:bg-black/5"
-            onClick={() => { setTempDist(formatRallyDist(row.totalDist)); setDistMode(true); }}
+            onPointerDown={() => { setTempDist(formatRallyDist(row.totalDist)); setDistMode(true); }}
           >
             {distMode ? (
               <input 
@@ -645,7 +633,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
         </div>
 
         <div className="w-[35%] border-r-2 border-black flex items-center justify-center relative p-2 overflow-hidden">
-          <button onClick={() => setEditorOpen(true)} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-gray-50 transition-colors rounded">
+          <button onPointerDown={(e) => { e.stopPropagation(); setEditorOpen(true); }} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-gray-50 transition-colors rounded">
             <StaticTulipRenderer data={row.customTulip} id={row.id} />
           </button>
           
@@ -659,190 +647,84 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
         </div>
 
         <div className="w-[35%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
-          
-          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 pb-14 lg:pb-4 font-bold uppercase text-2xl focus:bg-gray-50 leading-tight print:hidden" placeholder="Añadir nota..." />
-          
-          <div className="hidden print:block w-full h-full p-4 font-bold uppercase text-2xl leading-tight whitespace-pre-wrap overflow-hidden">
-            {row.notes}
-          </div>
-
-          {row.infoIcons.map(ic => {
-            const isSel = selectedIconId === ic.id;
-            const scale = ic.scale || 1;
-            const rot = ic.rotation || 0;
-            return (
-              <div 
-                key={ic.id} 
-                style={{
-                  position: 'absolute', 
-                  left: `${ic.x}%`, 
-                  top: `${ic.y}%`, 
-                  transform: `translate(-50%, -50%) rotate(${rot}deg) scale(${scale})`, 
-                  width: 40, 
-                  height: 40
-                }} 
-                className={`flex items-center justify-center cursor-move touch-none transition-shadow ${isSel ? 'ring-2 ring-blue-500 rounded bg-blue-50/50' : ''}`} 
-                onPointerDown={e => { e.stopPropagation(); e.target.setPointerCapture(e.pointerId); setSelectedIconId(ic.id); setDraggingIconId(ic.id); }}
-                onPointerUp={e => { e.stopPropagation(); e.target.releasePointerCapture(e.pointerId); setDraggingIconId(null); }}
-              >
-                {ic.type === 'custom_image' ? <img src={ic.dataUrl} className="w-full h-full object-contain pointer-events-none" /> : <div className="w-full h-full pointer-events-none flex items-center justify-center">{GetIconComponent(ic.type)}</div>}
-              </div>
-            );
-          })}
-
+          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none bg-transparent outline-none text-black font-black uppercase text-xl p-4 print:hidden" placeholder="NOTAS..." />
+          <div className="hidden print:block w-full h-full p-4 font-black uppercase text-xl leading-tight whitespace-pre-wrap overflow-hidden">{row.notes}</div>
+          {row.infoIcons.map(ic => (
+            <div key={ic.id} style={{ position: 'absolute', left: `${ic.x}%`, top: `${ic.y}%`, transform: `translate(-50%, -50%) rotate(${ic.rotation || 0}deg) scale(${ic.scale || 1})`, width: 40, height: 40 }} className={`flex items-center justify-center cursor-move touch-none ${selectedIconId === ic.id ? 'ring-2 ring-blue-500 rounded bg-blue-50/50' : ''}`} onPointerDown={e => { e.stopPropagation(); setSelectedIconId(ic.id); setDraggingIconId(ic.id); }}>
+              {ic.type === 'custom_image' ? <img src={ic.dataUrl} className="w-full h-full object-contain pointer-events-none" /> : <div className="w-full h-full pointer-events-none flex items-center justify-center">{GetIconComponent(ic.type)}</div>}
+            </div>
+          ))}
           {selectedIconId && (
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-white border-2 border-black rounded-lg p-1 z-50 shadow-xl" onPointerDown={e => e.stopPropagation()}>
-              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.max(0.5, (ic.scale||1)-0.2)} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl">-</button>
-              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.min(4, (ic.scale||1)+0.2)} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl">+</button>
-              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)-15} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl leading-none">↺</button>
-              <button onClick={() => onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)+15} : ic))} className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center font-bold text-xl leading-none">↻</button>
-              <button onClick={() => { onUpdate(row.id, 'infoIcons', row.infoIcons.filter(ic => ic.id !== selectedIconId)); setSelectedIconId(null); }} className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded flex items-center justify-center ml-2"><Trash2 size={16}/></button>
+              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.max(0.5, (ic.scale||1)-0.2)} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">-</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.min(4, (ic.scale||1)+0.2)} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">+</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)-15} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">↺</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)+15} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">↻</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.filter(ic => ic.id !== selectedIconId)); setSelectedIconId(null); }} className="w-8 h-8 bg-red-600 text-white rounded flex items-center justify-center ml-2"><Trash2 size={16}/></button>
             </div>
           )}
-
-          {/* Icono de imagen con print:hidden para que no salga en PDF */}
-          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 lg:hover:scale-100 print:hidden"><ImageIcon size={18}/></button>
-          
-          <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 transition-opacity print:hidden z-10">
-            <button onClick={() => onInsert(row.id)} className="bg-blue-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:bg-blue-700"><Plus size={20}/></button>
-            <button onClick={() => onDelete(row.id)} className="bg-red-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:bg-red-700"><Trash2 size={20}/></button>
+          <button onPointerDown={(e) => { e.stopPropagation(); setPickerOpen(true); }} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 text-white p-2 rounded-full shadow-lg z-10 print:hidden transition-all hover:scale-110 active:scale-95"><ImageIcon size={18}/></button>
+          <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 print:hidden z-10 transition-all">
+            <button onPointerDown={(e) => { e.stopPropagation(); onInsert(row.id); }} className="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 active:scale-95 transition-all"><Plus size={20}/></button>
+            <button onPointerDown={(e) => { e.stopPropagation(); onDelete(row.id); }} className="bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 active:scale-95 transition-all"><Trash2 size={20}/></button>
           </div>
-
-          {pickerOpen && <UniversalIconPicker 
-            onSelect={type => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1.2, rotation: 0 }]); setPickerOpen(false); }}
-            onUpload={url => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type: 'custom_image', x: 80, y: 50, scale: 1.2, rotation: 0, dataUrl: url }]); setPickerOpen(false); }}
-            onClose={() => setPickerOpen(false)}
-          />}
+          {pickerOpen && <UniversalIconPicker onSelect={type => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1.2, rotation: 0 }]); setPickerOpen(false); }} onUpload={url => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type: 'custom_image', x: 80, y: 50, scale: 1.2, rotation: 0, dataUrl: url }]); setPickerOpen(false); }} onClose={() => setPickerOpen(false)} />}
         </div>
       </div>
     </div>
   );
 }
 
-// --- CABECERA ---
-
 function EditableRoadbookHeader({ data, setData }) {
   const [active, setActive] = useState(null);
-  
   const renderField = (field, className, placeholder, rows=1, textAlign='center') => {
-    const isEditing = active === field;
-    if (isEditing) {
-      return (
-        <textarea 
-          autoFocus 
-          rows={rows} 
-          value={data[field]} 
-          onChange={e => setData({...data, [field]: e.target.value})} 
-          onBlur={() => setActive(null)} 
-          className={`bg-yellow-50 outline-none w-full p-1 font-bold ${className}`}
-          style={{ textAlign: textAlign, fontFamily: 'inherit' }}
-        />
-      );
-    }
-    return (
-      <div 
-        onClick={() => setActive(field)} 
-        className={`cursor-text hover:bg-gray-100 rounded p-1 whitespace-pre-wrap transition-all ${!data[field] ? 'bg-gray-50 border-2 border-dashed border-gray-200 min-h-[1.5em]' : ''} ${className}`}
-        style={{ textAlign: textAlign }}
-      >
-        {data[field] || placeholder}
-      </div>
-    );
+    if (active === field) return <textarea autoFocus rows={rows} value={data[field]} onChange={e => setData({...data, [field]: e.target.value})} onBlur={() => setActive(null)} className={`bg-yellow-50 outline-none w-full p-1 font-bold ${className}`} style={{ textAlign, fontFamily: 'inherit' }} />;
+    return <div onClick={() => setActive(field)} className={`cursor-text hover:bg-gray-100 rounded p-1 whitespace-pre-wrap transition-colors ${!data[field] ? 'bg-gray-50 border-2 border-dashed border-gray-200 min-h-[1.5em]' : ''} ${className}`} style={{ textAlign }}>{data[field] || placeholder}</div>;
   };
-
   return (
     <header className="p-6 flex flex-col bg-white overflow-hidden">
       <div className="flex justify-between items-center gap-4 mb-6">
         <div className="flex-1 flex flex-col items-center">
           {renderField('titleI', 'text-2xl font-bold italic uppercase', 'INICIO')}
           <div className="w-full border-2 border-black p-4 shadow-[4px_4px_0_0_black] mt-2">
-            {renderField('placeI', 'text-[10px] font-bold uppercase mb-1', 'NOMBRE LUGAR SALIDA')}
+            {renderField('placeI', 'text-[10px] font-bold uppercase mb-1', 'LUGAR SALIDA')}
             {renderField('coordsI', 'text-sm font-mono font-bold', 'COORDENADAS SALIDA', 2)}
           </div>
         </div>
-
-        <div className="w-40 h-40 shrink-0 flex items-center justify-center relative border-2 border-dashed border-gray-200 rounded-full group overflow-hidden hover:border-gray-300 transition-colors">
-          {data.logo ? (
-            <img src={data.logo} className="w-full h-full object-contain cursor-pointer" onClick={() => setData({...data, logo: null})}/>
-          ) : (
-            <button onClick={() => {
-              const input = document.createElement('input'); input.type='file';
-              input.onchange=e=>{ const r=new FileReader(); r.onload=ev=>setData({...data, logo:ev.target.result}); r.readAsDataURL(e.target.files[0]); };
-              input.click();
-            }} className="flex flex-col items-center text-gray-400 group-hover:text-black font-bold uppercase text-[8px] transition-colors">
-              <ImageIcon size={32} className="mb-2"/> Subir Logo
-            </button>
-          )}
+        <div className="w-40 h-40 flex items-center justify-center relative border-2 border-dashed border-gray-200 rounded-full group overflow-hidden">
+          {data.logo ? <img src={data.logo} className="w-full h-full object-contain cursor-pointer" onPointerDown={() => setData({...data, logo: null})}/> : <button onPointerDown={() => { const i = document.createElement('input'); i.type='file'; i.onchange=e=>{ const r=new FileReader(); r.onload=ev=>setData({...data, logo:ev.target.result}); r.readAsDataURL(e.target.files[0]); }; i.click(); }} className="flex flex-col items-center text-gray-400 group-hover:text-black font-bold uppercase text-[8px] transition-colors"><ImageIcon size={32} className="mb-2"/> Subir Logo</button>}
         </div>
-
         <div className="flex-1 flex flex-col items-center">
           {renderField('titleF', 'text-2xl font-bold italic uppercase', 'FINAL')}
           <div className="w-full border-2 border-black p-4 shadow-[4px_4px_0_0_black] mt-2">
-            {renderField('placeF', 'text-[10px] font-bold uppercase mb-1', 'NOMBRE LUGAR DESTINO')}
+            {renderField('placeF', 'text-[10px] font-bold uppercase mb-1', 'LUGAR DESTINO')}
             {renderField('coordsF', 'text-sm font-mono font-bold', 'COORDENADAS DESTINO', 2)}
           </div>
         </div>
       </div>
-      <div className="border-t-2 border-black py-2">
-        {renderField('rules', 'text-[9px] font-bold italic leading-tight', 'REGLAMENTO Y NORMAS...', 6, 'left')}
-      </div>
+      <div className="border-t-2 border-black py-2">{renderField('rules', 'text-[9px] font-bold italic leading-tight', 'REGLAMENTO...', 6, 'left')}</div>
     </header>
   );
 }
 
-// --- APP PRINCIPAL ---
-
 export default function App() {
-  
-  // INICIALIZACIÓN CON AUTOGUARDADO (Lee de memoria al abrir la app)
-  const [roadbook, setRoadbook] = useState(() => {
-    const saved = localStorage.getItem('robibook_data_v4');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { return []; }
-    }
-    return [];
-  });
-  
+  const [roadbook, setRoadbook] = useState(() => JSON.parse(localStorage.getItem('robibook_data_v4')) || []);
   const [headerData, setHeaderData] = useState(() => JSON.parse(localStorage.getItem('robibook_header_v4')) || { titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
-  
   const fileInputRef = useRef(null);
   const loadProjectRef = useRef(null);
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
 
-  // AUTO-GUARDADO DE CABECERA Y RUTÓMETRO EN TIEMPO REAL
   useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
   useEffect(() => localStorage.setItem('robibook_data_v4', JSON.stringify(roadbook)), [roadbook]);
 
   const handlePrint = () => setShowPrintModal(true);
-
-  // Funciones de Guardado/Carga de Proyecto (Backup en archivo físico)
   const handleSaveProject = () => {
-    const projectData = { version: "1.0", header: headerData, roadbook };
-    const blob = new Blob([JSON.stringify(projectData)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${headerData.titleI || 'ruta'}_proyecto.rbk`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const blob = new Blob([JSON.stringify({ header: headerData, roadbook })], { type: "application/json" });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${headerData.titleI || 'ruta'}.rbk`; a.click();
   };
-
   const handleLoadProject = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const projectData = JSON.parse(event.target.result);
-        if (projectData.roadbook) setRoadbook(projectData.roadbook);
-        if (projectData.header) setHeaderData(projectData.header);
-      } catch (error) {
-        alert("El archivo no es válido o está corrupto.");
-      }
-    };
-    reader.readAsText(file);
-    e.target.value = null; 
+    const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(e.target.files[0]); e.target.value = null;
   };
 
   useEffect(() => {
@@ -859,127 +741,46 @@ export default function App() {
   }, [roadbook.map(r => r.totalDist).join(',')]);
 
   const handleFileUpload = (e) => {
-    const file = e.target.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
+    const reader = new FileReader(); reader.onload = (event) => {
       const xml = new DOMParser().parseFromString(event.target.result, "text/xml");
-      const trk = Array.from(xml.getElementsByTagName('trkpt')).map(p => ({
-        lat: parseFloat(p.getAttribute('lat')), lon: parseFloat(p.getAttribute('lon'))
-      }));
+      const trk = Array.from(xml.getElementsByTagName('trkpt')).map(p => ({ lat: parseFloat(p.getAttribute('lat')), lon: parseFloat(p.getAttribute('lon')) }));
       let dist = 0;
-      const pointsWithDist = trk.map((p, i) => {
-        if (i > 0) dist += haversineDistance(trk[i-1].lat, trk[i-1].lon, p.lat, p.lon);
-        return { ...p, dist };
-      });
+      const points = trk.map((p, i) => { if (i > 0) dist += haversineDistance(trk[i-1].lat, trk[i-1].lon, p.lat, p.lon); return { ...p, dist }; });
       const wpts = Array.from(xml.getElementsByTagName('wpt')).map(w => {
         const lat = parseFloat(w.getAttribute('lat')), lon = parseFloat(w.getAttribute('lon'));
-        let closest = pointsWithDist[0]; let minErr = Infinity;
-        pointsWithDist.forEach(p => { const err = Math.abs(lat-p.lat) + Math.abs(lon-p.lon); if (err < minErr) { minErr = err; closest = p; } });
-        return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: { ...defaultCustomTulip }, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WAYPOINT").toUpperCase() };
+        let closest = points[0]; let minErr = Infinity;
+        points.forEach(p => { const err = Math.abs(lat-p.lat) + Math.abs(lon-p.lon); if (err < minErr) { minErr = err; closest = p; } });
+        return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WPT").toUpperCase() };
       });
       setRoadbook(wpts.sort((a,b) => a.totalDist - b.totalDist));
-    };
-    reader.readAsText(file); e.target.value = null;
+    }; reader.readAsText(e.target.files[0]); e.target.value = null;
   };
 
   const handleManualOpen = () => {
-    const baseUrl = window.location.href.split('?')[0].replace(/\/$/, '');
     const manualHTML = `
       <!DOCTYPE html>
       <html lang="es">
       <head>
           <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Manual de Usuario - Rally RobiBook Pro</title>
+          <title>Manual - Rally RobiBook Pro</title>
           <style>
-              :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
-              body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); margin: 0; padding: 0; }
-              .container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border: 2px solid black; }
-              h1 { border-bottom: 2px solid black; padding-bottom: 15px; text-transform: uppercase; font-weight: 800; letter-spacing: -1px; margin-top: 0; }
-              h2 { color: var(--primary); margin-top: 40px; border-bottom: 2px solid var(--border); padding-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2rem; }
-              h3 { color: #475569; margin-top: 25px; font-weight: 700; }
-              .step { background: #f1f5f9; padding: 20px; border-left: 4px solid #f59e0b; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
-              ul { padding-left: 20px; }
-              li { margin-bottom: 10px; }
-              kbd { background: black; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em; font-family: monospace; font-weight: bold; }
-              .icon-btn { display: inline-flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 4px; padding: 2px 8px; font-weight: bold; font-size: 0.9em; margin: 0 4px; border: 1px solid #cbd5e1; }
+              body { font-family: sans-serif; line-height: 1.6; color: #1e293b; background: #f8fafc; padding: 20px; }
+              .container { max-width: 800px; margin: auto; background: white; padding: 40px; border: 2px solid black; border-radius: 8px; }
+              h1 { border-bottom: 2px solid black; padding-bottom: 10px; }
+              .step { background: #f1f5f9; padding: 15px; border-left: 4px solid #f59e0b; margin-bottom: 20px; }
+              b { color: #dc2626; }
           </style>
       </head>
       <body>
           <div class="container">
               <h1>🏁 Manual de Uso: Rally RobiBook Pro</h1>
-              <p>Bienvenido al editor profesional de roadbooks. Esta herramienta está diseñada para digitalizar, editar y maquetar rutómetros con calidad de competición. Aquí tienes todo lo necesario para dominarla.</p>
-              
-              <h2>1. Primeros Pasos y Carga de Rutas</h2>
               <div class="step">
-                  <h3>🌍 Importar un Track (GPX)</h3>
-                  <p>Haz clic en el botón <span class="icon-btn">GPX</span> de la barra superior para importar tu ruta. La aplicación leerá los Waypoints de tu archivo, calculará automáticamente las distancias kilométricas entre ellos y creará todas las viñetas necesarias.</p>
-              </div>
-              <div class="step">
-                  <h3>➕ Creación Manual</h3>
-                  <p>Usa <span class="icon-btn">+ Añadir Fila</span> para crear viñetas desde cero al final del documento. Si necesitas insertar una viñeta entre dos ya existentes, usa el botón azul con el signo <b>+</b> situado a la derecha de la viñeta correspondiente.</p>
-              </div>
-
-              <h2>2. Editor de Viñetas (El Canvas Vectorial)</h2>
-              <p>Haz clic en el dibujo de cualquier viñeta (columna central) para abrir el editor avanzado:</p>
-              <ul>
-                  <li><b>Dibujar Vías:</b> Usa los botones inferiores para añadir la ruta <b>+ Principal</b> (azul) o vías <b>+ Adicionales</b> (negras).</li>
-                  <li><b>Modificar Curvas:</b> Arrastra los puntos rojos para dar forma a las carreteras. 
-                      <br><i>Truco:</i> Haz <b>doble clic</b> en la línea para añadir un nuevo punto de curvatura. Haz doble clic en un punto rojo para eliminarlo.</li>
-                  <li><b>Tipos de Terreno:</b> Selecciona una línea (se pondrá naranja). En las "Opciones de Vía", cambia a <i>Tierra</i> (línea discontinua) o conviértela en <i>Autopista</i> (doble línea).</li>
-                  <li><b>Grosores:</b> En las vías adicionales, pulsa el botón "Grosor" para alternar entre Fino, Medio y Grueso. La "T" de bloqueo se adaptará automáticamente.</li>
-                  <li><b>Rotondas Automáticas:</b> En la parte superior del editor, indica el número de salidas de la rotonda y por cuál debes salir. Pulsa <b>Generar</b> y la app trazará la rotonda perfecta al instante.</li>
-                  <li><b>Iconos y Símbolos:</b> Arrastra señales o referencias desde el catálogo inferior al lienzo. Una vez colocado, tócalo para que aparezcan los controles de tamaño <kbd>+</kbd> <kbd>-</kbd> y de rotación <kbd>↺</kbd> <kbd>↻</kbd>.</li>
-              </ul>
-
-              <h2>3. Gestión de Distancias e Información</h2>
-              <ul>
-                  <li><b>Editar Kilómetros:</b> Haz clic en el número de la distancia TOTAL (el número grande de la izquierda) y escribe el nuevo valor. Al pulsar <kbd>Enter</kbd>, la distancia Parcial de esa viñeta (y de la siguiente) se recalcularán matemáticamente.</li>
-                  <li><b>Avisos visuales:</b> Si la distancia entre dos viñetas es inferior a 300 metros (0.3 km), el recuadro de la distancia se pintará de verde automáticamente para alertar al piloto.</li>
-                  <li><b>Caja de Información:</b> Escribe texto libremente en la tercera columna. Toca el botón de la imagen en esa columna para <b>añadir iconos sueltos</b> (peligros, controles, etc.) que puedes arrastrar libremente por el texto para crear tus notas personalizadas.</li>
-              </ul>
-
-              <h2>4. Guardar, Cargar e Imprimir</h2>
-              <div class="step">
-                  <h3>💾 Autoguardado Activo</h3>
-                  <p>La aplicación guarda automáticamente todo lo que haces de forma transparente. Si cierras la pestaña por error y vuelves a entrar, tu trabajo seguirá exactamente donde lo dejaste.</p>
-              </div>
-              <div class="step">
-                  <h3>💾 Guardar y Cargar Proyecto (Backup)</h3>
-                  <p>Pulsa <b>Guardar</b> para descargar un archivo <code>.rbk</code> (RobiBook) físico en tu ordenador o móvil. Es perfecto para crear copias de seguridad de tus rutas favoritas o para pasarlas a otro dispositivo mediante el botón <b>Cargar</b>.</p>
-              </div>
-              <div class="step">
-                  <h3>🖨️ Exportar a PDF (Formato Libro A4)</h3>
-                  <p>Pulsa el botón verde <b>Imprimir</b>. En la ventana de advertencia, pulsa el botón azul <b>"Aceptar e Imprimir"</b>. <br><b style="color: #dc2626;">¡MUY IMPORTANTE! No uses Ctrl+P en tu teclado</b> si estás usando la app dentro de una plataforma web integrada. En los ajustes de impresión de tu navegador, asegúrate de configurar el tamaño en <b>A4</b>, los márgenes en <b>Predeterminados</b> y desmarcar la opción de imprimir encabezados/pies de página.</p>
-              </div>
-              <div class="step" style="border-left-color: #3b82f6; background: #eff6ff;">
-                  <h3 style="color: #1d4ed8;">📜 Exportar a PDF (Formato Rollo Continuo / Digital)</h3>
-                  <p>Si vas a utilizar un lector digital de Roadbook (Tablet) o quieres imprimir en un rollo continuo sin cortes de página, sigue estos pasos:</p>
-                  <ol>
-                      <li>Pulsa el botón verde "Imprimir" en la app y luego el botón azul <b>"Aceptar e Imprimir"</b>. (De nuevo, no uses atajos de teclado como Ctrl+P).</li>
-                      <li><b>¡CRUCIAL!</b> En los ajustes de impresión del navegador, abre "Más ajustes" y cambia los <b>Márgenes</b> a <b>Ninguno</b>.</li>
-                      <li><b>¡CRUCIAL 2!</b> Asegúrate de DESMARCAR la casilla <b>"Encabezados y pies de página"</b> para que el navegador no imprima fechas ni textos raros en las esquinas. Guarda el PDF.</li>
-                      <li>Descarga e instala la herramienta gratuita <a href="https://www.pdfstitcher.org/" target="_blank" style="color: #2563eb; font-weight: bold;">PDFStitcher</a>.</li>
-                      <li>Abre el PDF que acabas de guardar con PDFStitcher y aplica exactamente esta configuración basándote en sus pestañas:
-                          <div style="background: white; border: 1px solid #bfdbfe; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                              <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Options"</h4>
-                              <img src="${baseUrl}/pdfstitcher1.png" alt="Opciones de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'"/>
-                              <ul style="margin-bottom: 15px;">
-                                  <li><b>Pages per column:</b> 1</li>
-                                  <li><b>Include empty pages:</b> Desmarcado (False)</li>
-                                  <li><b>Add margins (inches):</b> 0 (en Left, Right, Top y Bottom)</li>
-                                  <li><b>Trim bounding box:</b> 0 (en Left, Right, Top y Bottom)</li>
-                                  <li><b>Scale factor:</b> 100%</li>
-                              </ul>
-                              <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Properties"</h4>
-                              <img src="${baseUrl}/pdfstitcher2.png" alt="Propiedades de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'"/>
-                              <ul style="margin-bottom: 0;">
-                                  <li><b>Background Color:</b> Clic en el botón y selecciona color Blanco (White)</li>
-                              </ul>
-                          </div>
-                      </li>
-                      <li>Haz clic en el botón inferior derecho <b>"Generate PDF"</b> y obtendrás tu roadbook en un único rollo perfecto.</li>
-                  </ol>
+                  <h3>🖨️ Cómo Imprimir Correctamente</h3>
+                  <p>1. Pulsa el botón verde <b>Imprimir</b> de la barra superior.</p>
+                  <p>2. Pulsa el botón azul <b>"Aceptar e Imprimir"</b> que aparecerá en pantalla.</p>
+                  <p><b>⚠️ ¡IMPORTANTE! NO uses Ctrl + P</b>. Esto imprime la página completa incluyendo la interfaz del navegador.</p>
+                  <p>3. En los ajustes de tu navegador: <b>Tamaño A4</b> y <b>Márgenes Predeterminados</b>.</p>
+                  <p>4. <b>DESMARCA</b> la casilla "Encabezados y pies de página" para un acabado limpio.</p>
               </div>
           </div>
       </body>
@@ -990,63 +791,40 @@ export default function App() {
   };
 
   return (
-    <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none" dir="ltr">
+    <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none">
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <Map className="w-8 h-8" />
-          <h1 className="text-xl font-bold uppercase tracking-widest text-white">Rally RobiBook Pro</h1>
-        </div>
+        <div className="flex items-center gap-3"><Map className="w-8 h-8" /><h1 className="text-xl font-bold uppercase tracking-widest">Rally RobiBook Pro</h1></div>
         <div className="flex flex-wrap gap-2">
-          {/* Botón de Manual */}
-          <button onClick={handleManualOpen} className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 px-4 py-2 rounded font-bold text-sm transition-colors text-black mr-4 shadow-sm" title="Abrir instrucciones"><HelpCircle size={16}/> Manual</button>
-          
-          {/* Botones de Guardar / Cargar */}
-          <button onClick={handleSaveProject} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Guardar Proyecto"><Save size={16}/> Guardar</button>
-          <button onClick={() => loadProjectRef.current?.click()} className="flex items-center gap-2 bg-teal-600 hover:bg-teal-500 px-4 py-2 rounded font-bold text-sm transition-colors text-white" title="Cargar Proyecto"><FolderOpen size={16}/> Cargar</button>
-          <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk,.json" className="hidden" />
-
-          <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded font-bold text-sm transition-colors text-white"><Upload size={16}/> GPX</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpen(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); handleSaveProject(); }} className="bg-indigo-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-indigo-500 transition-colors"><Save size={16}/> Guardar</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); loadProjectRef.current?.click(); }} className="bg-teal-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-teal-500 transition-colors"><FolderOpen size={16}/> Cargar</button>
+          <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk" className="hidden" />
+          <button onPointerDown={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }} className="bg-gray-700 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-gray-600 transition-colors"><Upload size={16}/> GPX</button>
           <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept=".gpx" className="hidden" />
-          <button onClick={() => setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[roadbook.length-1]?.totalDist || 0) + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }])} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded font-bold text-sm text-white"><Plus size={16}/> Añadir Fila</button>
-          <button onClick={() => setRoadbook([])} className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold text-sm text-white"><RotateCcw size={16}/> RESET</button>
-          <button onClick={handlePrint} className="flex items-center gap-2 bg-green-600 hover:bg-green-500 px-4 py-2 rounded font-bold text-sm text-white"><Printer size={16}/> Imprimir</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[roadbook.length-1]?.totalDist || 0) + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }]); }} className="bg-blue-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-blue-500 transition-colors"><Plus size={16}/> Añadir</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); handlePrint(); }} className="bg-green-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-green-500 transition-colors"><Printer size={16}/> Imprimir</button>
         </div>
       </header>
 
       <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full border-2 border-black box-border">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
-        
         <div className="flex w-full border-y-2 border-black bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
           <div className="w-[30%] p-2 border-r-2 border-black">Distancia</div>
           <div className="w-[35%] p-2 border-r-2 border-black">Dirección</div>
           <div className="w-[35%] p-2">Información</div>
         </div>
-
         <div className="flex flex-col">
-          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden">AÑADE UNA FILA O CARGA UN GPX</div>}
           {roadbook.map((row, index) => (
-            <RoadbookRow 
-              key={row.id} 
-              row={row} 
-              index={index + 1} 
-              onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} 
-              onDelete={id => setRowToDelete(id)} 
-              onInsert={id => {
-                const insertIdx = roadbook.findIndex(r => r.id === id);
-                const nextDist = roadbook[insertIdx+1] ? roadbook[insertIdx+1].totalDist : roadbook[insertIdx].totalDist + 0.1;
-                const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[insertIdx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' };
-                const updated = [...roadbook]; updated.splice(insertIdx+1, 0, newRow); setRoadbook(updated);
-              }} 
-            />
+            <RoadbookRow key={row.id} row={row} index={index + 1} onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} onDelete={id => setRowToDelete(id)} onInsert={id => { const idx = roadbook.findIndex(r => r.id === id); const nextDist = roadbook[idx+1] ? roadbook[idx+1].totalDist : roadbook[idx].totalDist + 0.5; const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[idx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }; const up = [...roadbook]; up.splice(idx+1, 0, newRow); setRoadbook(up); }} />
           ))}
         </div>
       </main>
 
       {rowToDelete && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
-          <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-w-sm" onPointerDown={e => e.stopPropagation()}>
-            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-bold mb-6 uppercase text-black">¿Eliminar viñeta?</h2>
-            <div className="flex gap-4"><button onClick={() => setRowToDelete(null)} className="flex-1 bg-gray-200 py-3 rounded font-bold text-black hover:bg-gray-300 transition-colors">CANCELAR</button><button onClick={() => { setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
+          <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
+            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-bold mb-6 uppercase">¿Eliminar viñeta?</h2>
+            <div className="flex gap-4"><button onPointerDown={(e) => { e.stopPropagation(); setRowToDelete(null); }} className="flex-1 bg-gray-200 py-3 rounded font-bold hover:bg-gray-300 transition-colors">CANCELAR</button><button onPointerDown={(e) => { e.stopPropagation(); setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
           </div>
         </div>
       )}
@@ -1054,66 +832,27 @@ export default function App() {
       {showPrintModal && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-2 border-black" onPointerDown={e => e.stopPropagation()}>
-            <Printer className="w-16 h-16 text-black mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-4 uppercase tracking-tight text-black">Imprimir Roadbook</h2>
+            <Printer className="w-16 h-16 text-black mx-auto mb-4" /><h2 className="text-2xl font-bold mb-4 uppercase">Imprimir Roadbook</h2>
             <div className="text-left text-gray-700 mb-6 font-medium text-base bg-yellow-50 p-4 border-2 border-yellow-400 rounded-xl">
               <p className="mb-2 font-bold text-red-600 text-lg">⚠️ ¡MUY IMPORTANTE!</p>
               <ol className="list-decimal pl-5 space-y-2 text-sm text-black">
-                <li><b className="text-red-600">NO uses Ctrl + P en tu teclado.</b> Como estás dentro de una plataforma web, imprimirá la página entera y se cortará.</li>
-                <li>Pulsa el botón azul de abajo <b>"Aceptar e Imprimir"</b>.</li>
-                <li>En la ventana, pon <b>Tamaño: A4</b> y desmarca "Encabezados y pies de página" en Más Ajustes.</li>
-                <li>Márgenes: <b>Predeterminados</b> (para folio normal) o <b>Ninguno</b> (si vas a usar PDFStitcher para rollo).</li>
+                <li><b className="text-red-600">NO uses Ctrl + P</b> en tu teclado.</li>
+                <li>Pulsa el botón azul <b>"Aceptar e Imprimir"</b> de abajo.</li>
+                <li><b>Tamaño: A4</b> y desmarca <b>"Encabezados y pies de página"</b>.</li>
               </ol>
             </div>
-            <button
-              onClick={() => {
-                setShowPrintModal(false);
-                setTimeout(() => {
-                  window.print();
-                }, 400);
-              }}
-              className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-blue-700 text-lg uppercase tracking-wider transition-colors shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none"
-            >
-              Aceptar e Imprimir
-            </button>
+            <button onPointerDown={(e) => { e.stopPropagation(); setShowPrintModal(false); setTimeout(() => window.print(), 400); }} className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-blue-700 uppercase tracking-wider shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none transition-all">Aceptar e Imprimir</button>
           </div>
         </div>
       )}
 
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
-          /* FORZAR LA IMPRESIÓN EXCLUSIVA DEL DOCUMENTO */
-          html, body, #root, #main-app-container { 
-            height: auto !important;
-            min-height: 100% !important;
-            max-height: none !important;
-            overflow: visible !important;
-            display: block !important;
-            background-color: white !important; 
-            margin: 0 !important; 
-            padding: 0 !important; 
-            -webkit-print-color-adjust: exact; 
-            print-color-adjust: exact; 
-          }
-          
-          @page { 
-            margin: 10mm; 
-          }
-          
+          html, body, #root, #main-app-container { height: auto !important; min-height: 100% !important; overflow: visible !important; display: block !important; background-color: white !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          @page { margin: 10mm; }
           .print\\:hidden { display: none !important; }
-          .print\\:block { display: block !important; }
-          .print\\:shadow-none { box-shadow: none !important; }
-          .print\\:w-full { width: 100% !important; max-width: 100% !important; }
-          .print\\:mt-0 { margin-top: 0 !important; }
-          
-          /* Evitar que se corten las viñetas */
-          .roadbook-row { 
-            page-break-inside: avoid !important; 
-            break-inside: avoid !important; 
-            display: block !important;
-          }
+          .roadbook-row { page-break-inside: avoid !important; break-inside: avoid !important; display: block !important; }
         }
-        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
