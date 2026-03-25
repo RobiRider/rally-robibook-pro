@@ -45,6 +45,11 @@ const ICON_CATEGORIES = {
     { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#2563eb" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'dangerous_curve', label: 'Curva', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M10,16 Q10,10 14,8 M12,6 L15,8 L13,10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" fontWeight="bold" textAnchor="middle">10%</text></svg> },
+    // NUEVOS ICONOS DE CARTELES:
+    { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" fontWeight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
+    { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#2563eb" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
+    { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
   ],
   "Referencias": [
     { type: 'house', label: 'Casa', icon: <Home size={20}/> },
@@ -166,7 +171,7 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
               <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <span className="text-[8px] font-bold uppercase text-gray-400 group-hover:text-black">{item.label || item.type}</span>
+              <span className="text-[8px] font-bold uppercase text-gray-400 group-hover:text-black text-center">{item.label || item.type}</span>
             </button>
           ))}
         </div>
@@ -657,7 +662,8 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             </div>
           )}
 
-          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 lg:hover:scale-100"><ImageIcon size={18}/></button>
+          {/* CORRECCIÓN DEL BUG: Añadido 'print:hidden' al botón de añadir icono */}
+          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 lg:hover:scale-100 print:hidden"><ImageIcon size={18}/></button>
           
           <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 transition-opacity print:hidden z-10">
             <button onClick={() => onInsert(row.id)} className="bg-blue-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:bg-blue-700"><Plus size={20}/></button>
@@ -839,9 +845,7 @@ export default function App() {
   };
 
   const handleManualOpen = () => {
-    // Calculamos la URL base para que las imágenes funcionen tanto en local como en GitHub Pages
     const baseUrl = window.location.href.split('?')[0].replace(/\/$/, '');
-    
     const manualHTML = `
       <!DOCTYPE html>
       <html lang="es">
@@ -920,7 +924,7 @@ export default function App() {
                       <li>Abre el PDF que acabas de guardar con PDFStitcher y aplica exactamente esta configuración basándote en sus pestañas:
                           <div style="background: white; border: 1px solid #bfdbfe; padding: 15px; border-radius: 8px; margin-top: 15px;">
                               <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Options"</h4>
-                              <img src="${baseUrl}/pdfstitcher1.png" alt="Opciones de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+                              <img src="${baseUrl}/pdfstitcher1.png" alt="Opciones de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'"/>
                               <ul style="margin-bottom: 15px;">
                                   <li><b>Pages per column:</b> 1</li>
                                   <li><b>Include empty pages:</b> Desmarcado (False)</li>
@@ -929,7 +933,7 @@ export default function App() {
                                   <li><b>Scale factor:</b> 100%</li>
                               </ul>
                               <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Properties"</h4>
-                              <img src="${baseUrl}/pdfstitcher2.png" alt="Propiedades de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+                              <img src="${baseUrl}/pdfstitcher2.png" alt="Propiedades de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'"/>
                               <ul style="margin-bottom: 0;">
                                   <li><b>Background Color:</b> Clic en el botón y selecciona color Blanco (White)</li>
                               </ul>
@@ -973,13 +977,13 @@ export default function App() {
       <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
         
-        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest print:border-x-0 print:border-t-0">
+        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
           <div className="w-[30%] p-2 border-r-2 border-black">Distancia</div>
           <div className="w-[35%] p-2 border-r-2 border-black">Dirección</div>
           <div className="w-[35%] p-2">Información</div>
         </div>
 
-        <div className="flex flex-col print:block border-2 border-black border-b-0 print:border-0 print:border-t-2 print:border-black">
+        <div className="flex flex-col print:block border-2 border-black border-b-0">
           {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-2 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
           {roadbook.map((row, index) => (
             <RoadbookRow 
@@ -997,7 +1001,6 @@ export default function App() {
             />
           ))}
         </div>
-        <div className="h-0 border-t-2 border-black print:block hidden"></div>
       </main>
 
       {rowToDelete && (
@@ -1057,9 +1060,6 @@ export default function App() {
           .min-h-screen { min-height: auto !important; }
           .print\\:hidden { display: none !important; }
           .print\\:block { display: block !important; }
-          .print\\:border-0 { border: none !important; }
-          .print\\:border-t-2 { border-top-width: 2px !important; }
-          .print\\:border-black { border-color: black !important; }
           .print\\:shadow-none { box-shadow: none !important; }
           .print\\:w-full { width: 100% !important; max-width: 100% !important; }
           .print\\:mt-0 { margin-top: 0 !important; }
