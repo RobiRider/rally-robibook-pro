@@ -28,28 +28,66 @@ const ICON_CATEGORIES = {
     { type: 'flag_start', label: 'Salida', icon: <Flag color="green" fill="green" size={20} /> },
     { type: 'flag_end', label: 'Meta', icon: <Flag color="red" fill="red" size={20} /> },
     { type: 'reset_icon', label: 'Reset', icon: <RotateCcw color="black" size={20} /> },
+    { type: 'reset_00', label: 'Reset 0,00', icon: <div className="bg-black text-white font-bold text-[9px] px-1.5 py-0.5 rounded flex items-center gap-1 shadow-sm"><RotateCcw size={10} strokeWidth={3}/>0,00</div> },
+    { type: 'reset_box', label: 'Caja Reset', icon: (
+      <svg viewBox="0 0 40 40" width="100%" height="100%">
+        <rect x="0" y="0" width="40" height="40" fill="white" />
+        <g transform="translate(2.5, 6)">
+          <rect x="0" y="0" width="8" height="12" fill="black" rx="1"/>
+          <text x="4" y="9" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">0</text>
+          <rect x="9" y="0" width="8" height="12" fill="black" rx="1"/>
+          <text x="13" y="9" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">0</text>
+          <rect x="18" y="0" width="8" height="12" fill="black" rx="1"/>
+          <text x="22" y="9" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">0</text>
+          <rect x="27" y="0" width="8" height="12" fill="black" rx="1"/>
+          <text x="31" y="9" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">0</text>
+        </g>
+        <text x="20" y="32" fill="black" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="Arial, sans-serif" letterSpacing="0.5">RESET</text>
+      </svg>
+    )},
   ],
   "Señales": [
-    { type: 'v30', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">30</div> },
-    { type: 'v50', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">50</div> },
-    { type: 'v90', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[10px]">90</div> },
-    { type: 'v100', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[9px] tracking-tight">100</div> },
-    { type: 'v120', icon: <div className="border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px]">120</div> },
+    ...[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120].map(v => ({
+      type: `v${v}`, label: `Máx ${v}`,
+      icon: <div className={`border-2 border-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold ${v >= 100 ? 'text-[8px] tracking-tight' : 'text-[10px]'}`}>{v}</div>
+    })),
     { type: 'v_end', icon: <div className="border-2 border-black rounded-full w-7 h-7 flex items-center justify-center font-bold text-[8px] relative"><div className="absolute w-full h-0.5 bg-black rotate-45"/>FIN</div> },
     { type: 'warning_sign', icon: <AlertTriangle color="red" size={20} /> },
+    { type: 'warning_danger', label: 'Peligro', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><rect x="11.2" y="8" width="1.6" height="5" fill="black"/><circle cx="12" cy="16" r="1.2" fill="black"/></svg> },
     { type: 'no_entry', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center"><div className="w-4 h-1 bg-white"/></div> },
-    { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">P</div> },
-    { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#2563eb"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
+    { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 rounded flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: '#3D93D0' }}>P</div> },
+    { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
     { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" fontWeight="bold" textAnchor="middle">STOP</text></svg> },
     { type: 'yield', label: 'Ceda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,22 2,2 22,2" fill="white" stroke="#dc2626" strokeWidth="3" strokeLinejoin="round" /></svg> },
-    { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#2563eb" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
+    { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#3D93D0" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'dangerous_curve', label: 'Curva', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M10,16 Q10,10 14,8 M12,6 L15,8 L13,10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" fontWeight="bold" textAnchor="middle">10%</text></svg> },
-    // NUEVOS ICONOS DE CARTELES:
+    { type: 'no_overtaking', label: 'Proh. Adel.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="#dc2626" strokeWidth="2.5"/><rect x="5.5" y="10" width="4.5" height="4" rx="1" fill="black"/><rect x="14" y="10" width="4.5" height="4" rx="1" fill="#dc2626"/></svg> },
+    { type: 'end_restriction', label: 'Fin Restr.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="black" strokeWidth="1.5"/><line x1="7" y1="17" x2="17" y2="7" stroke="black" strokeWidth="1"/><line x1="9" y1="19" x2="19" y2="9" stroke="black" strokeWidth="1"/><line x1="5" y1="15" x2="15" y2="5" stroke="black" strokeWidth="1"/></svg> },
+    { type: 'bump', label: 'Badén', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 6 16 Q 8 10 12 16 Q 16 10 18 16" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
+    { type: 'slippery', label: 'Deslizante', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 10 16 Q 8 13 12 11 Q 16 9 14 7" fill="none" stroke="black" strokeWidth="1.5"/><rect x="10" y="6" width="4" height="3" rx="0.5" fill="black"/></svg> },
+    { type: 'two_way', label: 'Doble Sent.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 9 16 L 9 8 L 7 10 M 9 8 L 11 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/><path d="M 15 8 L 15 16 L 13 14 M 15 16 L 17 14" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/></svg> },
+    { type: 'pedestrian', label: 'Peatones', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><circle cx="12" cy="8" r="1.5" fill="black"/><path d="M 12 10 L 12 14 L 10 17 M 12 14 L 14 17 M 10 10 L 14 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><line x1="7" y1="16" x2="17" y2="16" stroke="black" strokeWidth="1.5"/></svg> },
+    { type: 'priority_intersection', label: 'Prioridad', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><line x1="12" y1="7" x2="12" y2="17" stroke="black" strokeWidth="3" strokeLinecap="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="black" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { type: 'traffic_lights', label: 'Semáforo', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><rect x="8.5" y="6" width="7" height="12" rx="1" fill="black"/><circle cx="12" cy="8" r="1.2" fill="#ef4444"/><circle cx="12" cy="12" r="1.2" fill="#eab308"/><circle cx="12" cy="16" r="1.2" fill="#22c55e"/></svg> },
     { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" fontWeight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
-    { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#2563eb" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#3D93D0" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
+    
+    /* --- SEÑALES OBLIGATORIAS CORREGIDAS (Con flechas de triángulo sólido) --- */
+    { type: 'mandatory_straight', label: 'Oblig. Recto', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 8" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="12,5 9,9 15,9" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+    { type: 'mandatory_right', label: 'Oblig. Der.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 1 16 10 L 16 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="19,10 15,7 15,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+    { type: 'mandatory_left', label: 'Oblig. Izq.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 0 8 10 L 8 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="5,10 9,7 9,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+    { type: 'straight_or_right', label: 'Recto/Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"><path d="M 10 18 L 10 7" /><path d="M 10 15 A 3 3 0 0 1 13 12 L 15 12" /></g><polygon points="10,4 7,8 13,8" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/><polygon points="18,12 14,9 14,15" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+    { type: 'straight_or_left', label: 'Recto/Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"><path d="M 14 18 L 14 7" /><path d="M 14 15 A 3 3 0 0 0 11 12 L 9 12" /></g><polygon points="14,4 11,8 17,8" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/><polygon points="6,12 10,9 10,15" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+    { type: 'left_or_right', label: 'Izq/Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><path d="M 12 18 L 12 14 A 4 4 0 0 0 8 10 L 8 10 M 12 14 A 4 4 0 0 1 16 10 L 16 10" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/><polygon points="5,10 9,7 9,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/><polygon points="19,10 15,7 15,13" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/></svg> },
+  ],
+  "Distancias": [
+    ...[25, 50, 100, 150, 200, 300, 400].map(d => ({
+      type: `dist_${d}`, label: `${d} m`,
+      icon: <div className="bg-blue-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded shadow-sm whitespace-nowrap">{d} m</div>
+    }))
   ],
   "Referencias": [
     { type: 'house', label: 'Casa', icon: <Home size={20}/> },
@@ -159,7 +197,7 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
 
         <div className="flex bg-gray-200 border-b-2 border-black overflow-x-auto no-scrollbar shrink-0">
           {Object.keys(ICON_CATEGORIES).map(cat => (
-            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-5 py-4 font-bold text-sm uppercase tracking-widest whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
+            <button key={cat} onClick={() => setActiveTab(cat)} className={`flex items-center justify-center px-3 py-3 font-bold text-[10px] sm:text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
               {cat}
             </button>
           ))}
