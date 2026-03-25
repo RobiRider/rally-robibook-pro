@@ -662,7 +662,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             </div>
           )}
 
-          {/* CORRECCIÓN DEL BUG: Añadido 'print:hidden' al botón de añadir icono */}
+          {/* Icono de imagen con print:hidden para que no salga en PDF */}
           <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 lg:hover:scale-100 print:hidden"><ImageIcon size={18}/></button>
           
           <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 transition-opacity print:hidden z-10">
@@ -713,7 +713,7 @@ function EditableRoadbookHeader({ data, setData }) {
   };
 
   return (
-    <header className="border-2 border-black border-b-0 p-6 flex flex-col bg-white overflow-hidden">
+    <header className="p-6 flex flex-col bg-white overflow-hidden">
       <div className="flex justify-between items-center gap-4 mb-6">
         <div className="flex-1 flex flex-col items-center">
           {renderField('titleI', 'text-2xl font-bold italic uppercase', 'INICIO')}
@@ -745,7 +745,7 @@ function EditableRoadbookHeader({ data, setData }) {
           </div>
         </div>
       </div>
-      <div className="border-y-2 border-black py-2">
+      <div className="border-t-2 border-black py-2">
         {renderField('rules', 'text-[9px] font-bold italic leading-tight', 'REGLAMENTO Y NORMAS...', 6, 'left')}
       </div>
     </header>
@@ -912,14 +912,15 @@ export default function App() {
               </div>
               <div class="step">
                   <h3>🖨️ Exportar a PDF (Formato Libro A4)</h3>
-                  <p>Pulsa el botón verde <b>Imprimir</b>. En la ventana que aparece, pulsa "Fijar Pantalla". Inmediatamente después, pulsa <kbd>Ctrl + P</kbd> (o <kbd>Cmd + P</kbd> en Mac). En los ajustes de impresión de tu navegador, asegúrate de configurar el tamaño en <b>A4</b>, los márgenes en <b>Predeterminados</b> y desmarcar la opción de imprimir encabezados/pies de página.</p>
+                  <p>Pulsa el botón verde <b>Imprimir</b>. En la ventana de advertencia, pulsa el botón azul <b>"Aceptar e Imprimir"</b>. <br><b style="color: #dc2626;">¡MUY IMPORTANTE! No uses Ctrl+P en tu teclado</b> si estás usando la app dentro de una plataforma web integrada. En los ajustes de impresión de tu navegador, asegúrate de configurar el tamaño en <b>A4</b>, los márgenes en <b>Predeterminados</b> y desmarcar la opción de imprimir encabezados/pies de página.</p>
               </div>
               <div class="step" style="border-left-color: #3b82f6; background: #eff6ff;">
                   <h3 style="color: #1d4ed8;">📜 Exportar a PDF (Formato Rollo Continuo / Digital)</h3>
                   <p>Si vas a utilizar un lector digital de Roadbook (Tablet) o quieres imprimir en un rollo continuo sin cortes de página, sigue estos pasos:</p>
                   <ol>
-                      <li>Pulsa "Imprimir" y luego "Fijar Pantalla". Haz <kbd>Ctrl + P</kbd>.</li>
-                      <li><b>¡CRUCIAL!</b> En los ajustes de impresión del navegador, abre "Más ajustes" y cambia los <b>Márgenes</b> a <b>Ninguno</b>. Guarda el PDF.</li>
+                      <li>Pulsa el botón verde "Imprimir" en la app y luego el botón azul <b>"Aceptar e Imprimir"</b>. (De nuevo, no uses atajos de teclado como Ctrl+P).</li>
+                      <li><b>¡CRUCIAL!</b> En los ajustes de impresión del navegador, abre "Más ajustes" y cambia los <b>Márgenes</b> a <b>Ninguno</b>.</li>
+                      <li><b>¡CRUCIAL 2!</b> Asegúrate de DESMARCAR la casilla <b>"Encabezados y pies de página"</b> para que el navegador no imprima fechas ni textos raros en las esquinas. Guarda el PDF.</li>
                       <li>Descarga e instala la herramienta gratuita <a href="https://www.pdfstitcher.org/" target="_blank" style="color: #2563eb; font-weight: bold;">PDFStitcher</a>.</li>
                       <li>Abre el PDF que acabas de guardar con PDFStitcher y aplica exactamente esta configuración basándote en sus pestañas:
                           <div style="background: white; border: 1px solid #bfdbfe; padding: 15px; border-radius: 8px; margin-top: 15px;">
@@ -974,17 +975,17 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
+      <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full border-2 border-black box-border">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
         
-        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
+        <div className="flex w-full border-y-2 border-black bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
           <div className="w-[30%] p-2 border-r-2 border-black">Distancia</div>
           <div className="w-[35%] p-2 border-r-2 border-black">Dirección</div>
           <div className="w-[35%] p-2">Información</div>
         </div>
 
-        <div className="flex flex-col print:block border-2 border-black border-b-0">
-          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-2 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
+        <div className="flex flex-col">
+          {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden">AÑADE UNA FILA O CARGA UN GPX</div>}
           {roadbook.map((row, index) => (
             <RoadbookRow 
               key={row.id} 
@@ -1018,25 +1019,24 @@ export default function App() {
             <Printer className="w-16 h-16 text-black mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4 uppercase tracking-tight text-black">Imprimir Roadbook</h2>
             <div className="text-left text-gray-700 mb-6 font-medium text-base bg-yellow-50 p-4 border-2 border-yellow-400 rounded-xl">
-              <p className="mb-2 font-bold text-black">Pasos para un PDF perfecto:</p>
-              <ol className="list-decimal pl-5 space-y-2">
-                <li>Pulsa el botón <b className="text-blue-700">"Fijar Pantalla"</b> de abajo.</li>
-                <li>Pulsa inmediatamente <span className="bg-white px-2 py-1 rounded border-2 border-black font-bold font-mono text-sm">Ctrl + P</span> (o Cmd+P).</li>
-                <li>En la ventana de impresión pon <b>Tamaño: A4</b>.</li>
-                <li>Pon <b>Márgenes: Predeterminados</b> (¡NO pongas "Ninguno" o cortará las viñetas!).</li>
+              <p className="mb-2 font-bold text-red-600 text-lg">⚠️ ¡MUY IMPORTANTE!</p>
+              <ol className="list-decimal pl-5 space-y-2 text-sm text-black">
+                <li><b className="text-red-600">NO uses Ctrl + P en tu teclado.</b> Como estás dentro de una plataforma web, imprimirá la página entera y se cortará.</li>
+                <li>Pulsa el botón azul de abajo <b>"Aceptar e Imprimir"</b>.</li>
+                <li>En la ventana, pon <b>Tamaño: A4</b> y desmarca "Encabezados y pies de página" en Más Ajustes.</li>
+                <li>Márgenes: <b>Predeterminados</b> (para folio normal) o <b>Ninguno</b> (si vas a usar PDFStitcher para rollo).</li>
               </ol>
             </div>
             <button
               onClick={() => {
                 setShowPrintModal(false);
                 setTimeout(() => {
-                  const container = document.getElementById('main-app-container');
-                  if (container) container.focus();
-                }, 100);
+                  window.print();
+                }, 400);
               }}
               className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-blue-700 text-lg uppercase tracking-wider transition-colors shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none"
             >
-              Fijar Pantalla
+              Aceptar e Imprimir
             </button>
           </div>
         </div>
@@ -1044,20 +1044,24 @@ export default function App() {
 
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
+          /* FORZAR LA IMPRESIÓN EXCLUSIVA DEL DOCUMENTO */
           html, body, #root, #main-app-container { 
+            height: auto !important;
+            min-height: 100% !important;
+            max-height: none !important;
+            overflow: visible !important;
+            display: block !important;
             background-color: white !important; 
             margin: 0 !important; 
             padding: 0 !important; 
-            height: auto !important;
-            min-height: auto !important;
-            overflow: visible !important;
             -webkit-print-color-adjust: exact; 
             print-color-adjust: exact; 
           }
+          
           @page { 
             margin: 10mm; 
           }
-          .min-h-screen { min-height: auto !important; }
+          
           .print\\:hidden { display: none !important; }
           .print\\:block { display: block !important; }
           .print\\:shadow-none { box-shadow: none !important; }
@@ -1071,6 +1075,7 @@ export default function App() {
             display: block !important;
           }
         }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
