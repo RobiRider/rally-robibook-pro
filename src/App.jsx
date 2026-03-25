@@ -617,10 +617,8 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
 
         <div className="w-[35%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
           
-          {/* TEXTAREA INTERACTIVO: Visible solo en pantalla, se oculta al imprimir */}
-          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 font-bold uppercase text-2xl focus:bg-gray-50 leading-tight print:hidden" placeholder="Añadir nota..." />
+          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none outline-none p-4 pb-14 lg:pb-4 font-bold uppercase text-2xl focus:bg-gray-50 leading-tight print:hidden" placeholder="Añadir nota..." />
           
-          {/* DIV ESTÁTICO DE IMPRESIÓN: Visible solo en el PDF, evita que Chrome estire la fila a lo loco */}
           <div className="hidden print:block w-full h-full p-4 font-bold uppercase text-2xl leading-tight whitespace-pre-wrap overflow-hidden">
             {row.notes}
           </div>
@@ -659,17 +657,18 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             </div>
           )}
 
-          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-0 group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 hover:scale-100"><ImageIcon size={18}/></button>
+          <button onClick={() => setPickerOpen(true)} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-lg z-10 scale-90 lg:hover:scale-100"><ImageIcon size={18}/></button>
+          
+          <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 transition-opacity print:hidden z-10">
+            <button onClick={() => onInsert(row.id)} className="bg-blue-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:bg-blue-700"><Plus size={20}/></button>
+            <button onClick={() => onDelete(row.id)} className="bg-red-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:bg-red-700"><Trash2 size={20}/></button>
+          </div>
+
           {pickerOpen && <UniversalIconPicker 
             onSelect={type => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1.2, rotation: 0 }]); setPickerOpen(false); }}
             onUpload={url => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type: 'custom_image', x: 80, y: 50, scale: 1.2, rotation: 0, dataUrl: url }]); setPickerOpen(false); }}
             onClose={() => setPickerOpen(false)}
           />}
-        </div>
-
-        <div className="absolute -right-16 top-1/2 -translate-y-1/2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
-          <button onClick={() => onInsert(row.id)} className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"><Plus size={20}/></button>
-          <button onClick={() => onDelete(row.id)} className="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700"><Trash2 size={20}/></button>
         </div>
       </div>
     </div>
@@ -678,7 +677,6 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
 
 // --- CABECERA ---
 
-// Recibe ahora los datos desde App para poder exportarlos juntos
 function EditableRoadbookHeader({ data, setData }) {
   const [active, setActive] = useState(null);
   
@@ -751,9 +749,16 @@ function EditableRoadbookHeader({ data, setData }) {
 // --- APP PRINCIPAL ---
 
 export default function App() {
-  const [roadbook, setRoadbook] = useState([]);
   
-  // Hemos movido el estado de la cabecera aquí para poder exportarlo entero
+  // INICIALIZACIÓN CON AUTOGUARDADO (Lee de memoria al abrir la app)
+  const [roadbook, setRoadbook] = useState(() => {
+    const saved = localStorage.getItem('robibook_data_v4');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { return []; }
+    }
+    return [];
+  });
+  
   const [headerData, setHeaderData] = useState(() => JSON.parse(localStorage.getItem('robibook_header_v4')) || { titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
   
   const fileInputRef = useRef(null);
@@ -761,12 +766,13 @@ export default function App() {
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
 
-  // Auto-guardado en caché para la cabecera (por si refrescas por error)
+  // AUTO-GUARDADO DE CABECERA Y RUTÓMETRO EN TIEMPO REAL
   useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
+  useEffect(() => localStorage.setItem('robibook_data_v4', JSON.stringify(roadbook)), [roadbook]);
 
   const handlePrint = () => setShowPrintModal(true);
 
-  // Funciones de Guardado/Carga de Proyecto
+  // Funciones de Guardado/Carga de Proyecto (Backup en archivo físico)
   const handleSaveProject = () => {
     const projectData = { version: "1.0", header: headerData, roadbook };
     const blob = new Blob([JSON.stringify(projectData)], { type: "application/json" });
@@ -833,6 +839,9 @@ export default function App() {
   };
 
   const handleManualOpen = () => {
+    // Calculamos la URL base para que las imágenes funcionen tanto en local como en GitHub Pages
+    const baseUrl = window.location.href.split('?')[0].replace(/\/$/, '');
+    
     const manualHTML = `
       <!DOCTYPE html>
       <html lang="es">
@@ -866,7 +875,7 @@ export default function App() {
               </div>
               <div class="step">
                   <h3>➕ Creación Manual</h3>
-                  <p>Usa <span class="icon-btn">+ Añadir Fila</span> para crear viñetas desde cero al final del documento. Si necesitas insertar una viñeta entre dos ya existentes, pasa el ratón por el lado derecho de una fila y pulsa el botón azul <b>+</b>.</p>
+                  <p>Usa <span class="icon-btn">+ Añadir Fila</span> para crear viñetas desde cero al final del documento. Si necesitas insertar una viñeta entre dos ya existentes, usa el botón azul con el signo <b>+</b> situado a la derecha de la viñeta correspondiente.</p>
               </div>
 
               <h2>2. Editor de Viñetas (El Canvas Vectorial)</h2>
@@ -885,21 +894,49 @@ export default function App() {
               <ul>
                   <li><b>Editar Kilómetros:</b> Haz clic en el número de la distancia TOTAL (el número grande de la izquierda) y escribe el nuevo valor. Al pulsar <kbd>Enter</kbd>, la distancia Parcial de esa viñeta (y de la siguiente) se recalcularán matemáticamente.</li>
                   <li><b>Avisos visuales:</b> Si la distancia entre dos viñetas es inferior a 300 metros (0.3 km), el recuadro de la distancia se pintará de verde automáticamente para alertar al piloto.</li>
-                  <li><b>Caja de Información:</b> Escribe texto libremente en la tercera columna. Si pasas el ratón por encima, verás un botón azul arriba a la derecha para <b>añadir iconos sueltos</b> (peligros, controles, etc.) que puedes arrastrar libremente por el texto para crear tus notas personalizadas.</li>
+                  <li><b>Caja de Información:</b> Escribe texto libremente en la tercera columna. Toca el botón de la imagen en esa columna para <b>añadir iconos sueltos</b> (peligros, controles, etc.) que puedes arrastrar libremente por el texto para crear tus notas personalizadas.</li>
               </ul>
 
               <h2>4. Guardar, Cargar e Imprimir</h2>
               <div class="step">
-                  <h3>💾 Guardar Proyecto</h3>
-                  <p>Pulsa <b>Guardar</b> para descargar un archivo <code>.rbk</code> (RobiBook) en tu ordenador. Este archivo contiene todas tus distancias, dibujos, notas y configuraciones de cabecera. Es tu copia de seguridad.</p>
+                  <h3>💾 Autoguardado Activo</h3>
+                  <p>La aplicación guarda automáticamente todo lo que haces de forma transparente. Si cierras la pestaña por error y vuelves a entrar, tu trabajo seguirá exactamente donde lo dejaste.</p>
               </div>
               <div class="step">
-                  <h3>📂 Cargar Proyecto</h3>
-                  <p>Al empezar a trabajar otro día, pulsa <b>Cargar</b> y selecciona tu archivo <code>.rbk</code> para restaurar tu trabajo exactamente donde lo dejaste, sin perder ni un detalle.</p>
+                  <h3>💾 Guardar y Cargar Proyecto (Backup)</h3>
+                  <p>Pulsa <b>Guardar</b> para descargar un archivo <code>.rbk</code> (RobiBook) físico en tu ordenador o móvil. Es perfecto para crear copias de seguridad de tus rutas favoritas o para pasarlas a otro dispositivo mediante el botón <b>Cargar</b>.</p>
               </div>
               <div class="step">
-                  <h3>🖨️ Exportar a PDF (Imprimir)</h3>
+                  <h3>🖨️ Exportar a PDF (Formato Libro A4)</h3>
                   <p>Pulsa el botón verde <b>Imprimir</b>. En la ventana que aparece, pulsa "Fijar Pantalla". Inmediatamente después, pulsa <kbd>Ctrl + P</kbd> (o <kbd>Cmd + P</kbd> en Mac). En los ajustes de impresión de tu navegador, asegúrate de configurar el tamaño en <b>A4</b>, los márgenes en <b>Predeterminados</b> y desmarcar la opción de imprimir encabezados/pies de página.</p>
+              </div>
+              <div class="step" style="border-left-color: #3b82f6; background: #eff6ff;">
+                  <h3 style="color: #1d4ed8;">📜 Exportar a PDF (Formato Rollo Continuo / Digital)</h3>
+                  <p>Si vas a utilizar un lector digital de Roadbook (Tablet) o quieres imprimir en un rollo continuo sin cortes de página, sigue estos pasos:</p>
+                  <ol>
+                      <li>Pulsa "Imprimir" y luego "Fijar Pantalla". Haz <kbd>Ctrl + P</kbd>.</li>
+                      <li><b>¡CRUCIAL!</b> En los ajustes de impresión del navegador, abre "Más ajustes" y cambia los <b>Márgenes</b> a <b>Ninguno</b>. Guarda el PDF.</li>
+                      <li>Descarga e instala la herramienta gratuita <a href="https://www.pdfstitcher.org/" target="_blank" style="color: #2563eb; font-weight: bold;">PDFStitcher</a>.</li>
+                      <li>Abre el PDF que acabas de guardar con PDFStitcher y aplica exactamente esta configuración basándote en sus pestañas:
+                          <div style="background: white; border: 1px solid #bfdbfe; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                              <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Options"</h4>
+                              <img src="${baseUrl}/pdfstitcher1.png" alt="Opciones de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+                              <ul style="margin-bottom: 15px;">
+                                  <li><b>Pages per column:</b> 1</li>
+                                  <li><b>Include empty pages:</b> Desmarcado (False)</li>
+                                  <li><b>Add margins (inches):</b> 0 (en Left, Right, Top y Bottom)</li>
+                                  <li><b>Trim bounding box:</b> 0 (en Left, Right, Top y Bottom)</li>
+                                  <li><b>Scale factor:</b> 100%</li>
+                              </ul>
+                              <h4 style="margin-top: 0; color: #1e40af; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">Pestaña "Properties"</h4>
+                              <img src="${baseUrl}/pdfstitcher2.png" alt="Propiedades de PDFStitcher" style="max-width: 100%; border-radius: 6px; margin: 10px 0; border: 1px solid #93c5fd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+                              <ul style="margin-bottom: 0;">
+                                  <li><b>Background Color:</b> Clic en el botón y selecciona color Blanco (White)</li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li>Haz clic en el botón inferior derecho <b>"Generate PDF"</b> y obtendrás tu roadbook en un único rollo perfecto.</li>
+                  </ol>
               </div>
           </div>
       </body>
@@ -936,15 +973,13 @@ export default function App() {
       <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
         
-        {/* CORRECCIÓN: Se han quitado las clases "print:border-x-0 print:border-t-0" para que respete la cuadrícula en el PDF */}
-        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
+        <div className="flex w-full border-2 border-black border-b-0 bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest print:border-x-0 print:border-t-0">
           <div className="w-[30%] p-2 border-r-2 border-black">Distancia</div>
           <div className="w-[35%] p-2 border-r-2 border-black">Dirección</div>
           <div className="w-[35%] p-2">Información</div>
         </div>
 
-        {/* CORRECCIÓN: Se han quitado las clases "print:border-0 print:border-t-2 print:border-black" para que no sobreescriba los bordes */}
-        <div className="flex flex-col print:block border-2 border-black border-b-0">
+        <div className="flex flex-col print:block border-2 border-black border-b-0 print:border-0 print:border-t-2 print:border-black">
           {roadbook.length === 0 && <div className="p-12 text-center text-gray-400 font-bold print:hidden border-b-2 border-black">AÑADE UNA FILA O CARGA UN GPX</div>}
           {roadbook.map((row, index) => (
             <RoadbookRow 
@@ -962,6 +997,7 @@ export default function App() {
             />
           ))}
         </div>
+        <div className="h-0 border-t-2 border-black print:block hidden"></div>
       </main>
 
       {rowToDelete && (
@@ -1021,6 +1057,9 @@ export default function App() {
           .min-h-screen { min-height: auto !important; }
           .print\\:hidden { display: none !important; }
           .print\\:block { display: block !important; }
+          .print\\:border-0 { border: none !important; }
+          .print\\:border-t-2 { border-top-width: 2px !important; }
+          .print\\:border-black { border-color: black !important; }
           .print\\:shadow-none { box-shadow: none !important; }
           .print\\:w-full { width: 100% !important; max-width: 100% !important; }
           .print\\:mt-0 { margin-top: 0 !important; }
