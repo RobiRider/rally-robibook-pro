@@ -57,11 +57,11 @@ const ICON_CATEGORIES = {
     { type: 'no_entry', label: 'Prohibido', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center border border-black"><div className="w-4 h-1 bg-white"/></div> },
     { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 rounded flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: '#3D93D0' }}>P</div> },
     { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
-    { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" fontWeight="bold" textAnchor="middle">STOP</text></svg> },
+    { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" font-weight="bold" textAnchor="middle">STOP</text></svg> },
     { type: 'yield', label: 'Ceda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,22 2,2 22,2" fill="white" stroke="#dc2626" strokeWidth="3" strokeLinejoin="round" /></svg> },
     { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#3D93D0" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'dangerous_curve', label: 'Curva', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M10,16 Q10,10 14,8 M12,6 L15,8 L13,10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
-    { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" fontWeight="bold" textAnchor="middle">10%</text></svg> },
+    { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" font-weight="bold" textAnchor="middle">10%</text></svg> },
     { type: 'no_overtaking', label: 'Proh. Adel.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="#dc2626" strokeWidth="2.5"/><rect x="5.5" y="10" width="4.5" height="4" rx="1" fill="black"/><rect x="14" y="10" width="4.5" height="4" rx="1" fill="#dc2626"/></svg> },
     { type: 'end_restriction', label: 'Fin Restr.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="black" strokeWidth="1.5"/><line x1="7" y1="17" x2="17" y2="7" stroke="black" strokeWidth="1"/><line x1="9" y1="19" x2="19" y2="9" stroke="black" strokeWidth="1"/><line x1="5" y1="15" x2="15" y2="5" stroke="black" strokeWidth="1"/></svg> },
     { type: 'bump', label: 'Badén', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 6 16 Q 8 10 12 16 Q 16 10 18 16" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
@@ -70,7 +70,7 @@ const ICON_CATEGORIES = {
     { type: 'pedestrian', label: 'Peatones', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><circle cx="12" cy="8" r="1.5" fill="black"/><path d="M 12 10 L 12 14 L 10 17 M 12 14 L 14 17 M 10 10 L 14 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><line x1="7" y1="16" x2="17" y2="16" stroke="black" strokeWidth="1.5"/></svg> },
     { type: 'priority_intersection', label: 'Prioridad', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><line x1="12" y1="7" x2="12" y2="17" stroke="black" strokeWidth="3" strokeLinecap="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="black" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'traffic_lights', label: 'Semáforo', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><rect x="8" y="2" width="8" height="15" rx="1.5" fill="black" stroke="black" strokeWidth="0.5"/><circle cx="12" cy="5.5" r="2.2" fill="#ef4444"/><circle cx="12" cy="10" r="2.2" fill="#fbbf24"/><circle cx="12" cy="14.5" r="2.2" fill="#22c55e"/><rect x="11.2" y="17" width="1.6" height="5" fill="black"/></svg> },
-    { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" fontWeight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
+    { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" font-weight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
     { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#3D93D0" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
@@ -101,7 +101,7 @@ const ICON_CATEGORIES = {
     { type: 'tower', label: 'Torre', icon: <Landmark size={20}/> },
     { type: 'pylon', label: 'Alta Tensión', icon: <svg viewBox="0 0 24 24" width="20" height="20" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M12,2 L8,22 M12,2 L16,22 M6,8 L18,8 M5,14 L19,14 M10,2 L14,8 M14,2 L10,8 M8,8 L12,14 M16,8 L12,14" /></svg> },
     { type: 'tree', label: 'Árbol', icon: <Trees size={20}/> },
-    { type: 'park', label: 'Parque', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 6 12 C 0 12 0 1 6 1 C 12 1 12 12 6 12 Z" fill="#22c55e" /><line x1="6" y1="12" x2="6" y2="22" stroke="#92400e" strokeWidth="3" strokeLinecap="round" /><line x1="10" y1="8" x2="22" y2="8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="8" x2="9" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="20" y1="8" x2="23" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="14" y1="8" x2="14" y2="16" stroke="black" strokeWidth="1"/><line x1="18" y1="8" x2="18" y2="16" stroke="black" strokeWidth="1"/><line x1="13" y1="16" x2="19" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
+    { type: 'park', label: 'Parque', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 6 12 C 0 12 0 1 6 1 C 12 1 12 12 6 12 Z" fill="#22c55e" /><line x1="6" y1="12" x2="6" y2="22" stroke="#92400e" strokeWidth="3" strokeLinecap="round" /><line x1="10" y1="8" x2="22" y2="8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="8" x2="9" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="20" y1="8" x2="23" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="14" y1="8" x2="14" y2="16" stroke="black" strokeWidth="1"/><line x1="18" y1="8" x2="18" vessel="16" stroke="black" strokeWidth="1"/><line x1="13" y1="16" x2="19" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
     { type: 'cafe', label: 'Café', icon: <Coffee size={20}/> },
     { type: 'restaurant', label: 'Restaurante', icon: <UtensilsCrossed size={20}/> },
     { type: 'pharmacy', label: 'Farmacia', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M10,3 h4 v6 h6 v4 h-6 v6 h-4 v-6 h-6 v-4 h6 z" fill="#16a34a" /></svg> },
@@ -777,6 +777,8 @@ export default function App() {
   };
 
   const handleManualOpen = () => {
+    const baseUrl = window.location.origin + window.location.pathname.replace(/[^\/]*$/, '');
+    
     const manualHTML = `
       <!DOCTYPE html>
       <html lang="es">
@@ -784,23 +786,121 @@ export default function App() {
           <meta charset="UTF-8">
           <title>Manual - Rally RobiBook Pro</title>
           <style>
-              body { font-family: sans-serif; line-height: 1.6; color: #1e293b; background: #f8fafc; padding: 20px; }
-              .container { max-width: 800px; margin: auto; background: white; padding: 40px; border: 2px solid black; border-radius: 8px; }
-              h1 { border-bottom: 2px solid black; padding-bottom: 10px; }
-              .step { background: #f1f5f9; padding: 15px; border-left: 4px solid #f59e0b; margin-bottom: 20px; }
-              b { color: #dc2626; }
+              body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.6; color: #1e293b; background: #f8fafc; padding: 20px; }
+              .container { max-width: 900px; margin: auto; background: white; padding: 40px; border: 3px solid black; border-radius: 12px; box-shadow: 10px 10px 0 0 rgba(0,0,0,0.1); }
+              h1 { border-bottom: 4px solid black; padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; color: #000; }
+              h2 { background: #3b82f6; color: white; display: inline-block; padding: 5px 15px; margin-top: 30px; border-radius: 4px; text-transform: uppercase; font-size: 1.2rem; }
+              .step { background: #f1f5f9; padding: 20px; border-left: 6px solid #f59e0b; margin: 20px 0; border-radius: 0 8px 8px 0; }
+              .step h3 { margin-top: 0; color: #000; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; }
+              ul { padding-left: 20px; }
+              li { margin-bottom: 10px; }
+              b { color: #2563eb; }
+              .alert { background: #fee2e2; border: 2px solid #ef4444; padding: 15px; color: #b91c1c; font-weight: bold; border-radius: 8px; margin: 20px 0; }
+              .key { background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 4px; padding: 2px 6px; font-family: monospace; font-weight: bold; }
+              .img-container { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; justify-content: center; background: #fff; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; }
+              .img-box { flex: 1; min-width: 280px; text-align: center; }
+              .img-box img { width: 100%; border: 2px solid #000; border-radius: 4px; box-shadow: 4px 4px 0 0 rgba(0,0,0,0.1); background: #eee; }
+              .img-caption { font-size: 11px; font-weight: bold; color: #475569; margin-top: 8px; text-transform: uppercase; }
+              .footer { margin-top: 40px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 20px; font-style: italic; color: #64748b; }
+              a { color: #2563eb; text-decoration: underline; font-weight: bold; }
           </style>
       </head>
       <body>
           <div class="container">
               <h1>🏁 Manual de Uso: Rally RobiBook Pro</h1>
+              <p>Bienvenido al sistema profesional de creación de Roadbooks para Rally Raid y Cross Country. Esta herramienta está diseñada para ser intuitiva pero potente.</p>
+
+              <h2>1. Editor de Viñetas (Tulipas)</h2>
               <div class="step">
-                  <h3>🖨️ Cómo Imprimir Correctamente</h3>
-                  <p>1. Pulsa el botón verde <b>Imprimir</b> de la barra superior.</p>
-                  <p>2. Pulsa el botón azul <b>"Aceptar e Imprimir"</b> que aparecerá en pantalla.</p>
-                  <p><b>⚠️ ¡IMPORTANTE! NO uses Ctrl + P</b>. Esto imprime la página completa incluyendo la interfaz del navegador.</p>
-                  <p>3. En los ajustes de tu navegador: <b>Tamaño A4</b> y <b>Márgenes Predeterminados</b>.</p>
-                  <p>4. <b>DESMARCA</b> la casilla "Encabezados y pies de página" para un acabado limpio.</p>
+                  <h3>Creación de Caminos</h3>
+                  <ul>
+                      <li><b>Arrastrar Puntos:</b> Haz clic y arrastra los círculos rojos para dar forma a la vía.</li>
+                      <li><b>Añadir Puntos:</b> Haz <b>doble clic</b> sobre cualquier línea para añadir un nuevo punto de control.</li>
+                      <li><b>Borrar Puntos:</b> Haz <b>doble clic</b> sobre un punto rojo para eliminarlo.</li>
+                      <li><b>Tipo de Vía:</b> Selecciona una vía para cambiarla entre <b>Asfalto</b> o <b>Tierra</b> (línea discontinua), y entre <b>Vía Única</b> o <b>Autopista</b> (doble línea).</li>
+                      <li><b>Grosor:</b> Cambia el grosor para diferenciar pistas principales de senderos finos.</li>
+                  </ul>
+                  <h3>Generador de Rotondas</h3>
+                  <p>Introduce el número de salidas y cuál es la de salida (objetivo) y pulsa <b>Generar</b>. El sistema creará automáticamente la estructura base que luego podrás deformar a tu gusto.</p>
+              </div>
+
+              <h2>2. Librería de Iconos</h2>
+              <div class="step">
+                  <h3>Uso de Iconos</h3>
+                  <ul>
+                      <li><b>Añadir:</b> Selecciona iconos de la librería (Peligros, Señales, Referencias, Terreno).</li>
+                      <li><b>Posicionar:</b> Arrastra el icono dentro del recuadro para colocarlo.</li>
+                      <li><b>Transformar:</b> Con un icono seleccionado, usa los botones <span class="key">+</span> / <span class="key">-</span> para cambiar el tamaño y <span class="key">↺</span> / <span class="key">↻</span> para rotarlo.</li>
+                      <li><b>Imágenes Propias:</b> Pulsa el botón azul <b>"SUBIR IMAGEN PROPIA"</b> para insertar logos de sponsors o fotos reales de referencias.</li>
+                  </ul>
+              </div>
+
+              <h2>3. Distancias y Navegación</h2>
+              <div class="step">
+                  <h3>Gestión del Odómetro</h3>
+                  <ul>
+                      <li><b>Editar Distancia:</b> Haz clic en el número grande de distancia total para editarlo manualmente. El sistema calculará automáticamente la distancia parcial respecto a la viñeta anterior.</li>
+                      <li><b>Reset 0,00:</b> Usa el icono de Reset en la librería para indicar puntos donde el piloto debe poner su cuentakilómetros a cero.</li>
+                      <li><b>Color Verde:</b> Las viñetas con una parcial muy corta (menos de 300m) se marcan automáticamente en verde para alertar al piloto de cambios muy rápidos.</li>
+                  </ul>
+              </div>
+
+              <h2>4. Importación y Guardado</h2>
+              <div class="step">
+                  <h3>Archivos Admitidos</h3>
+                  <ul>
+                      <li><b>GPX:</b> Puedes importar un archivo de track GPX. La app extraerá los Waypoints y los colocará en el Roadbook calculando sus distancias reales sobre el track.</li>
+                      <li><b>Proyectos (.rbk):</b> Usa el botón <b>Guardar</b> para descargar tu trabajo. Es un archivo propio que guarda toda la estructura vectorial, iconos y notas para que puedas seguir editando otro día con el botón <b>Cargar</b>.</li>
+                  </ul>
+              </div>
+
+              <h2>5. Impresión Estándar (Hojas Sueltas)</h2>
+              <div class="alert">
+                  ⚠️ ¡IMPORTANTE! PARA UN ACABADO PERFECTO:
+              </div>
+              <div class="step">
+                  <ul>
+                      <li>1. Pulsa el botón verde <b>Imprimir</b> de la barra superior de la aplicación.</li>
+                      <li>2. Pulsa el botón azul <b>"Aceptar e Imprimir"</b> que aparecerá en el centro.</li>
+                      <li><b>NO uses el atajo de teclado Ctrl+P</b>, ya que imprimiría los botones y menús del navegador.</li>
+                      <li>En los ajustes de impresión del navegador:
+                          <ul>
+                              <li>Tamaño de papel: <b>A4</b>.</li>
+                              <li>Márgenes: <b>Predeterminados</b>.</li>
+                              <li><b>DESMARCA</b> la casilla "Encabezados y pies de página".</li>
+                              <li><b>MARCA</b> la casilla "Gráficos de fondo".</li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+
+              <h2>6. Impresión en Modo Rollo (PDF Stitcher)</h2>
+              <div class="step">
+                  <h3>Preparación para Porta-Rollos</h3>
+                  <p>Si eres piloto de moto o quad y necesitas el roadbook en formato continuo, utiliza la herramienta gratuita <b>PDF Stitcher</b> (<a href="https://www.pdfstitcher.org/" target="_blank">www.pdfstitcher.org</a>) siguiendo estas capturas de configuración:</p>
+                  
+                  <div class="img-container">
+                    <div class="img-box">
+                      <img src="${baseUrl}pdfstitcher1.png" alt="Captura PDF Stitcher 1" onerror="this.src='https://placehold.co/600x400?text=Captura+1+No+Encontrada'">
+                      <div class="img-caption">Interfaz Principal: Selección de Filas/Columnas</div>
+                    </div>
+                    <div class="img-box">
+                      <img src="${baseUrl}pdfstitcher2.png" alt="Captura PDF Stitcher 2" onerror="this.src='https://placehold.co/600x400?text=Captura+2+No+Encontrada'">
+                      <div class="img-caption">Configuración de Recorte y Márgenes (Crop)</div>
+                    </div>
+                  </div>
+
+                  <ul>
+                      <li><b>Paso 1:</b> Genera el PDF de tu roadbook usando el método de impresión estándar explicado arriba.</li>
+                      <li><b>Paso 2:</b> Abre <b>PDF Stitcher</b> y carga tu archivo.</li>
+                      <li><b>Paso 3 (Captura 1):</b> En <b>"Page Layout"</b>, pon las <b>Rows</b> (Filas) igual al número de páginas de tu PDF y las <b>Columns</b> (Columnas) en 1.</li>
+                      <li><b>Paso 4 (Captura 2):</b> Ajusta el recorte para eliminar bordes blancos y que las viñetas queden perfectamente pegadas.</li>
+                      <li><b>Paso 5:</b> Haz clic en <b>"Stitch!"</b> para generar la tira continua.</li>
+                  </ul>
+              </div>
+
+              <div class="footer">
+                  Rally RobiBook Pro - Herramienta desarrollada para copilotos y organizadores de eventos.
               </div>
           </div>
       </body>
@@ -810,13 +910,16 @@ export default function App() {
     window.open(URL.createObjectURL(blob), '_blank');
   };
 
+  const handleManualOpenRef = useRef(handleManualOpen);
+  handleManualOpenRef.current = handleManualOpen;
+
   return (
     <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none">
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
         <div className="flex items-center gap-3"><Map className="w-8 h-8" /><h1 className="text-xl font-bold uppercase tracking-widest">Rally RobiBook Pro</h1></div>
         <div className="flex flex-wrap gap-2">
           <button onPointerDown={(e) => { e.stopPropagation(); setShowResetConfirm(true); }} className="bg-red-700 text-white px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"><Trash2 size={16}/> Nuevo</button>
-          <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpen(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpenRef.current(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
           <button onPointerDown={(e) => { e.stopPropagation(); handleSaveProject(); }} className="bg-indigo-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-indigo-500 transition-colors"><Save size={16}/> Guardar</button>
           <button onPointerDown={(e) => { e.stopPropagation(); loadProjectRef.current?.click(); }} className="bg-teal-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-teal-500 transition-colors"><FolderOpen size={16}/> Cargar</button>
           <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk" className="hidden" />
