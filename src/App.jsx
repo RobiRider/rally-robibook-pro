@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 
 // --- LIBRERÍA EXTENDIDA DE ICONOS ---
+// Respetamos íntegramente la librería proporcionada
 const ICON_CATEGORIES = {
   "Rally / CC": [
     { type: 'alert_1', label: 'Peligro 1', icon: <AlertTriangle color="black" strokeWidth={3} size={20} /> },
@@ -57,20 +58,20 @@ const ICON_CATEGORIES = {
     { type: 'no_entry', label: 'Prohibido', icon: <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center border border-black"><div className="w-4 h-1 bg-white"/></div> },
     { type: 'parking', label: 'Parking', icon: <div className="w-6 h-6 rounded flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: '#3D93D0' }}>P</div> },
     { type: 'roundabout', label: 'Rotonda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11" fill="#3D93D0"/><circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="0.75"/><g fill="white"><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(120 12 12)"/><path d="M12 5.5 c-1.5 0-2.8.5-3.8 1.4 l-1.2-1.2 v4 h4 l-1.4-1.4 c.7-.6 1.5-1 2.4-1 v-1.8 z" transform="rotate(240 12 12)"/></g></svg> },
-    { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" font-weight="bold" textAnchor="middle">STOP</text></svg> },
+    { type: 'stop_traffic', label: 'Señal Stop', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" fill="#dc2626" stroke="white" strokeWidth="1"/><text x="12" y="15" fill="white" fontSize="6" font_weight="bold" textAnchor="middle">STOP</text></svg> },
     { type: 'yield', label: 'Ceda', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,22 2,2 22,2" fill="white" stroke="#dc2626" strokeWidth="3" strokeLinejoin="round" /></svg> },
     { type: 'one_way', label: 'Sentido', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" fill="#3D93D0" /><path d="M12,18 L12,6 M8,10 L12,5 L16,10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
     { type: 'dangerous_curve', label: 'Curva', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M10,16 Q10,10 14,8 M12,6 L15,8 L13,10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg> },
-    { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" font-weight="bold" textAnchor="middle">10%</text></svg> },
+    { type: 'steep_descent', label: 'Pendiente', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><polygon points="7,17 17,17 17,11" fill="black" /><text x="13.5" y="16" fill="white" fontSize="4" font_weight="bold" textAnchor="middle">10%</text></svg> },
     { type: 'no_overtaking', label: 'Proh. Adel.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="#dc2626" strokeWidth="2.5"/><rect x="5.5" y="10" width="4.5" height="4" rx="1" fill="black"/><rect x="14" y="10" width="4.5" height="4" rx="1" fill="#dc2626"/></svg> },
     { type: 'end_restriction', label: 'Fin Restr.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="white" stroke="black" strokeWidth="1.5"/><line x1="7" y1="17" x2="17" y2="7" stroke="black" strokeWidth="1"/><line x1="9" y1="19" x2="19" y2="9" stroke="black" strokeWidth="1"/><line x1="5" y1="15" x2="15" y2="5" stroke="black" strokeWidth="1"/></svg> },
     { type: 'bump', label: 'Badén', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 6 16 Q 8 10 12 16 Q 16 10 18 16" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
     { type: 'slippery', label: 'Deslizante', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 10 16 Q 8 13 12 11 Q 16 9 14 7" fill="none" stroke="black" strokeWidth="1.5"/><rect x="10" y="6" width="4" height="3" rx="0.5" fill="black"/></svg> },
-    { type: 'two_way', label: 'Doble Sent.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 9 16 L 9 8 L 7 10 M 9 8 L 11 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/><path d="M 15 8 L 15 16 L 13 14 M 15 16 L 17 14" stroke="black" strokeWidth="1.5" fill="none" strokeLinejoin="round"/></svg> },
+    { type: 'two_way', label: 'Doble Sent.', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><path d="M 9 16 L 9 8 L 7 10 M 9 8 L 11 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d="M 15 8 L 15 16 L 13 14 M 15 16 L 17 14" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg> },
     { type: 'pedestrian', label: 'Peatones', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><circle cx="12" cy="8" r="1.5" fill="black"/><path d="M 12 10 L 12 14 L 10 17 M 12 14 L 14 17 M 10 10 L 14 10" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><line x1="7" y1="16" x2="17" y2="16" stroke="black" strokeWidth="1.5"/></svg> },
     { type: 'priority_intersection', label: 'Prioridad', icon: <svg viewBox="0 0 24 24" width="20" height="20"><polygon points="12,2 2,20 22,20" fill="white" stroke="#dc2626" strokeWidth="2.5" strokeLinejoin="round" /><line x1="12" y1="7" x2="12" y2="17" stroke="black" strokeWidth="3" strokeLinecap="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="black" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'traffic_lights', label: 'Semáforo', icon: <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><rect x="8" y="2" width="8" height="15" rx="1.5" fill="black" stroke="black" strokeWidth="0.5"/><circle cx="12" cy="5.5" r="2.2" fill="#ef4444"/><circle cx="12" cy="10" r="2.2" fill="#fbbf24"/><circle cx="12" cy="14.5" r="2.2" fill="#22c55e"/><rect x="11.2" y="17" width="1.6" height="5" fill="black"/></svg> },
-    { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" font-weight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
+    { type: 'sign_town', label: 'Población', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" fill="white" stroke="black" strokeWidth="1.5"/><rect x="11" y="15" width="2" height="7" fill="black"/><text x="12" y="12.5" fill="black" fontSize="5.5" font_weight="bold" textAnchor="middle" letterSpacing="0.5">VILLA</text></svg> },
     { type: 'sign_highway', label: 'Autopista', icon: <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="10" rx="1.5" fill="#3D93D0" stroke="black" strokeWidth="1"/><rect x="11" y="15" width="2" height="7" fill="black"/><path d="M6,9 L14,9 M6,12 L18,12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg> },
     { type: 'sign_dir_right', label: 'Dir. Der', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3,6 L15,6 L21,10.5 L15,15 L3,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
     { type: 'sign_dir_left', label: 'Dir. Izq', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21,6 L9,6 L3,10.5 L9,15 L21,15 Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/><rect x="11" y="15" width="2" height="7" fill="black"/></svg> },
@@ -101,7 +102,7 @@ const ICON_CATEGORIES = {
     { type: 'tower', label: 'Torre', icon: <Landmark size={20}/> },
     { type: 'pylon', label: 'Alta Tensión', icon: <svg viewBox="0 0 24 24" width="20" height="20" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M12,2 L8,22 M12,2 L16,22 M6,8 L18,8 M5,14 L19,14 M10,2 L14,8 M14,2 L10,8 M8,8 L12,14 M16,8 L12,14" /></svg> },
     { type: 'tree', label: 'Árbol', icon: <Trees size={20}/> },
-    { type: 'park', label: 'Parque', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 6 12 C 0 12 0 1 6 1 C 12 1 12 12 6 12 Z" fill="#22c55e" /><line x1="6" y1="12" x2="6" y2="22" stroke="#92400e" strokeWidth="3" strokeLinecap="round" /><line x1="10" y1="8" x2="22" y2="8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="8" x2="9" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="20" y1="8" x2="23" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="14" y1="8" x2="14" y2="16" stroke="black" strokeWidth="1"/><line x1="18" y1="8" x2="18" vessel="16" stroke="black" strokeWidth="1"/><line x1="13" y1="16" x2="19" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
+    { type: 'park', label: 'Parque', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M 6 12 C 0 12 0 1 6 1 C 12 1 12 12 6 12 Z" fill="#22c55e" /><line x1="6" y1="12" x2="6" y2="22" stroke="#92400e" strokeWidth="3" strokeLinecap="round" /><line x1="10" y1="8" x2="22" y2="8" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="8" x2="9" y2="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="20" y1="8" x2="23" vessel="22" stroke="black" strokeWidth="1.5" strokeLinecap="round"/><line x1="14" y1="8" x2="14" y2="16" stroke="black" strokeWidth="1"/><line x1="18" y1="8" x2="18" vessel="16" stroke="black" strokeWidth="1"/><line x1="13" y1="16" x2="19" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round"/></svg> },
     { type: 'cafe', label: 'Café', icon: <Coffee size={20}/> },
     { type: 'restaurant', label: 'Restaurante', icon: <UtensilsCrossed size={20}/> },
     { type: 'pharmacy', label: 'Farmacia', icon: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M10,3 h4 v6 h6 v4 h-6 v6 h-4 v-6 h-6 v-4 h6 z" fill="#16a34a" /></svg> },
@@ -163,11 +164,9 @@ const findIconByType = (type) => {
 
 const GetIconComponent = (type) => findIconByType(type)?.icon || null;
 
-// --- COMPONENTE: SELECTOR UNIVERSAL ---
 function UniversalIconPicker({ onSelect, onUpload, onClose }) {
   const [activeTab, setActiveTab] = useState("Rally / CC");
   const fileInputRef = useRef(null);
-
   return (
     <div className="fixed inset-0 z-[250] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onPointerDown={onClose}>
       <div className="bg-white border-2 border-black w-full max-w-xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onPointerDown={e => e.stopPropagation()}>
@@ -175,7 +174,6 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
           <h3 className="font-bold uppercase text-lg tracking-tight">Librería de Iconos</h3>
           <button onPointerDown={(e) => { e.stopPropagation(); onClose(); }} className="p-2 hover:bg-gray-200 rounded-full transition-colors"><X/></button>
         </div>
-
         <div className="p-4 bg-blue-50 border-b-2 border-black">
           <button onPointerDown={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-all shadow-[4px_4px_0_0_#1e3a8a]">
             <Upload size={18}/> SUBIR IMAGEN PROPIA
@@ -189,7 +187,6 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
             }
           }} />
         </div>
-
         <div className="flex bg-gray-200 border-b-2 border-black overflow-x-auto no-scrollbar shrink-0">
           {Object.keys(ICON_CATEGORIES).map(cat => (
             <button key={cat} onPointerDown={(e) => { e.stopPropagation(); setActiveTab(cat); }} className={`flex items-center justify-center px-3 py-3 font-bold text-[10px] sm:text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${activeTab === cat ? 'bg-white text-black border-b-2 border-blue-600' : 'text-gray-500 hover:bg-gray-300 hover:text-black border-b-2 border-transparent'}`}>
@@ -197,7 +194,6 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
             </button>
           ))}
         </div>
-
         <div className="p-4 pb-12 overflow-y-auto grid grid-cols-4 sm:grid-cols-5 gap-3 bg-white flex-1 min-h-0 content-start">
           {ICON_CATEGORIES[activeTab].map((item, idx) => (
             <button key={idx} onPointerDown={(e) => { e.stopPropagation(); onSelect(item.type); }} className="group flex flex-col items-center justify-center gap-2 p-2 border-2 border-gray-100 rounded-xl hover:border-black hover:bg-gray-50 transition-all">
@@ -212,8 +208,6 @@ function UniversalIconPicker({ onSelect, onUpload, onClose }) {
     </div>
   );
 }
-
-// --- RENDERIZADORES ---
 
 function StaticTulipRenderer({ data, id }) {
   const norm = normalizeTulip(data);
@@ -281,9 +275,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
   const [selectedIconId, setSelectedIconId] = useState(null);
   const [selectedPathId, setSelectedPathId] = useState(null); 
   const [showIconPicker, setShowIconPicker] = useState(false);
-
   const QUICK_ICON_TYPES = ["roundabout", "stop_traffic", "no_entry", "warning_danger"];
-
   const getCoords = (e) => {
     const svg = svgRef.current;
     if (!svg) return { x: 50, y: 50 };
@@ -293,7 +285,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
     const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
     return { x: Math.max(-10, Math.min(110, loc.x)), y: Math.max(-10, Math.min(110, loc.y)) };
   };
-
   const handlePointerDown = (e, target) => {
     e.stopPropagation();
     e.target.setPointerCapture(e.pointerId);
@@ -310,7 +301,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       setSelectedPathId(null);
     }
   };
-
   const handlePointerMove = (e) => {
     if (!dragging) return;
     const loc = getCoords(e);
@@ -325,14 +315,12 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       setIcons(icons.map(ic => ic.id === dragging.iconId ? { ...ic, x: loc.x, y: loc.y } : ic));
     }
   };
-
   const handlePointerUp = (e) => {
     if (dragging) {
       e.target.releasePointerCapture(e.pointerId);
       setDragging(null);
     }
   };
-
   const handleLineDoubleClick = (e, pathId) => {
     e.stopPropagation();
     const loc = getCoords(e);
@@ -353,7 +341,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       return { ...path, points: newPts };
     }));
   };
-
   const handleDeletePoint = (e, pathId, pointIdx) => {
     e.stopPropagation();
     setPaths(paths.map(path => {
@@ -364,39 +351,32 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       return { ...path, points: newPts };
     }));
   };
-
   const deleteSelectedPath = () => {
     if (!selectedPathId || paths.length <= 1) return; 
     setPaths(paths.filter(p => p.id !== selectedPathId));
     setSelectedPathId(null);
   };
-
   const updateSelectedIconScale = (delta) => {
     if (!selectedIconId) return;
     setIcons(icons.map(ic => ic.id === selectedIconId ? { ...ic, scale: Math.max(0.5, Math.min(4, (ic.scale || 1) + delta)) } : ic));
   };
-
   const updateSelectedIconRotation = (delta) => {
     if (!selectedIconId) return;
     setIcons(icons.map(ic => ic.id === selectedIconId ? { ...ic, rotation: (ic.rotation || 0) + delta } : ic));
   };
-
   const deleteSelectedIcon = () => {
     if (!selectedIconId) return;
     setIcons(icons.filter(ic => ic.id !== selectedIconId));
     setSelectedIconId(null);
   };
-
   const togglePathDirt = () => {
     if (!selectedPathId) return;
     setPaths(paths.map(p => p.id === selectedPathId ? { ...p, isDirt: !p.isDirt } : p));
   };
-
   const togglePathHighway = () => {
     if (!selectedPathId) return;
     setPaths(paths.map(p => p.id === selectedPathId ? { ...p, isHighway: !p.isHighway } : p));
   };
-
   const cycleThickness = () => {
     if (!selectedPathId) return;
     setPaths(paths.map(p => {
@@ -406,13 +386,11 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
       return { ...p, type: p.type === 'secondary' ? 'wrong_way' : p.type, thickness: next };
     }));
   };
-
   const addIcon = (type, dataUrl = null) => {
     const newIcon = { id: crypto.randomUUID(), type, x: 50, y: 50, scale: 1, rotation: 0, dataUrl };
     setIcons([...icons, newIcon]);
     setSelectedIconId(newIcon.id);
   };
-
   const generateRoundabout = () => {
     const newPaths = [];
     const totalLegs = rExits + 1;
@@ -426,10 +404,8 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
     setPaths(newPaths); setIsRoundabout(true);
     setSelectedPathId(null);
   };
-
   const selectedPath = paths.find(p => p.id === selectedPathId);
   const showThicknessBtn = selectedPath && selectedPath.type !== 'main';
-
   return (
     <div className="flex flex-col items-center select-none w-full">
       <div className="bg-gray-100 p-2 rounded border-2 border-gray-200 mb-2 w-full flex flex-col items-center">
@@ -442,11 +418,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           <button onPointerDown={(e) => { e.stopPropagation(); generateRoundabout(); }} className="bg-blue-600 text-white font-bold px-2 py-1 rounded hover:bg-blue-700 ml-1 uppercase text-[10px]">Generar</button>
         </div>
       </div>
-
-      <div 
-        className="w-64 h-64 border-2 border-dashed border-gray-400 bg-gray-50 mb-2 relative touch-none shadow-inner rounded overflow-hidden"
-        onPointerDown={() => { setSelectedPathId(null); setSelectedIconId(null); }}
-      >
+      <div className="w-64 h-64 border-2 border-dashed border-gray-400 bg-gray-50 mb-2 relative touch-none shadow-inner rounded overflow-hidden" onPointerDown={() => { setSelectedPathId(null); setSelectedIconId(null); }}>
         <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-full overflow-visible" onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
           <defs>
             <marker id="editor-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" /></marker>
@@ -496,7 +468,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           })}
         </svg>
       </div>
-
       {selectedIconId && (
         <div className="flex gap-1 mb-2 w-full justify-center">
           <button onPointerDown={(e) => { e.stopPropagation(); updateSelectedIconScale(-0.1); }} className="bg-gray-200 w-8 h-8 rounded font-bold text-xl flex items-center justify-center">-</button>
@@ -506,7 +477,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           <button onPointerDown={(e) => { e.stopPropagation(); deleteSelectedIcon(); }} className="bg-red-500 text-white px-3 rounded font-bold text-xs uppercase tracking-wide ml-2">Eliminar</button>
         </div>
       )}
-
       {selectedPathId && selectedPath && (
         <div className="flex flex-col gap-2 mb-2 w-full justify-center bg-gray-100 p-2 rounded border-2 border-gray-200">
           <span className="text-[10px] font-bold uppercase text-gray-500 text-center tracking-widest">Opciones de Vía</span>
@@ -532,7 +502,6 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           </div>
         </div>
       )}
-
       <div className="flex flex-wrap gap-1 p-2 bg-gray-100 rounded border-2 border-gray-200 mb-2 w-full justify-center items-center">
         {QUICK_ICON_TYPES.map(type => {
           const icData = findIconByType(type);
@@ -547,17 +516,14 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
           <Plus size={12}/> Más Iconos
         </button>
       </div>
-
       <div className="grid grid-cols-2 gap-2 mb-4 w-full">
         <button onPointerDown={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'wrong_way', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 50}, {x: 20, y: 30}] }]); }} className="bg-black text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-gray-800 transition-colors shadow">+ Adicional</button>
         <button onPointerDown={(e) => { e.stopPropagation(); setPaths([...paths, { id: crypto.randomUUID(), type: 'main', isDirt: false, isHighway: false, thickness: 5, points: [{x: 50, y: 90}, {x: 50, y: 10}] }]); }} className="bg-blue-600 text-white font-bold py-3 rounded text-[10px] uppercase hover:bg-blue-700 transition-colors shadow">+ Principal</button>
       </div>
-
       <div className="flex gap-2 mt-2 w-full">
         <button onPointerDown={onCancel} className="flex-1 bg-gray-300 font-bold uppercase text-sm py-3 rounded hover:bg-gray-400 transition-colors">Cancelar</button>
         <button onPointerDown={() => onSave({ paths, isRoundabout, icons })} className="flex-1 bg-green-600 text-white font-bold uppercase text-sm py-3 rounded hover:bg-green-700 transition-colors">Guardar</button>
       </div>
-
       {showIconPicker && (
         <UniversalIconPicker 
           onSelect={type => { addIcon(type); setShowIconPicker(false); }}
@@ -577,7 +543,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
   const [distMode, setDistMode] = useState(false);
   const [tempDist, setTempDist] = useState(''); 
   const infoRef = useRef(null);
-
+  
   const handleInfoPointerMove = (e) => {
     if (!draggingIconId) return;
     const r = infoRef.current.getBoundingClientRect();
@@ -585,69 +551,50 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
     const y = ((e.clientY - r.top) / r.height) * 100;
     onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === draggingIconId ? { ...ic, x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) } : ic));
   };
-
+  
   const isGreen = row.partialDist < 0.3;
-
+  const cellBg = row.terrain === 'tierra' ? '#C6E0B5' : 'transparent';
+  
   return (
     <div className="roadbook-row w-full print:block">
       <div className="flex border-b-2 border-black bg-white min-h-[160px] group relative">
         <div className={`w-[30%] border-r-2 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
-          <div 
-            className="w-full h-full flex flex-col items-center justify-start pt-6 cursor-text hover:bg-black/5"
-            onClick={(e) => { 
-              if (!distMode) {
-                e.stopPropagation();
-                setTempDist(row.totalDist.toString().replace('.', ',')); 
-                setDistMode(true); 
-              }
-            }}
+          
+          {/* BOTÓN DE RESET LÓGICO Y VISUAL */}
+          <button
+            onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'isReset', !row.isReset); }}
+            className={`absolute top-1 left-1 p-1 sm:p-1.5 rounded transition-colors z-10 print:hidden ${row.isReset ? 'text-blue-600 bg-blue-100' : 'text-gray-300 hover:text-blue-500 hover:bg-gray-200'}`}
+            title="Marcar Reseteo (0,00)"
           >
+            <RotateCcw size={14} strokeWidth={3} />
+          </button>
+
+          <div className={`w-full h-full flex flex-col items-center justify-start ${row.isReset ? 'pt-1 sm:pt-2' : 'pt-6'} cursor-text hover:bg-black/5`} onClick={(e) => { if (!distMode) { e.stopPropagation(); setTempDist(row.totalDist.toString().replace('.', ',')); setDistMode(true); } }}>
             {distMode ? (
-              <input 
-                type="text"
-                autoFocus 
-                dir="ltr" 
-                value={tempDist} 
-                onChange={e => setTempDist(e.target.value)}
-                onFocus={(e) => e.target.select()}
-                onClick={e => e.stopPropagation()} 
-                onBlur={() => {
-                  const val = tempDist.replace(',', '.');
-                  const parsed = parseFloat(val);
-                  onUpdate(row.id, 'totalDist', isNaN(parsed) ? 0 : parsed);
-                  setDistMode(false);
-                }}
-                onKeyDown={e => {
-                  if (e.key === 'Enter') e.target.blur();
-                  if (e.key === 'Escape') setDistMode(false);
-                }}
-                className="w-[90%] text-center outline-none bg-yellow-50 text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight border-2 border-blue-400 rounded-lg" 
-              />
+              <input type="text" autoFocus dir="ltr" value={tempDist} onChange={e => setTempDist(e.target.value)} onFocus={(e) => e.target.select()} onClick={e => e.stopPropagation()} onBlur={() => { const val = tempDist.replace(',', '.'); const parsed = parseFloat(val); onUpdate(row.id, 'totalDist', isNaN(parsed) ? 0 : parsed); setDistMode(false); }} onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') setDistMode(false); }} className={`w-[90%] text-center outline-none bg-yellow-50 ${row.isReset ? 'text-[2.2rem] sm:text-[2.8rem]' : 'text-[2.8rem] sm:text-[3.5rem]'} leading-none font-bold tracking-tight border-2 border-blue-400 rounded-lg`} />
             ) : (
-              <span className="text-[2.8rem] sm:text-[3.5rem] leading-none font-bold tracking-tight whitespace-nowrap">
-                {formatRallyDist(row.totalDist)}
-              </span>
+              <span className={`${row.isReset ? 'text-[2.2rem] sm:text-[2.8rem]' : 'text-[2.8rem] sm:text-[3.5rem]'} leading-none font-bold tracking-tight whitespace-nowrap`}>{formatRallyDist(row.totalDist)}</span>
+            )}
+            
+            {/* LÍNEA Y 0,00 DEBAJO DEL TRIP 1 SI ES RESET */}
+            {row.isReset && !distMode && (
+              <div className="w-[80%] flex flex-col items-center mt-1 sm:mt-1.5 pointer-events-none">
+                <div className="w-full h-[2px] sm:h-[3px] bg-black"></div>
+                <span className="text-xl sm:text-2xl font-bold leading-none mt-1 sm:mt-1.5 text-black">0,00</span>
+              </div>
             )}
           </div>
-          
           <div className="absolute bottom-0 left-0 w-[65%] h-[40%] border-t-2 border-r-2 border-black flex items-center justify-center pointer-events-none">
-            <span className="text-2xl sm:text-3xl font-semibold text-gray-800 leading-none">
-              {formatRallyDist(row.partialDist)}
-            </span>
+            <span className="text-2xl sm:text-3xl font-semibold text-gray-800 leading-none">{formatRallyDist(row.partialDist)}</span>
           </div>
-
           <div className="absolute bottom-0 right-0 w-10 h-10 sm:w-12 sm:h-12 border-t-2 border-l-2 border-black bg-black flex items-center justify-center pointer-events-none">
-            <span className="text-lg sm:text-xl font-bold text-white leading-none">
-              {index}
-            </span>
+            <span className="text-lg sm:text-xl font-bold text-white leading-none">{index}</span>
           </div>
         </div>
-
-        <div className="w-[35%] border-r-2 border-black flex items-center justify-center relative p-2 overflow-hidden">
-          <button onPointerDown={(e) => { e.stopPropagation(); setEditorOpen(true); }} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-gray-50 transition-colors rounded">
+        <div className="w-[35%] border-r-2 border-black flex items-center justify-center relative p-2 overflow-hidden transition-colors" style={{ backgroundColor: cellBg }}>
+          <button onPointerDown={(e) => { e.stopPropagation(); setEditorOpen(true); }} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-black/5 transition-colors rounded">
             <StaticTulipRenderer data={row.customTulip} id={row.id} />
           </button>
-          
           {editorOpen && (
             <div className="fixed inset-0 z-[150] bg-black/50 flex items-center justify-center p-4" onPointerDown={() => setEditorOpen(false)}>
               <div onPointerDown={e => e.stopPropagation()} className="bg-white border-2 border-black rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh] w-full max-w-[360px]">
@@ -656,8 +603,7 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             </div>
           )}
         </div>
-
-        <div className="w-[35%] relative group/info" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)}>
+        <div className="w-[35%] relative group/info transition-colors" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)} style={{ backgroundColor: cellBg }}>
           <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none bg-transparent outline-none text-black font-black uppercase text-xl p-4 print:hidden" placeholder="NOTAS..." />
           <div className="hidden print:block w-full h-full p-4 font-black uppercase text-xl leading-tight whitespace-pre-wrap overflow-hidden">{row.notes}</div>
           {row.infoIcons.map(ic => (
@@ -676,6 +622,9 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
           )}
           <button onPointerDown={(e) => { e.stopPropagation(); setPickerOpen(true); }} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 text-white p-2 rounded-full shadow-lg z-10 print:hidden transition-all hover:scale-110 active:scale-95"><ImageIcon size={18}/></button>
           <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 print:hidden z-10 transition-all">
+            <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'terrain', row.terrain === 'tierra' ? 'asfalto' : 'tierra'); }} className={`p-2 rounded-full shadow-lg active:scale-95 transition-all text-white ${row.terrain === 'tierra' ? 'bg-amber-800' : 'bg-gray-400'}`} title="Conmutar Tierra/Asfalto">
+              <Mountain size={20}/>
+            </button>
             <button onPointerDown={(e) => { e.stopPropagation(); onInsert(row.id); }} className="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 active:scale-95 transition-all"><Plus size={20}/></button>
             <button onPointerDown={(e) => { e.stopPropagation(); onDelete(row.id); }} className="bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 active:scale-95 transition-all"><Trash2 size={20}/></button>
           </div>
@@ -721,24 +670,26 @@ function EditableRoadbookHeader({ data, setData }) {
 export default function App() {
   const [roadbook, setRoadbook] = useState(() => JSON.parse(localStorage.getItem('robibook_data_v4')) || []);
   const [headerData, setHeaderData] = useState(() => JSON.parse(localStorage.getItem('robibook_header_v4')) || { titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
-  const fileInputRef = useRef(null);
   const loadProjectRef = useRef(null);
+  const fileInputRef = useRef(null);
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
-
+  const [showAddChoice, setShowAddChoice] = useState(false);
+  const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
   useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
   useEffect(() => localStorage.setItem('robibook_data_v4', JSON.stringify(roadbook)), [roadbook]);
-
   const handlePrint = () => setShowPrintModal(true);
+  
   const handleSaveProject = () => {
     const blob = new Blob([JSON.stringify({ header: headerData, roadbook })], { type: "application/json" });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${headerData.titleI || 'ruta'}.rbk`; a.click();
   };
+  
   const handleLoadProject = (e) => {
     const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(event.target.files[0]); e.target.value = null;
   };
-
+  
   const handleResetProject = () => {
     setRoadbook([]);
     setHeaderData({ titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
@@ -746,20 +697,36 @@ export default function App() {
     localStorage.removeItem('robibook_header_v4');
     setShowResetConfirm(false);
   };
-
+  
+  const handleAddRow = (terrainType) => {
+    const lastRowDist = roadbook[roadbook.length - 1]?.totalDist || 0;
+    // INCLUIDO: isReset inicializado en false
+    setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat((lastRowDist + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '', terrain: terrainType, isReset: false }]);
+    setShowAddChoice(false);
+  };
+  
+  // LÓGICA DE CÁLCULO MODIFICADA
   useEffect(() => {
     setRoadbook(prev => {
       let isChanged = false;
       const updated = prev.map((row, idx) => {
-        let expected = idx === 0 ? row.totalDist : Math.max(0, row.totalDist - prev[idx-1].totalDist);
+        let expected;
+        if (idx === 0) {
+          expected = row.totalDist; // Fila 1 siempre asume su propio Trip 1
+        } else if (prev[idx-1].isReset) {
+          expected = row.totalDist; // Magia: Si la de arriba fue reseteada, mi Trip 2 es igual a mi Trip 1 (inicio de cuenta)
+        } else {
+          expected = Math.max(0, row.totalDist - prev[idx-1].totalDist); // Cálculo estándar continuo
+        }
         expected = parseFloat(expected.toFixed(2));
-        if (Math.abs(row.partialDist - expected) > 0.001) { isChanged = true; return { ...row, partialDist: expected }; }
+        if (Math.abs((row.partialDist || 0) - expected) > 0.001) { isChanged = true; return { ...row, partialDist: expected }; }
         return row;
       });
       return isChanged ? updated : prev;
     });
-  }, [roadbook.map(r => r.totalDist).join(',')]);
-
+    // Se añade isReset a las dependencias para disparar el render cuando cambie su estado
+  }, [roadbook.map(r => r.totalDist + '_' + (r.isReset ? '1' : '0')).join(',')]);
+  
   const handleFileUpload = (e) => {
     const reader = new FileReader(); reader.onload = (event) => {
       const xml = new DOMParser().parseFromString(event.target.result, "text/xml");
@@ -770,166 +737,39 @@ export default function App() {
         const lat = parseFloat(w.getAttribute('lat')), lon = parseFloat(w.getAttribute('lon'));
         let closest = points[0]; let minErr = Infinity;
         points.forEach(p => { const err = Math.abs(lat-p.lat) + Math.abs(lon-p.lon); if (err < minErr) { minErr = err; closest = p; } });
-        return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WPT").toUpperCase() };
+        // INCLUIDO: isReset en inicialización GPX
+        return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WPT").toUpperCase(), terrain: 'asfalto', isReset: false };
       });
       setRoadbook(wpts.sort((a,b) => a.totalDist - b.totalDist));
     }; reader.readAsText(e.target.files[0]); e.target.value = null;
   };
-
-  const handleManualOpen = () => {
-    const baseUrl = window.location.origin + window.location.pathname.replace(/[^\/]*$/, '');
-    
-    const manualHTML = `
-      <!DOCTYPE html>
-      <html lang="es">
-      <head>
-          <meta charset="UTF-8">
-          <title>Manual - Rally RobiBook Pro</title>
-          <style>
-              body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.6; color: #1e293b; background: #f8fafc; padding: 20px; }
-              .container { max-width: 900px; margin: auto; background: white; padding: 40px; border: 3px solid black; border-radius: 12px; box-shadow: 10px 10px 0 0 rgba(0,0,0,0.1); }
-              h1 { border-bottom: 4px solid black; padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; color: #000; }
-              h2 { background: #3b82f6; color: white; display: inline-block; padding: 5px 15px; margin-top: 30px; border-radius: 4px; text-transform: uppercase; font-size: 1.2rem; }
-              .step { background: #f1f5f9; padding: 20px; border-left: 6px solid #f59e0b; margin: 20px 0; border-radius: 0 8px 8px 0; }
-              .step h3 { margin-top: 0; color: #000; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; }
-              ul { padding-left: 20px; }
-              li { margin-bottom: 10px; }
-              b { color: #2563eb; }
-              .alert { background: #fee2e2; border: 2px solid #ef4444; padding: 15px; color: #b91c1c; font-weight: bold; border-radius: 8px; margin: 20px 0; }
-              .key { background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 4px; padding: 2px 6px; font-family: monospace; font-weight: bold; }
-              .img-container { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; justify-content: center; background: #fff; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; }
-              .img-box { flex: 1; min-width: 280px; text-align: center; }
-              .img-box img { width: 100%; border: 2px solid #000; border-radius: 4px; box-shadow: 4px 4px 0 0 rgba(0,0,0,0.1); background: #eee; }
-              .img-caption { font-size: 11px; font-weight: bold; color: #475569; margin-top: 8px; text-transform: uppercase; }
-              .footer { margin-top: 40px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 20px; font-style: italic; color: #64748b; }
-              a { color: #2563eb; text-decoration: underline; font-weight: bold; }
-          </style>
-      </head>
-      <body>
-          <div class="container">
-              <h1>🏁 Manual de Uso: Rally RobiBook Pro</h1>
-              <p>Bienvenido al sistema profesional de creación de Roadbooks para Rally Raid y Cross Country. Esta herramienta está diseñada para ser intuitiva pero potente.</p>
-
-              <h2>1. Editor de Viñetas (Tulipas)</h2>
-              <div class="step">
-                  <h3>Creación de Caminos</h3>
-                  <ul>
-                      <li><b>Arrastrar Puntos:</b> Haz clic y arrastra los círculos rojos para dar forma a la vía.</li>
-                      <li><b>Añadir Puntos:</b> Haz <b>doble clic</b> sobre cualquier línea para añadir un nuevo punto de control.</li>
-                      <li><b>Borrar Puntos:</b> Haz <b>doble clic</b> sobre un punto rojo para eliminarlo.</li>
-                      <li><b>Tipo de Vía:</b> Selecciona una vía para cambiarla entre <b>Asfalto</b> o <b>Tierra</b> (línea discontinua), y entre <b>Vía Única</b> o <b>Autopista</b> (doble línea).</li>
-                      <li><b>Grosor:</b> Cambia el grosor para diferenciar pistas principales de senderos finos.</li>
-                  </ul>
-                  <h3>Generador de Rotondas</h3>
-                  <p>Introduce el número de salidas y cuál es la de salida (objetivo) y pulsa <b>Generar</b>. El sistema creará automáticamente la estructura base que luego podrás deformar a tu gusto.</p>
-              </div>
-
-              <h2>2. Librería de Iconos</h2>
-              <div class="step">
-                  <h3>Uso de Iconos</h3>
-                  <ul>
-                      <li><b>Añadir:</b> Selecciona iconos de la librería (Peligros, Señales, Referencias, Terreno).</li>
-                      <li><b>Posicionar:</b> Arrastra el icono dentro del recuadro para colocarlo.</li>
-                      <li><b>Transformar:</b> Con un icono seleccionado, usa los botones <span class="key">+</span> / <span class="key">-</span> para cambiar el tamaño y <span class="key">↺</span> / <span class="key">↻</span> para rotarlo.</li>
-                      <li><b>Imágenes Propias:</b> Pulsa el botón azul <b>"SUBIR IMAGEN PROPIA"</b> para insertar logos de sponsors o fotos reales de referencias.</li>
-                  </ul>
-              </div>
-
-              <h2>3. Distancias y Navegación</h2>
-              <div class="step">
-                  <h3>Gestión del Odómetro</h3>
-                  <ul>
-                      <li><b>Editar Distancia:</b> Haz clic en el número grande de distancia total para editarlo manualmente. El sistema calculará automáticamente la distancia parcial respecto a la viñeta anterior.</li>
-                      <li><b>Reset 0,00:</b> Usa el icono de Reset en la librería para indicar puntos donde el piloto debe poner su cuentakilómetros a cero.</li>
-                      <li><b>Color Verde:</b> Las viñetas con una parcial muy corta (menos de 300m) se marcan automáticamente en verde para alertar al piloto de cambios muy rápidos.</li>
-                  </ul>
-              </div>
-
-              <h2>4. Importación y Guardado</h2>
-              <div class="step">
-                  <h3>Archivos Admitidos</h3>
-                  <ul>
-                      <li><b>GPX:</b> Puedes importar un archivo de track GPX. La app extraerá los Waypoints y los colocará en el Roadbook calculando sus distancias reales sobre el track.</li>
-                      <li><b>Proyectos (.rbk):</b> Usa el botón <b>Guardar</b> para descargar tu trabajo. Es un archivo propio que guarda toda la estructura vectorial, iconos y notas para que puedas seguir editando otro día con el botón <b>Cargar</b>.</li>
-                  </ul>
-              </div>
-
-              <h2>5. Impresión Estándar (Hojas Sueltas)</h2>
-              <div class="alert">
-                  ⚠️ ¡IMPORTANTE! PARA UN ACABADO PERFECTO:
-              </div>
-              <div class="step">
-                  <ul>
-                      <li>1. Pulsa el botón verde <b>Imprimir</b> de la barra superior de la aplicación.</li>
-                      <li>2. Pulsa el botón azul <b>"Aceptar e Imprimir"</b> que aparecerá en el centro.</li>
-                      <li><b>NO uses el atajo de teclado Ctrl+P</b>, ya que imprimiría los botones y menús del navegador.</li>
-                      <li>En los ajustes de impresión del navegador:
-                          <ul>
-                              <li>Tamaño de papel: <b>A4</b>.</li>
-                              <li>Márgenes: <b>Predeterminados</b>.</li>
-                              <li><b>DESMARCA</b> la casilla "Encabezados y pies de página".</li>
-                              <li><b>MARCA</b> la casilla "Gráficos de fondo".</li>
-                          </ul>
-                      </li>
-                  </ul>
-              </div>
-
-              <h2>6. Impresión en Modo Rollo (PDF Stitcher)</h2>
-              <div class="step">
-                  <h3>Preparación para Porta-Rollos</h3>
-                  <p>Si eres piloto de moto o quad y necesitas el roadbook en formato continuo, utiliza la herramienta gratuita <b>PDF Stitcher</b> (<a href="https://www.pdfstitcher.org/" target="_blank">www.pdfstitcher.org</a>) siguiendo estas capturas de configuración:</p>
-                  
-                  <div class="img-container">
-                    <div class="img-box">
-                      <img src="${baseUrl}pdfstitcher1.png" alt="Captura PDF Stitcher 1" onerror="this.src='https://placehold.co/600x400?text=Captura+1+No+Encontrada'">
-                      <div class="img-caption">Interfaz Principal: Selección de Filas/Columnas</div>
-                    </div>
-                    <div class="img-box">
-                      <img src="${baseUrl}pdfstitcher2.png" alt="Captura PDF Stitcher 2" onerror="this.src='https://placehold.co/600x400?text=Captura+2+No+Encontrada'">
-                      <div class="img-caption">Configuración de Recorte y Márgenes (Crop)</div>
-                    </div>
-                  </div>
-
-                  <ul>
-                      <li><b>Paso 1:</b> Genera el PDF de tu roadbook usando el método de impresión estándar explicado arriba.</li>
-                      <li><b>Paso 2:</b> Abre <b>PDF Stitcher</b> y carga tu archivo.</li>
-                      <li><b>Paso 3 (Captura 1):</b> En <b>"Page Layout"</b>, pon las <b>Rows</b> (Filas) igual al número de páginas de tu PDF y las <b>Columns</b> (Columnas) en 1.</li>
-                      <li><b>Paso 4 (Captura 2):</b> Ajusta el recorte para eliminar bordes blancos y que las viñetas queden perfectamente pegadas.</li>
-                      <li><b>Paso 5:</b> Haz clic en <b>"Stitch!"</b> para generar la tira continua.</li>
-                  </ul>
-              </div>
-
-              <div class="footer">
-                  Rally RobiBook Pro - Herramienta desarrollada para copilotos y organizadores de eventos.
-              </div>
-          </div>
-      </body>
-      </html>
-    `;
-    const blob = new Blob([manualHTML], { type: 'text/html;charset=utf-8' });
-    window.open(URL.createObjectURL(blob), '_blank');
-  };
-
-  const handleManualOpenRef = useRef(handleManualOpen);
-  handleManualOpenRef.current = handleManualOpen;
-
+  
+  const handleManualOpen = () => window.open(`public/data/Manual.pdf`, '_blank');
+  
   return (
     <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none">
       <header className="bg-slate-900 text-white p-4 shadow-xl print:hidden flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50">
         <div className="flex items-center gap-3"><Map className="w-8 h-8" /><h1 className="text-xl font-bold uppercase tracking-widest">Rally RobiBook Pro</h1></div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 relative">
           <button onPointerDown={(e) => { e.stopPropagation(); setShowResetConfirm(true); }} className="bg-red-700 text-white px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"><Trash2 size={16}/> Nuevo</button>
-          <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpenRef.current(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
+          <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpen(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
           <button onPointerDown={(e) => { e.stopPropagation(); handleSaveProject(); }} className="bg-indigo-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-indigo-500 transition-colors"><Save size={16}/> Guardar</button>
           <button onPointerDown={(e) => { e.stopPropagation(); loadProjectRef.current?.click(); }} className="bg-teal-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-teal-500 transition-colors"><FolderOpen size={16}/> Cargar</button>
           <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk" className="hidden" />
           <button onPointerDown={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }} className="bg-gray-700 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-gray-600 transition-colors"><Upload size={16}/> GPX</button>
           <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept=".gpx" className="hidden" />
-          <button onPointerDown={(e) => { e.stopPropagation(); setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[roadbook.length-1]?.totalDist || 0) + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }]); }} className="bg-blue-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-blue-500 transition-colors"><Plus size={16}/> Añadir</button>
+          <div className="relative">
+            <button onPointerDown={(e) => { e.stopPropagation(); setShowAddChoice(!showAddChoice); }} className="bg-blue-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-blue-500 transition-colors"><Plus size={16}/> Añadir</button>
+            {showAddChoice && (
+              <div className="absolute top-full mt-2 right-0 bg-white border-2 border-black rounded shadow-2xl z-[300] flex flex-col p-1 min-w-[120px]">
+                <button onPointerDown={(e) => { e.stopPropagation(); handleAddRow('asfalto'); }} className="px-4 py-3 text-black font-bold text-xs uppercase hover:bg-gray-100 text-left rounded">🛣️ Asfalto</button>
+                <button onPointerDown={(e) => { e.stopPropagation(); handleAddRow('tierra'); }} className="px-4 py-3 text-black font-bold text-xs uppercase hover:bg-gray-100 text-left rounded border-t border-gray-200">🏜️ Tierra</button>
+              </div>
+            )}
+          </div>
           <button onPointerDown={(e) => { e.stopPropagation(); handlePrint(); }} className="bg-green-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-green-500 transition-colors"><Printer size={16}/> Imprimir</button>
         </div>
       </header>
-
       <main className="max-w-[800px] mx-auto mt-8 bg-white shadow-2xl print:shadow-none print:mt-0 print:max-w-none print:w-full border-2 border-black box-border">
         <EditableRoadbookHeader data={headerData} setData={setHeaderData} />
         <div className="flex w-full border-y-2 border-black bg-white text-black font-bold uppercase text-center text-[10px] tracking-widest">
@@ -939,11 +779,18 @@ export default function App() {
         </div>
         <div className="flex flex-col">
           {roadbook.map((row, index) => (
-            <RoadbookRow key={row.id} row={row} index={index + 1} onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} onDelete={id => setRowToDelete(id)} onInsert={id => { const idx = roadbook.findIndex(r => r.id === id); const nextDist = roadbook[idx+1] ? roadbook[idx+1].totalDist : roadbook[idx].totalDist + 0.5; const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[idx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '' }; const up = [...roadbook]; up.splice(idx+1, 0, newRow); setRoadbook(up); }} />
+            <RoadbookRow key={row.id} row={row} index={index + 1} onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} onDelete={id => setRowToDelete(id)} onInsert={id => { 
+                const idx = roadbook.findIndex(r => r.id === id); 
+                const nextDist = roadbook[idx+1] ? roadbook[idx+1].totalDist : roadbook[idx].totalDist + 0.5; 
+                // INCLUIDO: isReset en inicialización
+                const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[idx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '', terrain: row.terrain, isReset: false }; 
+                const up = [...roadbook]; 
+                up.splice(idx+1, 0, newRow); 
+                setRoadbook(up); 
+            }} />
           ))}
         </div>
       </main>
-
       {rowToDelete && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
           <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
@@ -952,7 +799,6 @@ export default function App() {
           </div>
         </div>
       )}
-
       {showResetConfirm && (
         <div className="fixed inset-0 z-[150] bg-black/70 flex items-center justify-center p-4" onPointerDown={() => setShowResetConfirm(false)}>
           <div className="bg-white p-8 rounded-2xl border-2 border-black text-center max-w-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
@@ -966,7 +812,6 @@ export default function App() {
           </div>
         </div>
       )}
-
       {showPrintModal && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-2 border-black" onPointerDown={e => e.stopPropagation()}>
