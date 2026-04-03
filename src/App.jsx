@@ -6,7 +6,7 @@ import {
   Octagon, Map, PenTool, RotateCcw, Settings, Image as ImageIcon,
   Home, Fuel, Coffee, Camera, Tent, X, Flag, Droplets, Mountain, 
   Wind, Trees, Building2, School, Landmark, Church, Wrench, PlusSquare, 
-  Warehouse, Factory, Waves, Zap, UtensilsCrossed, Save, FolderOpen, HelpCircle
+  Warehouse, Factory, Waves, Zap, UtensilsCrossed, Save, FolderOpen, HelpCircle, Lock, Unlock
 } from 'lucide-react';
 
 // --- LIBRERÍA EXTENDIDA DE ICONOS ---
@@ -535,7 +535,7 @@ function TulipVectorEditor({ data, onSave, onCancel }) {
   );
 }
 
-function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
+function RoadbookRow({ row, index, onUpdate, onDelete, onInsert, isLocked }) {
   const [editorOpen, setEditorOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedIconId, setSelectedIconId] = useState(null);
@@ -558,25 +558,20 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
   return (
     <div className="roadbook-row w-full print:block">
       <div className="flex border-b-2 border-black bg-white min-h-[160px] group relative">
+        {/* COLUMNA DISTANCIA (SIEMPRE EDITABLE) */}
         <div className={`w-[30%] border-r-2 border-black relative transition-colors ${isGreen ? 'bg-[#8FFE89]' : 'bg-white'}`}>
-          
-          {/* BOTÓN DE RESET LÓGICO Y VISUAL */}
           <button
             onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'isReset', !row.isReset); }}
             className={`absolute top-1 left-1 p-1 sm:p-1.5 rounded transition-colors z-10 print:hidden ${row.isReset ? 'text-blue-600 bg-blue-100' : 'text-gray-300 hover:text-blue-500 hover:bg-gray-200'}`}
-            title="Marcar Reseteo (0,00)"
           >
             <RotateCcw size={14} strokeWidth={3} />
           </button>
-
           <div className={`w-full h-full flex flex-col items-center justify-start ${row.isReset ? 'pt-1 sm:pt-2' : 'pt-6'} cursor-text hover:bg-black/5`} onClick={(e) => { if (!distMode) { e.stopPropagation(); setTempDist(row.totalDist.toString().replace('.', ',')); setDistMode(true); } }}>
             {distMode ? (
               <input type="text" autoFocus dir="ltr" value={tempDist} onChange={e => setTempDist(e.target.value)} onFocus={(e) => e.target.select()} onClick={e => e.stopPropagation()} onBlur={() => { const val = tempDist.replace(',', '.'); const parsed = parseFloat(val); onUpdate(row.id, 'totalDist', isNaN(parsed) ? 0 : parsed); setDistMode(false); }} onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') setDistMode(false); }} className={`w-[90%] text-center outline-none bg-yellow-50 ${row.isReset ? 'text-[2.2rem] sm:text-[2.8rem]' : 'text-[2.8rem] sm:text-[3.5rem]'} leading-none font-bold tracking-tight border-2 border-blue-400 rounded-lg`} />
             ) : (
               <span className={`${row.isReset ? 'text-[2.2rem] sm:text-[2.8rem]' : 'text-[2.8rem] sm:text-[3.5rem]'} leading-none font-bold tracking-tight whitespace-nowrap`}>{formatRallyDist(row.totalDist)}</span>
             )}
-            
-            {/* LÍNEA Y 0,00 DEBAJO DEL TRIP 1 SI ES RESET */}
             {row.isReset && !distMode && (
               <div className="w-[80%] flex flex-col items-center mt-1 sm:mt-1.5 pointer-events-none">
                 <div className="w-full h-[2px] sm:h-[3px] bg-black"></div>
@@ -591,8 +586,13 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             <span className="text-lg sm:text-xl font-bold text-white leading-none">{index}</span>
           </div>
         </div>
+
+        {/* COLUMNA DIRECCIÓN (BLOQUEADA EN RECON) */}
         <div className="w-[35%] border-r-2 border-black flex items-center justify-center relative p-2 overflow-hidden transition-colors" style={{ backgroundColor: cellBg }}>
-          <button onPointerDown={(e) => { e.stopPropagation(); setEditorOpen(true); }} className="w-[140px] h-[140px] flex items-center justify-center hover:bg-black/5 transition-colors rounded">
+          <button 
+            onPointerDown={(e) => { e.stopPropagation(); if (!isLocked) setEditorOpen(true); }} 
+            className={`w-[140px] h-[140px] flex items-center justify-center transition-colors rounded ${isLocked ? 'cursor-default' : 'hover:bg-black/5'}`}
+          >
             <StaticTulipRenderer data={row.customTulip} id={row.id} />
           </button>
           {editorOpen && (
@@ -603,31 +603,35 @@ function RoadbookRow({ row, index, onUpdate, onDelete, onInsert }) {
             </div>
           )}
         </div>
+
+        {/* COLUMNA INFORMACIÓN (BLOQUEADA EN RECON) */}
         <div className="w-[35%] relative group/info transition-colors" ref={infoRef} onPointerMove={handleInfoPointerMove} onPointerUp={() => setDraggingIconId(null)} onPointerDown={() => setSelectedIconId(null)} style={{ backgroundColor: cellBg }}>
-          <textarea dir="ltr" value={row.notes} onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} className="w-full h-full resize-none bg-transparent outline-none text-black font-black uppercase text-xl p-4 print:hidden" placeholder="NOTAS..." />
+          <textarea 
+            dir="ltr" 
+            value={row.notes} 
+            readOnly={isLocked}
+            onChange={e => onUpdate(row.id, 'notes', e.target.value.toUpperCase())} 
+            className={`w-full h-full resize-none bg-transparent outline-none text-black font-black uppercase text-xl p-4 print:hidden ${isLocked ? 'cursor-default' : ''}`} 
+            placeholder={isLocked ? "" : "NOTAS..."} 
+          />
           <div className="hidden print:block w-full h-full p-4 font-black uppercase text-xl leading-tight whitespace-pre-wrap overflow-hidden">{row.notes}</div>
+          
           {row.infoIcons.map(ic => (
-            <div key={ic.id} style={{ position: 'absolute', left: `${ic.x}%`, top: `${ic.y}%`, transform: `translate(-50%, -50%) rotate(${ic.rotation || 0}deg) scale(${ic.scale || 1})`, width: 40, height: 40 }} className={`flex items-center justify-center cursor-move touch-none ${selectedIconId === ic.id ? 'ring-2 ring-blue-500 rounded bg-blue-50/50' : ''}`} onPointerDown={e => { e.stopPropagation(); setSelectedIconId(ic.id); setDraggingIconId(ic.id); }}>
+            <div key={ic.id} style={{ position: 'absolute', left: `${ic.x}%`, top: `${ic.y}%`, transform: `translate(-50%, -50%) rotate(${ic.rotation || 0}deg) scale(${ic.scale || 1})`, width: 40, height: 40 }} className={`flex items-center justify-center cursor-move touch-none ${selectedIconId === ic.id ? 'ring-2 ring-blue-500 rounded bg-blue-50/50' : ''}`} onPointerDown={e => { e.stopPropagation(); if(!isLocked) { setSelectedIconId(ic.id); setDraggingIconId(ic.id); } }}>
               {ic.type === 'custom_image' ? <img src={ic.dataUrl} className="w-full h-full object-contain pointer-events-none" /> : <div className="w-full h-full pointer-events-none flex items-center justify-center">{GetIconComponent(ic.type)}</div>}
             </div>
           ))}
-          {selectedIconId && (
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-white border-2 border-black rounded-lg p-1 z-50 shadow-xl" onPointerDown={e => e.stopPropagation()}>
-              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.max(0.5, (ic.scale||1)-0.2)} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">-</button>
-              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, scale: Math.min(4, (ic.scale||1)+0.2)} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">+</button>
-              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)-15} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">↺</button>
-              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.map(ic => ic.id === selectedIconId ? {...ic, rotation: (ic.rotation||0)+15} : ic)); }} className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center font-bold text-xl">↻</button>
-              <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'infoIcons', row.infoIcons.filter(ic => ic.id !== selectedIconId)); setSelectedIconId(null); }} className="w-8 h-8 bg-red-600 text-white rounded flex items-center justify-center ml-2"><Trash2 size={16}/></button>
-            </div>
+
+          {!isLocked && (
+            <>
+              <button onPointerDown={(e) => { e.stopPropagation(); setPickerOpen(true); }} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 text-white p-2 rounded-full shadow-lg z-10 print:hidden transition-all hover:scale-110 active:scale-95"><ImageIcon size={18}/></button>
+              <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 print:hidden z-10 transition-all">
+                <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'terrain', row.terrain === 'tierra' ? 'asfalto' : 'tierra'); }} className={`p-2 rounded-full shadow-lg active:scale-95 transition-all text-white ${row.terrain === 'tierra' ? 'bg-amber-800' : 'bg-gray-400'}`} title="Conmutar Tierra/Asfalto"><Mountain size={20}/></button>
+                <button onPointerDown={(e) => { e.stopPropagation(); onInsert(row.id); }} className="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 active:scale-95 transition-all"><Plus size={20}/></button>
+                <button onPointerDown={(e) => { e.stopPropagation(); onDelete(row.id); }} className="bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 active:scale-95 transition-all"><Trash2 size={20}/></button>
+              </div>
+            </>
           )}
-          <button onPointerDown={(e) => { e.stopPropagation(); setPickerOpen(true); }} className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 bg-blue-600 text-white p-2 rounded-full shadow-lg z-10 print:hidden transition-all hover:scale-110 active:scale-95"><ImageIcon size={18}/></button>
-          <div className="absolute right-2 bottom-2 lg:-right-16 lg:top-1/2 lg:-translate-y-1/2 flex flex-row lg:flex-col gap-2 opacity-100 lg:opacity-0 lg:group-hover/info:opacity-100 print:hidden z-10 transition-all">
-            <button onPointerDown={(e) => { e.stopPropagation(); onUpdate(row.id, 'terrain', row.terrain === 'tierra' ? 'asfalto' : 'tierra'); }} className={`p-2 rounded-full shadow-lg active:scale-95 transition-all text-white ${row.terrain === 'tierra' ? 'bg-amber-800' : 'bg-gray-400'}`} title="Conmutar Tierra/Asfalto">
-              <Mountain size={20}/>
-            </button>
-            <button onPointerDown={(e) => { e.stopPropagation(); onInsert(row.id); }} className="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 active:scale-95 transition-all"><Plus size={20}/></button>
-            <button onPointerDown={(e) => { e.stopPropagation(); onDelete(row.id); }} className="bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 active:scale-95 transition-all"><Trash2 size={20}/></button>
-          </div>
           {pickerOpen && <UniversalIconPicker onSelect={type => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type, x: 80, y: 50, scale: 1.2, rotation: 0 }]); setPickerOpen(false); }} onUpload={url => { onUpdate(row.id, 'infoIcons', [...row.infoIcons, { id: crypto.randomUUID(), type: 'custom_image', x: 80, y: 50, scale: 1.2, rotation: 0, dataUrl: url }]); setPickerOpen(false); }} onClose={() => setPickerOpen(false)} />}
         </div>
       </div>
@@ -670,15 +674,18 @@ function EditableRoadbookHeader({ data, setData }) {
 export default function App() {
   const [roadbook, setRoadbook] = useState(() => JSON.parse(localStorage.getItem('robibook_data_v4')) || []);
   const [headerData, setHeaderData] = useState(() => JSON.parse(localStorage.getItem('robibook_header_v4')) || { titleI: "Inicio", placeI: "", coordsI: "", titleF: "Final", placeF: "", coordsF: "", logo: null, rules: "" });
+  const [isLocked, setIsLocked] = useState(false); 
+  
   const loadProjectRef = useRef(null);
   const fileInputRef = useRef(null);
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
   const [showAddChoice, setShowAddChoice] = useState(false);
-  const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
   useEffect(() => localStorage.setItem('robibook_header_v4', JSON.stringify(headerData)), [headerData]);
   useEffect(() => localStorage.setItem('robibook_data_v4', JSON.stringify(roadbook)), [roadbook]);
+
   const handlePrint = () => setShowPrintModal(true);
   
   const handleSaveProject = () => {
@@ -687,7 +694,14 @@ export default function App() {
   };
   
   const handleLoadProject = (e) => {
-    const reader = new FileReader(); reader.onload = (event) => { const d = JSON.parse(event.target.result); if (d.roadbook) setRoadbook(d.roadbook); if (d.header) setHeaderData(d.header); }; reader.readAsText(event.target.files[0]); e.target.value = null;
+    const reader = new FileReader(); 
+    reader.onload = (event) => { 
+      const d = JSON.parse(event.target.result); 
+      if (d.roadbook) setRoadbook(d.roadbook); 
+      if (d.header) setHeaderData(d.header); 
+    }; 
+    reader.readAsText(event.target.files[0]); 
+    e.target.value = null;
   };
   
   const handleResetProject = () => {
@@ -700,23 +714,21 @@ export default function App() {
   
   const handleAddRow = (terrainType) => {
     const lastRowDist = roadbook[roadbook.length - 1]?.totalDist || 0;
-    // INCLUIDO: isReset inicializado en false
     setRoadbook([...roadbook, { id: crypto.randomUUID(), totalDist: parseFloat((lastRowDist + 1).toFixed(2)), partialDist: 1, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '', terrain: terrainType, isReset: false }]);
     setShowAddChoice(false);
   };
   
-  // LÓGICA DE CÁLCULO MODIFICADA
   useEffect(() => {
     setRoadbook(prev => {
       let isChanged = false;
       const updated = prev.map((row, idx) => {
         let expected;
         if (idx === 0) {
-          expected = row.totalDist; // Fila 1 siempre asume su propio Trip 1
+          expected = row.totalDist; 
         } else if (prev[idx-1].isReset) {
-          expected = row.totalDist; // Magia: Si la de arriba fue reseteada, mi Trip 2 es igual a mi Trip 1 (inicio de cuenta)
+          expected = row.totalDist; 
         } else {
-          expected = Math.max(0, row.totalDist - prev[idx-1].totalDist); // Cálculo estándar continuo
+          expected = Math.max(0, row.totalDist - prev[idx-1].totalDist); 
         }
         expected = parseFloat(expected.toFixed(2));
         if (Math.abs((row.partialDist || 0) - expected) > 0.001) { isChanged = true; return { ...row, partialDist: expected }; }
@@ -724,11 +736,11 @@ export default function App() {
       });
       return isChanged ? updated : prev;
     });
-    // Se añade isReset a las dependencias para disparar el render cuando cambie su estado
   }, [roadbook.map(r => r.totalDist + '_' + (r.isReset ? '1' : '0')).join(',')]);
   
   const handleFileUpload = (e) => {
-    const reader = new FileReader(); reader.onload = (event) => {
+    const reader = new FileReader(); 
+    reader.onload = (event) => {
       const xml = new DOMParser().parseFromString(event.target.result, "text/xml");
       const trk = Array.from(xml.getElementsByTagName('trkpt')).map(p => ({ lat: parseFloat(p.getAttribute('lat')), lon: parseFloat(p.getAttribute('lon')) }));
       let dist = 0;
@@ -737,7 +749,6 @@ export default function App() {
         const lat = parseFloat(w.getAttribute('lat')), lon = parseFloat(w.getAttribute('lon'));
         let closest = points[0]; let minErr = Infinity;
         points.forEach(p => { const err = Math.abs(lat-p.lat) + Math.abs(lon-p.lon); if (err < minErr) { minErr = err; closest = p; } });
-        // INCLUIDO: isReset en inicialización GPX
         return { id: crypto.randomUUID(), totalDist: parseFloat(closest.dist.toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: (w.getElementsByTagName('name')[0]?.textContent || "WPT").toUpperCase(), terrain: 'asfalto', isReset: false };
       });
       setRoadbook(wpts.sort((a,b) => a.totalDist - b.totalDist));
@@ -753,6 +764,20 @@ export default function App() {
         <div className="flex flex-wrap gap-2 relative">
           <button onPointerDown={(e) => { e.stopPropagation(); setShowResetConfirm(true); }} className="bg-red-700 text-white px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"><Trash2 size={16}/> Nuevo</button>
           <button onPointerDown={(e) => { e.stopPropagation(); handleManualOpen(); }} className="bg-yellow-500 text-black px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-yellow-400 transition-colors"><HelpCircle size={16}/> Manual</button>
+
+          {/* BOTÓN MODO RECON */}
+          <button 
+            onPointerDown={(e) => { e.stopPropagation(); setIsLocked(!isLocked); }} 
+            className={`px-4 py-2 rounded font-bold text-sm flex items-center gap-2 transition-all border-2 ${
+              isLocked 
+              ? 'bg-orange-600 text-white border-orange-400 shadow-[0_0_15px_rgba(234,88,12,0.4)]' 
+              : 'bg-slate-700 text-gray-300 border-transparent hover:bg-slate-600'
+            }`}
+          >
+            {isLocked ? <Lock size={16} className="animate-pulse"/> : <Unlock size={16}/>}
+            {isLocked ? 'MODO RECON' : 'EDITOR LIBRE'}
+          </button>
+
           <button onPointerDown={(e) => { e.stopPropagation(); handleSaveProject(); }} className="bg-indigo-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-indigo-500 transition-colors"><Save size={16}/> Guardar</button>
           <button onPointerDown={(e) => { e.stopPropagation(); loadProjectRef.current?.click(); }} className="bg-teal-600 px-4 py-2 rounded font-bold text-sm flex items-center gap-2 hover:bg-teal-500 transition-colors"><FolderOpen size={16}/> Cargar</button>
           <input type="file" ref={loadProjectRef} onChange={handleLoadProject} accept=".rbk" className="hidden" />
@@ -779,10 +804,16 @@ export default function App() {
         </div>
         <div className="flex flex-col">
           {roadbook.map((row, index) => (
-            <RoadbookRow key={row.id} row={row} index={index + 1} onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} onDelete={id => setRowToDelete(id)} onInsert={id => { 
+            <RoadbookRow 
+              key={row.id} 
+              row={row} 
+              index={index + 1} 
+              isLocked={isLocked}
+              onUpdate={(id, field, val) => setRoadbook(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r))} 
+              onDelete={id => setRowToDelete(id)} 
+              onInsert={id => { 
                 const idx = roadbook.findIndex(r => r.id === id); 
                 const nextDist = roadbook[idx+1] ? roadbook[idx+1].totalDist : roadbook[idx].totalDist + 0.5; 
-                // INCLUIDO: isReset en inicialización
                 const newRow = { id: crypto.randomUUID(), totalDist: parseFloat(((roadbook[idx].totalDist + nextDist)/2).toFixed(2)), partialDist: 0, tulipId: 'custom', customTulip: {...defaultCustomTulip}, infoIcons: [], notes: '', terrain: row.terrain, isReset: false }; 
                 const up = [...roadbook]; 
                 up.splice(idx+1, 0, newRow); 
@@ -791,16 +822,24 @@ export default function App() {
           ))}
         </div>
       </main>
+      
+      {/* --- MODAL: ELIMINAR FILA INDIVIDUAL --- */}
       {rowToDelete && (
-        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
-          <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
-            <Trash2 size={48} className="mx-auto text-red-600 mb-4" /><h2 className="text-xl font-bold mb-6 uppercase">¿Eliminar viñeta?</h2>
-            <div className="flex gap-4"><button onPointerDown={(e) => { e.stopPropagation(); setRowToDelete(null); }} className="flex-1 bg-gray-200 py-3 rounded font-bold hover:bg-gray-300 transition-colors">CANCELAR</button><button onPointerDown={(e) => { e.stopPropagation(); setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button></div>
+        <div className="fixed inset-0 z-[600] bg-black/60 flex items-center justify-center p-4" onPointerDown={() => setRowToDelete(null)}>
+          <div className="bg-white p-6 rounded-2xl border-2 border-black text-center max-w-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
+            <Trash2 size={48} className="mx-auto text-red-600 mb-4" />
+            <h2 className="text-xl font-bold mb-6 uppercase">¿Eliminar viñeta?</h2>
+            <div className="flex gap-4">
+              <button onPointerDown={(e) => { e.stopPropagation(); setRowToDelete(null); }} className="flex-1 bg-gray-200 py-3 rounded font-bold hover:bg-gray-300 transition-colors">CANCELAR</button>
+              <button onPointerDown={(e) => { e.stopPropagation(); setRoadbook(prev => prev.filter(r => r.id !== rowToDelete)); setRowToDelete(null); }} className="flex-1 bg-red-600 text-white py-3 rounded font-bold hover:bg-red-700 transition-colors">ELIMINAR</button>
+            </div>
           </div>
         </div>
       )}
+
+      {/* --- MODAL: REINICIAR TODO (BOTÓN NUEVO) --- */}
       {showResetConfirm && (
-        <div className="fixed inset-0 z-[150] bg-black/70 flex items-center justify-center p-4" onPointerDown={() => setShowResetConfirm(false)}>
+        <div className="fixed inset-0 z-[600] bg-black/70 flex items-center justify-center p-4" onPointerDown={() => setShowResetConfirm(false)}>
           <div className="bg-white p-8 rounded-2xl border-2 border-black text-center max-w-sm shadow-2xl" onPointerDown={e => e.stopPropagation()}>
             <RotateCcw size={48} className="mx-auto text-red-600 mb-4" />
             <h2 className="text-xl font-bold mb-2 uppercase">Reiniciar Proyecto</h2>
@@ -812,10 +851,13 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* --- MODAL: IMPRIMIR --- */}
       {showPrintModal && (
-        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
+        <div className="fixed inset-0 z-[600] bg-black/60 flex items-center justify-center print:hidden backdrop-blur-sm" onPointerDown={() => setShowPrintModal(false)}>
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center border-2 border-black" onPointerDown={e => e.stopPropagation()}>
-            <Printer className="w-16 h-16 text-black mx-auto mb-4" /><h2 className="text-2xl font-bold mb-4 uppercase">Imprimir Roadbook</h2>
+            <Printer className="w-16 h-16 text-black mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-4 uppercase">Imprimir Roadbook</h2>
             <div className="text-left text-gray-700 mb-6 font-medium text-base bg-yellow-50 p-4 border-2 border-yellow-400 rounded-xl">
               <p className="mb-2 font-bold text-red-600 text-lg">⚠️ ¡MUY IMPORTANTE!</p>
               <ol className="list-decimal pl-5 space-y-2 text-sm text-black">
@@ -828,7 +870,6 @@ export default function App() {
           </div>
         </div>
       )}
-
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           html, body, #root, #main-app-container { height: auto !important; min-height: 100% !important; overflow: visible !important; display: block !important; background-color: white !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
