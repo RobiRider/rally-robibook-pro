@@ -755,7 +755,7 @@ export default function App() {
     }; reader.readAsText(e.target.files[0]); e.target.value = null;
   };
   
-  const handleManualOpen = () => window.open(`public/data/Manual.pdf`, '_blank');
+  const handleManualOpen = () => window.open(`/data/Manual.pdf`, '_blank');
   
   return (
     <div id="main-app-container" tabIndex="-1" className="min-h-screen bg-gray-200 text-black font-sans pb-10 focus:outline-none">
